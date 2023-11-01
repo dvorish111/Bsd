@@ -1,0 +1,37 @@
+# Ignore Visual Studio files
+.vs/
+bin/
+obj/
+
+# Ignore NuGet packages
+*.nupkg
+packages/
+
+# Ignore build output
+*.dll
+*.exe
+*.pdb
+
+# Ignore user-specific files
+*.suo
+*.user
+*.userprefs
+
+# Ignore build results
+[Dd]ebug/
+[Rr]elease/
+
+# Ignore Visual Studio code coverage files
+*.coverage
+*.coveragexml
+
+
+# Ignore ReSharper files
+_ReSharper*/
+*.resharper*
+*.DotSettings.user
+
+# Ignore SQL Server files
+*.mdf
+*.ldf
+*.bak
