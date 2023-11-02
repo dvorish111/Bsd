@@ -19,7 +19,7 @@ namespace BL_AppService
         }
         public List<UserDTO> GetAll()
         {
-            int x;
+           
            List<User>  users=userRepository.GetAll();
             List<UserDTO> userDTOs=new List<UserDTO>() { };
             foreach (var item in users)
