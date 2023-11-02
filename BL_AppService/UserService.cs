@@ -11,6 +11,7 @@ namespace BL_AppService
 {
     public class UserService : IUserService
     {
+        int yyyyyyyyyyyyyyyyyyy;
         IUserRepository userRepository;
         public UserService(IUserRepository userRepository)
         {
