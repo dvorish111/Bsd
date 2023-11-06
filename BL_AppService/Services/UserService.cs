@@ -19,9 +19,9 @@ namespace BL_AppService.Services
         }
         public List<UserDTO> GetAll()
         {
-            int x;
-            List<User> users = userRepository.GetAll();
-            List<UserDTO> userDTOs = new List<UserDTO>() { };
+           
+           List<User>  users=userRepository.GetAll();
+            List<UserDTO> userDTOs=new List<UserDTO>() { };
             foreach (var item in users)
             {
                 userDTOs.Add(new UserDTO() { Name = item.UserName, Password = item.UserPassword });
