@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Models;
+using DAL.Models;
 
 namespace DAL
 {
     internal class UserRepository : IUserRepository
     {
+        CampainContext CampainContext; 
         UserssContext context;
         public UserRepository(UserssContext context)
         {
@@ -27,6 +29,7 @@ namespace DAL
         public List<User> GetAll()
         {
             Console.WriteLine(context.Users.Count());
+            Console.WriteLine(CampainContext.ContextId.ToString());
             return context.Users.ToList();
         }
 
@@ -42,7 +45,9 @@ namespace DAL
 
         public void Update(User ObjToUpdate)
         {
+          
             throw new NotImplementedException();
         }
+       
     }
 }

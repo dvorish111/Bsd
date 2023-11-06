@@ -1,3 +1,4 @@
+using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Campain.Controllers
@@ -29,5 +30,6 @@ namespace Campain.Controllers
             })
             .ToArray();
         }
+    
     }
 }
