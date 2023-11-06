@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 
-namespace BL_AppService
+namespace BL_AppService.IServeces
 {
     public interface IUserService
     {
         List<UserDTO> GetAll();
         UserDTO GetById(string password);
-        
+
     }
 }
