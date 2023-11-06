@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
+using Microsoft.Extensions.DependencyInjection;
+
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,7 @@ namespace BL_AppService.IServeces
         public static void AddAppServices(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IUserService, UserService>();
+            serviceCollection.AddScoped<IDonorService, DonorService>();
             serviceCollection.AddRepositories();
 
         }

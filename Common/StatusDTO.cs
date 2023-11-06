@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.IRepositorys
+namespace Common
 {
-    public interface INeighborhoodRepository
+    public class StatusDTO
     {
+        public string StatusName { get; set; } = null!;
     }
 }

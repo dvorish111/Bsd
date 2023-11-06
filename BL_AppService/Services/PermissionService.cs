@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL_AppService.Services
 {
-    internal class PermissionService
+    public class PermissionService
     {
     }
 }

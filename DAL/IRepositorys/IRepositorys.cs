@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace DAL.IRepositorys
 {
-    internal interface IRepositorys
+    public interface IRepositorys<T>
     {
+        List<T> GetAll();
+        T GetById(int id);
+        void Create(T ObjToAdd);
+        void Update(T ObjToUpdate);
+        void Delete(int id);
     }
 }

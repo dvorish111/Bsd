@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAL.IRepositorys
 {
-    internal interface ICampaignRepositorycs
+    public interface ICampaignRepository
     {
+
     }
 }
