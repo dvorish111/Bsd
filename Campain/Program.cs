@@ -9,6 +9,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+var configuration = new ConfigurationBuilder()
+      .SetBasePath(Directory.GetCurrentDirectory())
+      .AddJsonFile("appsettings.json")
+         .AddUserSecrets<Program>()
+      .Build();
+
+   
+     
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -23,3 +32,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

@@ -9,6 +9,7 @@ namespace BL_AppService.IServeces
 {
     public interface IUserService
     {
+
         List<UserDTO> GetAll();
         UserDTO GetById(string password);
 

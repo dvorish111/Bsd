@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.IdentityModel.Protocols;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace DAL.Models
 {
     public partial class CampainContext : DbContext
     {
-        public CampainContext()
+        private readonly IConfiguration _configuration;
+        public CampainContext(IConfiguration configuration)
         {
+            _configuration = configuration;
         }
 
         public CampainContext(DbContextOptions<CampainContext> options)
@@ -28,8 +33,9 @@ namespace DAL.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CampainDB;Integrated Security=True;Pooling=False");
+
+                var connectionString = _configuration.GetConnectionString("ConnectionString");
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
 
@@ -58,13 +64,13 @@ namespace DAL.Models
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdNeighborhood)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdNeigh__34C8D9D1");
+                    .HasConstraintName("FK__Donates__IdNeigh__3A4CA8FD");
 
                 entity.HasOne(d => d.IdStatusNavigation)
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdStatus)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdStatu__35BCFE0A");
+                    .HasConstraintName("FK__Donates__IdStatu__4D5F7D71");
             });
 
             modelBuilder.Entity<Donation>(entity =>
@@ -79,13 +85,13 @@ namespace DAL.Models
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonated)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__37A5467C");
+                    .HasConstraintName("FK__Donations__IdDon__02FC7413");
 
                 entity.HasOne(d => d.IdDonorNavigation)
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__38996AB5");
+                    .HasConstraintName("FK__Donations__IdDon__03F0984C");
             });
 
             modelBuilder.Entity<Donor>(entity =>
