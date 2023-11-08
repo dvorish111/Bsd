@@ -21,9 +21,10 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(Permission permission)
+        public void Create(PermissionDTO permissionDTO)
         {
-            permissionRepository.Create(permission);
+            permissionRepository.Create(mapper.Map<Permission>(permissionDTO));
+            
         }
 
         public void Delete(int id)
@@ -43,9 +44,10 @@ namespace BL_AppService.Services
             return mapper.Map<PermissionDTO>(permissionRepository.GetById(id));
         }
 
-        public void Update(Permission permission)
+        public void Update(PermissionDTO permissionDTO)
         {
-            permissionRepository.Update(permission);
+           
+            permissionRepository.Update(mapper.Map<Permission>(permissionDTO));
         }
     }
 }

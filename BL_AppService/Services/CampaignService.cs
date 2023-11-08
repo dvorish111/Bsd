@@ -23,8 +23,8 @@ namespace BL_AppService.Services
 
         public void Create(CampaignDTO campaign)
         {
-            campaignRepository.Create(campaign);
-            
+            campaignRepository.Create(mapper.Map<Campaign>(campaign));
+
         }
 
         public void Delete(int id)
@@ -43,9 +43,10 @@ namespace BL_AppService.Services
              return mapper.Map<CampaignDTO>(campaignRepository.GetById(id));
         }
 
-        public void Update(Campaign campaign)
+        public void Update(CampaignDTO campaign)
         {
-            campaignRepository.Update(campaign);
+            campaignRepository.Update(mapper.Map<Campaign>(campaign));
+           
         }
 
 

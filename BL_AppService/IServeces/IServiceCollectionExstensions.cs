@@ -23,7 +23,7 @@ namespace BL_AppService.IServeces
              serviceCollection.AddScoped<IDonationService, DonationService>();
              serviceCollection.AddScoped<IDonateService, DonateService>();
             serviceCollection.AddScoped<IPermissionService, PermissionService>();
-        
+          
             serviceCollection.AddRepositories();
 
         }

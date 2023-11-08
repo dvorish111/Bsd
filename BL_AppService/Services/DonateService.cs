@@ -24,9 +24,10 @@ namespace BL_AppService.Services
             mapper = mapper;
         }
 
-        public void Create(Donate donate)
+        public void Create(DonateDTO donateDTO)
         {
-            donateRepository.Create(donate);
+            donateRepository.Create(mapper.Map<Donate>(donateDTO));
+
         }
 
         public void Delete(int id)
@@ -63,9 +64,9 @@ namespace BL_AppService.Services
 
         }
 
-        public void Update(Donate donate)
-        {
-            donateRepository.Update(donate);
+        public void Update(DonateDTO donateDTO)
+        {                  
+            donateRepository.Update(mapper.Map<Donate>(donateDTO));
         }
     }
 }

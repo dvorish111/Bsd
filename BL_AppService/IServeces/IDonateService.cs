@@ -8,7 +8,7 @@ using DAL.Models;
 
 namespace BL_AppService.IServeces
 {
-    public interface IDonateService: IService<Donate>
+    public interface IDonateService: IService<DonateDTO>
     {
         List<Donate> GetAllByNeeded(double id);
         List<Donate> GetAllByStatus(int id);

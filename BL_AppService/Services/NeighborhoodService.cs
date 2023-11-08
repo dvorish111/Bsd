@@ -22,9 +22,10 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(Neighborhood neighborhood)
+        public void Create(NeighborhoodDTO neighborhood)
         {
-            neighborhoodRepository.Create(neighborhood);
+            neighborhoodRepository.Create(mapper.Map<Neighborhood>(neighborhood));
+            
         }
 
         public void Delete(int id)
@@ -44,9 +45,10 @@ namespace BL_AppService.Services
             return mapper.Map<NeighborhoodDTO>(neighborhoodRepository.GetById(id));
         }
 
-        public void Update(Neighborhood neighborhood)
+        public void Update(NeighborhoodDTO neighborhood)
         {
-            neighborhoodRepository.Update(neighborhood);
+            neighborhoodRepository.Update(mapper.Map<Neighborhood>(neighborhood));
+           
         }
     }
 }
