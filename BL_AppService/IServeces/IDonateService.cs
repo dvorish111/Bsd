@@ -10,6 +10,9 @@ namespace BL_AppService.IServeces
 {
     public interface IDonateService: IService<DonateDTO>
     {
-       
+        List<DonateDTO> GetAllByNeeded(double id);
+        List<DonateDTO> GetAllByStatus(int id);
+        List<DonateDTO> GetAllByNumOfChildren(int from, int to);
+
     }
 }

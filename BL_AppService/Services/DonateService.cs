@@ -10,12 +10,13 @@ using Common;
 using DAL.IRepositorys;
 using DAL.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace BL_AppService.Services
 {
-    public class DonateService: IDonateService
+    public class DonateService : IDonateService
     {
-         IDonateRepository donateRepository;
+        IDonateRepository donateRepository;
         IMapper mapper;
         public DonateService(IDonateRepository repository, IMapper mapper)
         {
@@ -36,16 +37,31 @@ namespace BL_AppService.Services
 
         public List<DonateDTO> GetAll()
         {
-            List<Donate> donates = donateRepository.GetAll();
-            return mapper.Map<List<DonateDTO>>(donates);
+            return mapper.Map<List<DonateDTO>>(donateRepository.GetAll());
 
         }
+        public List<DonateDTO> GetAllByNumOfChildren(int from, int to)
+        {
+            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByNumOfChildren(from, to));
+        }
+        public List<DonateDTO> GetAllByStatus(int id)
+        {
+            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByStatus(id));
+        }
+        public List<DonateDTO> GetAllByNeeded(double id)
+        {
+            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByNeeded(id));
+        }
+        // public List<Donate> GetAllByGoul()
+        //{
+        //    return _context.Donates.ToList();
+        //}
 
         public DonateDTO GetById(int id)
         {
-          
+
             return mapper.Map<DonateDTO>(donateRepository.GetById(id));
-          
+
         }
 
         public void Update(DonateDTO donateDTO)

@@ -9,5 +9,8 @@ namespace DAL.IRepositorys
 {
     public interface IDonateRepository: IRepository<Donate>
     {
+         List<Donate> GetAllByNeeded(double id);
+         List<Donate> GetAllByStatus(int id);
+         List<Donate> GetAllByNumOfChildren(int from, int to);
     }
 }
