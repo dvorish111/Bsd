@@ -22,9 +22,9 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(Donor donor)
+        public void Create(DonorDTO donor)
         {
-            donorRepository.Create(donor);
+            donorRepository.Create(mapper.Map<Donor>(donor));
         }
 
         public void Delete(int id)
@@ -44,9 +44,10 @@ namespace BL_AppService.Services
             return mapper.Map<DonorDTO>(donorRepository.GetById(id));
         }
 
-        public void Update(Donor donor)
+        public void Update(DonorDTO donor)
         {
-            donorRepository.Update(donor);
+            donorRepository.Update(mapper.Map<Donor>(donor));
+            
         }
     }
 }

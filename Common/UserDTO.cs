@@ -8,6 +8,7 @@ namespace Common
 {
     public class UserDTO
     {
+        public int Id { get; set; }
         public String Password { get; set; }
         public string Name { get; set; }
     }

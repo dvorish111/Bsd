@@ -8,6 +8,7 @@ namespace Common
 {
     public class DonateDTO
     {
+        public int Id { get; set; }
         public int NumChildren { get; set; }
         public int IdStatus { get; set; }
         public string Street { get; set; } = null!;

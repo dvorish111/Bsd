@@ -8,6 +8,7 @@ namespace Common
 {
     public class DonationDTO
     {
+        public int Id { get; set; }
         public bool? IsAnonymous { get; set; }
         public string? Dedication { get; set; }
         public int Amount { get; set; }

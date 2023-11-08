@@ -7,7 +7,7 @@ using Common;
 using DAL.Models;
 namespace BL_AppService.IServeces
 {
-    public interface INeighborhoodService: IService<Neighborhood>
+    public interface INeighborhoodService: IService<NeighborhoodDTO>
     {
        
     }

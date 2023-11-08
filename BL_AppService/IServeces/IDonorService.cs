@@ -7,7 +7,7 @@ using Common;
 using DAL.Models;
 namespace BL_AppService.IServeces
 {
-    public interface IDonorService: IService<Donor>
+    public interface IDonorService: IService<DonorDTO>
     {
        
     }

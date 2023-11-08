@@ -7,7 +7,7 @@ using Common;
 using DAL.Models;
 namespace BL_AppService.IServeces
 {
-    public interface IPermissionService: IService<Permission>
+    public interface IPermissionService: IService<PermissionDTO>
     {
        
     }
