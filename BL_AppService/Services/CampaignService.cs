@@ -7,12 +7,13 @@ using AutoMapper;
 using BL_AppService.IServeces;
 using Common;
 using DAL.IRepositorys;
+using DAL.Models;
 
 namespace BL_AppService.Services
 {
     public class CampaignService: ICampaignService
     {
-        private readonly ICampaignRepository campaignRepository;
+         ICampaignRepository campaignRepository;
         IMapper mapper;
         public CampaignService(ICampaignRepository repository,IMapper mapper)
         {
@@ -20,45 +21,35 @@ namespace BL_AppService.Services
             mapper = mapper;    
         }
 
-        public void CreateCampaign(CampaignDTO campaign)
+        public void Create(CampaignDTO campaign)
         {
-          
-            throw new NotImplementedException();
+            campaignRepository.Create(campaign);
+            
         }
 
-        public void DeleteCampaign(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            campaignRepository.Delete(id);
         }
 
-        public CampaignDTO GetCampaignById(int id)
+        public List<CampaignDTO> GetAll()
         {
-            throw new NotImplementedException();
+            List<Campaign> campaigns = campaignRepository.GetAll();
+            return mapper.Map <List<CampaignDTO>> (campaigns);          
         }
 
-        public void UpdateCampaign(CampaignDTO campaign)
+        public CampaignDTO GetById(int id)
         {
-            throw new NotImplementedException();
+             return mapper.Map<CampaignDTO>(campaignRepository.GetById(id));
         }
-        /* public void CreateCampaign(CampaignDTO campaign)
-{         
-    campaignRepository.Create(campaign);     
-}
 
-public CampaignDTO GetCampaignById(int id)
-{
-    return campaignRepository.GetById(id);
-}
+        public void Update(Campaign campaign)
+        {
+            campaignRepository.Update(campaign);
+        }
 
-public void UpdateCampaign(CampaignDTO campaign)
-{
-    campaignRepository.Update(campaign);
-}
-public void DeleteCampaign(int id)
-{
-    campaignRepository.Delete(id);
-}
-*/
+
+
 
     }
 }

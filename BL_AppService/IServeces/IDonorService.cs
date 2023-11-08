@@ -4,21 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
-
+using DAL.Models;
 namespace BL_AppService.IServeces
 {
-    public interface IDonorService
+    public interface IDonorService: IService<Donor>
     {
-        // Create a new donor
-        void CreateDonor(DonorDTO donor);
-
-        // Read donor by ID
-        DonorDTO GetDonorById(int id);
-
-        // Update an existing donor
-        void UpdateDonor(DonorDTO donor);
-
-        // Delete a donor by ID
-        void DeleteDonor(int id);
+       
     }
 }

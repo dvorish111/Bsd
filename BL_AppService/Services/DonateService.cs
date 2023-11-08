@@ -8,36 +8,48 @@ using System.Threading.Tasks;
 using BL_AppService.IServeces;
 using Common;
 using DAL.IRepositorys;
+using DAL.Models;
+using AutoMapper;
 
 namespace BL_AppService.Services
 {
     public class DonateService: IDonateService
     {
-        private readonly IDonateRepository donateRepository;
-
-        public DonateService(IDonateRepository repository)
+         IDonateRepository donateRepository;
+        IMapper mapper;
+        public DonateService(IDonateRepository repository, IMapper mapper)
         {
             donateRepository = repository;
+            mapper = mapper;
         }
 
-        public void CreateDonate(DonateDTO donate)
+        public void Create(Donate donate)
         {
-            throw new NotImplementedException();
+            donateRepository.Create(donate);
         }
 
-        public void DeleteDonate(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            donateRepository.Delete(id);
         }
 
-        public DonateDTO GetCDonateById(int id)
+        public List<DonateDTO> GetAll()
         {
-            throw new NotImplementedException();
+            List<Donate> donates = donateRepository.GetAll();
+            return mapper.Map<List<DonateDTO>>(donates);
+
         }
 
-        public void UpdateDonaten(DonateDTO donate)
+        public DonateDTO GetById(int id)
         {
-            throw new NotImplementedException();
+          
+            return mapper.Map<DonateDTO>(donateRepository.GetById(id));
+          
+        }
+
+        public void Update(Donate donate)
+        {
+            donateRepository.Update(donate);
         }
     }
 }

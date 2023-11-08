@@ -3,31 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using BL_AppService.IServeces;
 using Common;
-
+using DAL.IRepositorys;
+using DAL.Models;
 namespace BL_AppService.Services
 {
     public class PermissionService : IPermissionService
     {
-        public void CreatePermission(StatusDTO Permission)
+        IPermissionRepository permissionRepository;
+        IMapper mapper;
+        public PermissionService(IPermissionRepository permissionRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            permissionRepository = permissionRepository;
+            mapper = mapper;
+
         }
 
-        public void DeletePermission(int id)
+        public void Create(Permission permission)
         {
-            throw new NotImplementedException();
+            permissionRepository.Create(permission);
         }
 
-        public StatusDTO GetPermissionById(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            permissionRepository.Delete(id);
         }
 
-        public void UpdatePermission(StatusDTO Permission)
+        public List<PermissionDTO> GetAll()
         {
-            throw new NotImplementedException();
+            List<Permission> permissions = permissionRepository.GetAll();
+            return mapper.Map<List<PermissionDTO>>(permissions);
+           
+        }
+
+        public PermissionDTO GetById(int id)
+        {
+            return mapper.Map<PermissionDTO>(permissionRepository.GetById(id));
+        }
+
+        public void Update(Permission permission)
+        {
+            permissionRepository.Update(permission);
         }
     }
 }

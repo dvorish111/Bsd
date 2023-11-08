@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.IRepositorys
 {
-    public interface IRepositorys<T>
+    public interface IRepository<T>
     {
         List<T> GetAll();
         T GetById(int id);
