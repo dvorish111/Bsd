@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common;
+using DAL.IRepositorys;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,7 @@ namespace BL_AppService.Services
     {
         private readonly IDonateRepository campaignRepository;
 
-        public DonateRepository(ICampaignRepository repository)
+        public DonateService(ICampaignRepository repository)
         {
             campaignRepository = repository;
         }
