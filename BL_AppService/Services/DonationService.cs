@@ -3,31 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using BL_AppService.IServeces;
 using Common;
+using DAL.IRepositorys;
+using DAL.Models;
 
 namespace BL_AppService.Services
 {
     public class DonationService : IDonationService
     {
-        public void CreateDonation(DonationDTO donationn)
+        IDonationRepository donationRepository;
+            IMapper mapper;
+        public DonationService(IDonationRepository repository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            donationRepository = repository;
+                mapper = mapper;
+           
         }
 
-        public void DeleteDonation(int id)
+        public void Create(Donation donation)
         {
-            throw new NotImplementedException();
+            donationRepository.(donation);
         }
 
-        public DonationDTO GetDonationById(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            donationRepository.Delete(id);
         }
 
-        public void UpdateDonation(DonationDTO donationn)
+        public List<DonationDTO> GetAll()
         {
-            throw new NotImplementedException();
+            List<Donation> donations = donationRepository.GetAll();
+            return mapper.Map<List<DonationDTO>>(donations);
+         
+        }
+
+        public DonationDTO GetById(int id)
+        {
+            return mapper.Map<DonationDTO>(donationRepository.GetById(id));
+
+        }
+
+        public void Update(Donation donation)
+        {
+            donationRepository.Update(donation);
         }
     }
 }

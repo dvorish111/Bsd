@@ -3,31 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using BL_AppService.IServeces;
 using Common;
+using DAL.IRepositorys;
+using DAL.Models;
 
 namespace BL_AppService.Services
 {
     public class NeighborhoodService : INeighborhoodService
     {
-        public void CreateNeighborhood(NeighborhoodDTO Neighborhood)
+        INeighborhoodRepository neighborhoodRepository;
+        IMapper mapper;
+        public NeighborhoodService(INeighborhoodRepository neighborhoodRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            neighborhoodRepository = neighborhoodRepository;
+            mapper = mapper;
+
         }
 
-        public void DeleteNeighborhood(int id)
+        public void Create(Neighborhood neighborhood)
         {
-            throw new NotImplementedException();
+            neighborhoodRepository.Create(neighborhood);
         }
 
-        public NeighborhoodDTO GetNeighborhoodById(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            neighborhoodRepository.Delete(id);
         }
 
-        public void UpdateNeighborhood(NeighborhoodDTO Neighborhood)
+        public List<NeighborhoodDTO> GetAll()
         {
-            throw new NotImplementedException();
+            List<Neighborhood> neighborhoods = neighborhoodRepository.GetAll();
+            return mapper.Map<List<NeighborhoodDTO>>(neighborhoods);
+          
+        }
+
+        public NeighborhoodDTO GetById(int id)
+        {
+            return mapper.Map<NeighborhoodDTO>(neighborhoodRepository.GetById(id));
+        }
+
+        public void Update(Neighborhood neighborhood)
+        {
+            neighborhoodRepository.Update(neighborhood);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.IRepositorys
 {
-    public interface IPermissionRepository:IRepository<Permission>
+    public interface IPermissionRepository :IRepository<Permission>
     {
     }
 }

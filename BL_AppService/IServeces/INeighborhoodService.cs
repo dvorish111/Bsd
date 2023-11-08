@@ -4,21 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
-
+using DAL.Models;
 namespace BL_AppService.IServeces
 {
-    public interface INeighborhoodService
+    public interface INeighborhoodService: IService<Neighborhood>
     {
-        // Create a new Neighborhood
-        void CreateNeighborhood(NeighborhoodDTO Neighborhood);
-
-        // Read Neighborhood by ID
-        NeighborhoodDTO GetNeighborhoodById(int id);
-
-        // Update an existing Neighborhood
-        void UpdateNeighborhood(NeighborhoodDTO Neighborhood);
-
-        // Delete a Neighborhood by ID
-        void DeleteNeighborhood(int id);
+       
     }
 }
