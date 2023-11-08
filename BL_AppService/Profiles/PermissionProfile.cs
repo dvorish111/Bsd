@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.IRepositorys
+namespace BL_AppService.Profiles
 {
-    public interface INeighborhoodRepository
+    internal class PermissionProfile
     {
+
     }
 }

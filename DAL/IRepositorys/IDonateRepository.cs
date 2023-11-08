@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.IRepositorys
 {
-    internal interface IDonateRepository
+    public interface IDonateRepository
     {
     }
 }
