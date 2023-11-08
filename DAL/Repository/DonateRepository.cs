@@ -18,11 +18,28 @@ namespace DAL.Repository
         {
             return _context.Donates.ToList();
         }
+        public List<Donate> GetAllByNumOfChildren(int from,int to)
+        {
+            return _context.Donates.Where(d=>d.NumChildren>from&&d.NumChildren<to).ToList();
+        }
+         public List<Donate> GetAllByStatus(int id)
+        {
+            return _context.Donates.Where(d=>d.IdStatus==id).ToList();
+        }
+         public List<Donate> GetAllByNeeded(double id)
+        {
+            return _context.Donates.Where(d=>d.Needed==id).ToList();
+        }
+        // public List<Donate> GetAllByGoul()
+        //{
+        //    return _context.Donates.ToList();
+        //}
 
         public Donate GetById(int donateId)
         {
             return _context.Donates.FirstOrDefault(d => d.Id == donateId);
         }
+
 
         public void Create(Donate donate)
         {
