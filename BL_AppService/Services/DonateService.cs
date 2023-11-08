@@ -3,35 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL_AppService.IServeces;
+using Common;
+using DAL.IRepositorys;
 
 namespace BL_AppService.Services
 {
-    public class DonateService
+    public class DonateService: IDonateService
     {
-        private readonly IDonateRepository campaignRepository;
+        private readonly IDonateRepository donateRepository;
 
-        public DonateRepository(ICampaignRepository repository)
+        public DonateService(IDonateRepository repository)
         {
-            campaignRepository = repository;
-        }
-        public void CreateCampaign(CampaignDTO campaign)
-        {
-            campaignRepository.Create(campaign);
+            donateRepository = repository;
         }
 
-        public CampaignDTO GetCampaignById(int id)
+        public void CreateDonate(DonateDTO donate)
         {
-            return campaignRepository.GetById(id);
+            throw new NotImplementedException();
         }
 
-        public void UpdateCampaign(CampaignDTO campaign)
+        public void DeleteDonate(int id)
         {
-            campaignRepository.Update(campaign);
-        }
-        public void DeleteCampaign(int id)
-        {
-            campaignRepository.Delete(id);
+            throw new NotImplementedException();
         }
 
+        public DonateDTO GetCDonateById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateDonaten(DonateDTO donate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

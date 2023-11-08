@@ -9,16 +9,16 @@ namespace BL_AppService.IServeces
 {
     public interface INeighborhoodService
     {
-        // Create a new campaign
-        void CreateCampaign(NeighborhoodDTO campaign);
+        // Create a new Neighborhood
+        void CreateNeighborhood(NeighborhoodDTO Neighborhood);
 
-        // Read campaign by ID
-        NeighborhoodDTO GetCampaignById(int id);
+        // Read Neighborhood by ID
+        NeighborhoodDTO GetNeighborhoodById(int id);
 
-        // Update an existing campaign
-        void UpdateCampaign(NeighborhoodDTO campaign);
+        // Update an existing Neighborhood
+        void UpdateNeighborhood(NeighborhoodDTO Neighborhood);
 
-        // Delete a campaign by ID
-        void DeleteCampaign(int id);
+        // Delete a Neighborhood by ID
+        void DeleteNeighborhood(int id);
     }
 }

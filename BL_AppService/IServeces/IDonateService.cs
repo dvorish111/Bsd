@@ -9,16 +9,16 @@ namespace BL_AppService.IServeces
 {
     public interface IDonateService
     {
-        // Create a new campaign
-        void CreateCampaign(DonateDTO campaign);
+        // Create a new donate
+        void CreateDonate(DonateDTO donate);
 
-        // Read campaign by ID
-        DonateDTO GetCampaignById(int id);
+        // Read donate by ID
+        DonateDTO GetCDonateById(int id);
 
-        // Update an existing campaign
-        void UpdateCampaign(DonateDTO campaign);
+        // Update an existing donate
+        void UpdateDonaten(DonateDTO donate);
 
-        // Delete a campaign by ID
-        void DeleteCampaign(int id);
+        // Delete a donate by ID
+        void DeleteDonate(int id);
     }
 }

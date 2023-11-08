@@ -9,16 +9,16 @@ namespace BL_AppService.IServeces
 {
     public interface IPermissionService
     {
-        // Create a new campaign
-        void CreateCampaign(StatusDTO campaign);
+        // Create a new Permission
+        void CreatePermission(StatusDTO Permission);
 
-        // Read campaign by ID
-        StatusDTO GetCampaignById(int id);
+        // Read Permission by ID
+        StatusDTO GetPermissionById(int id);
 
-        // Update an existing campaign
-        void UpdateCampaign(StatusDTO campaign);
+        // Update an existing Permission
+        void UpdatePermission(StatusDTO Permission);
 
-        // Delete a campaign by ID
-        void DeleteCampaign(int id);
+        // Delete a Permission by ID
+        void DeletePermission(int id);
     }
 }

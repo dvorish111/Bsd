@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Common;
+using DAL.Models;
 
 namespace BL_AppService.Profiles
 {
-    internal class PermissionProfile
+    public class PermissionProfile: Profile
     {
-
+        public PermissionProfile()
+        {
+            CreateMap<Permission, PermissionDTO>().ReverseMap();
+        }
     }
 }
