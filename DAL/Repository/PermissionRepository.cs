@@ -1,10 +1,12 @@
-﻿using DAL.Models;
+﻿using DAL.IRepositorys;
+using DAL.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 
 namespace DAL.Repository
 {
-    public class PermissionRepository
+    public class PermissionRepository: IPermissionRepository
     {
         private readonly CampainContext _context;
 
@@ -13,23 +15,23 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public List<Permission> GetAllPermissions()
+        public List<Permission> GetAll()
         {
             return _context.Permissions.ToList();
         }
 
-        public Permission GetPermissionById(int permissionId)
+        public Permission GetById(int permissionId)
         {
             return _context.Permissions.FirstOrDefault(c => c.Id == permissionId);
         }
 
-        public void AddPermission(Permission permission)
+        public void Create(Permission permission)
         {
             _context.Permissions.Add(permission);
             _context.SaveChanges();
         }
 
-        public void UpdatePermission(Permission permission)
+        public void Update(Permission permission)
         {
             var existingPermission = _context.Permissions.FirstOrDefault(c => c.Id == permission.Id);
             if (existingPermission != null)
@@ -40,7 +42,7 @@ namespace DAL.Repository
             }
         }
 
-        public void DeletePermission(int permissionId)
+        public void Delete(int permissionId)
         {
             var permission = _context.Permissions.FirstOrDefault(c => c.Id == permissionId);
             if (permission != null)

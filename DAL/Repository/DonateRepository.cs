@@ -1,10 +1,11 @@
-﻿using DAL.Models;
+﻿using DAL.IRepositorys;
+using DAL.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DAL.Repository
 {
-    public class DonateRepository
+    public class DonateRepository:IDonateRepository
     {
         private readonly CampainContext _context;
 
@@ -13,23 +14,23 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public List<Donate> GetAllDonates()
+        public List<Donate> GetAll()
         {
             return _context.Donates.ToList();
         }
 
-        public Donate GetDonateById(int donateId)
+        public Donate GetById(int donateId)
         {
             return _context.Donates.FirstOrDefault(d => d.Id == donateId);
         }
 
-        public void AddDonate(Donate donate)
+        public void Create(Donate donate)
         {
             _context.Donates.Add(donate);
             _context.SaveChanges();
         }
 
-        public void UpdateDonate(Donate donate)
+        public void Update(Donate donate)
         {
             var existingDonate = _context.Donates.FirstOrDefault(d => d.Id == donate.Id);
             if (existingDonate != null)
@@ -46,7 +47,7 @@ namespace DAL.Repository
         }
 
 
-        public void DeleteDonate(int donateId)
+        public void Delete(int donateId)
         {
             var donate = _context.Donates.FirstOrDefault(d => d.Id == donateId);
             if (donate != null)

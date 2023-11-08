@@ -1,10 +1,11 @@
-﻿using DAL.Models;
+﻿using DAL.IRepositorys;
+using DAL.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DAL.Repository
 {
-    public class CampaignRepository
+    public class CampaignRepository: ICampaignRepository
     {
         private readonly CampainContext _context;
 
@@ -13,23 +14,23 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public List<Campaign> GetAllCampaigns()
+        public List<Campaign> GetAll()
         {
             return _context.Campaigns.ToList();
         }
 
-        public Campaign GetCampaignById(int campaignId)
+        public Campaign GetById(int campaignId)
         {
             return _context.Campaigns.FirstOrDefault(c => c.Id == campaignId);
         }
 
-        public void AddCampaign(Campaign campaign)
+        public void Create(Campaign campaign)
         {
             _context.Campaigns.Add(campaign);
             _context.SaveChanges();
         }
 
-        public void UpdateCampaign(Campaign campaign)
+        public void Update(Campaign campaign)
         {
             var existingCampaign = _context.Campaigns.FirstOrDefault(c => c.Id == campaign.Id);
             if (existingCampaign != null)
@@ -42,7 +43,7 @@ namespace DAL.Repository
             }
         }
 
-        public void DeleteCampaign(int campaignId)
+        public void Delete(int campaignId)
         {
             var campaign = _context.Campaigns.FirstOrDefault(c => c.Id == campaignId);
             if (campaign != null)

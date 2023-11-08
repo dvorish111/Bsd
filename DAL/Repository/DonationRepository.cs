@@ -1,45 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DAL.IRepositorys;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
-    public class DonationRepository
+    public class DonationRepository: IDonationRepository
     {
-        private readonly CampainContext _dbContext;
+        private readonly CampainContext _context;
 
-        public DonationRepository(CampainContext dbContext)
+        public DonationRepository(CampainContext context)
         {
-            _dbContext = dbContext;
+            _context = context;
         }
 
-        public Donation GetDonationById(int donationId)
+        public Donation GetById(int donationId)
         {
-            return _dbContext.Donations.FirstOrDefault(d => d.Id == donationId);
+            return _context.Donations.FirstOrDefault(d => d.Id == donationId);
         }
 
-        public List<Donation> GetAllDonations()
+        public List<Donation> GetAll()
         {
-            return _dbContext.Donations.ToList();
+            return _context.Donations.ToList();
         }
 
-        public void AddDonation(Donation donation)
+        public void Create(Donation donation)
         {
-            _dbContext.Donations.Add(donation);
-            _dbContext.SaveChanges();
+            _context.Donations.Add(donation);
+            _context.SaveChanges();
         }
 
-        public void UpdateDonation(Donation donation)
+        public void Update(Donation donation)
         {
-            _dbContext.Donations.Update(donation);
-            _dbContext.SaveChanges();
+            var existingDonation = _context.Donations.FirstOrDefault(c => c.Id == donation.Id);
+            if (existingDonation != null)
+            {
+                existingDonation.Quetel = donation.Quetel;
+                existingDonation.NumPayments = donation.NumPayments;
+                existingDonation.IsAnonymous = donation.IsAnonymous;
+                existingDonation.Amount = donation.Amount;
+                existingDonation.IdDonated = donation.IdDonated;
+                existingDonation.IdDonor = donation.IdDonor;
+                existingDonation.Dedication = donation.Dedication;
+              
+                _context.SaveChanges();
+            }
         }
 
-        public void DeleteDonation(Donation donation)
+        public void Delete(int donorId)
         {
-            _dbContext.Donations.Remove(donation);
-            _dbContext.SaveChanges();
+            var donation = _context.Donations.FirstOrDefault(c => c.Id == donorId);
+            if (donation != null)
+            {
+                _context.Donations.Remove(donation);
+                _context.SaveChanges();
+            }
         }
     }
 }

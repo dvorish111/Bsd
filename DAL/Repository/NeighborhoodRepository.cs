@@ -1,10 +1,11 @@
-﻿using DAL.Models;
+﻿using DAL.IRepositorys;
+using DAL.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DAL.Repository
 {
-    public class NeighborhoodRepository
+    public class NeighborhoodRepository: INeighborhoodRepository
     {
         private readonly CampainContext _context;
 
@@ -13,23 +14,23 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public List<Neighborhood> GetAllNeighborhoods()
+        public List<Neighborhood> GetAll()
         {
             return _context.Neighborhoods.ToList();
         }
 
-        public Neighborhood GetNeighborhoodById(int neighborhoodId)
+        public Neighborhood GetById(int neighborhoodId)
         {
             return _context.Neighborhoods.FirstOrDefault(c => c.Id == neighborhoodId);
         }
 
-        public void AddNeighborhood(Neighborhood neighborhood)
+        public void Create(Neighborhood neighborhood)
         {
             _context.Neighborhoods.Add(neighborhood);
             _context.SaveChanges();
         }
 
-        public void UpdateNeighborhood(Neighborhood neighborhood)
+        public void Update(Neighborhood neighborhood)
         {
             var existingNeighborhood = _context.Neighborhoods.FirstOrDefault(c => c.Id == neighborhood.Id);
             if (existingNeighborhood != null)
@@ -40,7 +41,7 @@ namespace DAL.Repository
             }
         }
 
-        public void DeleteNeighborhood(int neighborhoodId)
+        public void Delete(int neighborhoodId)
         {
             var neighborhood = _context.Neighborhoods.FirstOrDefault(c => c.Id == neighborhoodId);
             if (neighborhood != null)
