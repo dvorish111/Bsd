@@ -1,43 +1,149 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BL_AppService.IServeces;
+using Common;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Campain.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DonateController : ControllerBase
+   
+    public class DonateController : BaseController
     {
-        // GET: api/<DonateController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        IDonateService donateService;
+        public DonateController(IDonateService donateService)
         {
-            return new string[] { "value1", "value2" };
+            this.donateService = donateService;
         }
 
-        // GET api/<DonateController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<DonateController>
+        #region HttpPost
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Create(DonateDTO donateDTO)
         {
+            try
+            {
+                donateService.Create(donateDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
 
-        // PUT api/<DonateController>/5
+        #region HttpPut
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Update(int id, DonateDTO donateDTO)
         {
+            try
+            {
+                donateDTO.Id = id;
+                donateService.Update(donateDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
 
-        // DELETE api/<DonateController>/5
+        #region HttpDelete
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            try
+            {
+                donateService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
+
+        #region HttpGetAll
+
+        [HttpGet]
+        public ActionResult<List<DonateDTO>> GetAll()
+        {
+            try
+            {
+                var donateDTOs = donateService.GetAll();
+                return Ok(donateDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region HttpGetAllByStatus
+
+        [HttpGet("{idStatus}")]
+        public ActionResult<List<DonateDTO>> GetAllByStatus(int idStatus)
+        {
+            try
+            {
+                var donateDTOs = donateService.GetAllByStatus(idStatus);
+                return Ok(donateDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region HttpGetAllByNeeded
+        [HttpGet("{idNeeded}")]
+        public ActionResult<List<DonateDTO>> GetAllByNeeded(double idNeeded)
+        {
+            try
+            {
+                var donateDTOs = donateService.GetAllByNeeded(idNeeded);
+                return Ok(donateDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region HttpGetById
+        [HttpGet("{id}")]
+        public ActionResult<DonateDTO> GetById(int id)
+        {
+            try
+            {
+                var donateDTO = donateService.GetById(id);
+                return Ok(donateDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region HttpGetBynumOfChildren
+        [HttpGet("numOfChildren")]
+        public ActionResult<List<DonateDTO>> GetAllByNumOfChildren(int from, int to)
+        {
+            try
+            {
+                var donateDTOs = donateService.GetAllByNumOfChildren(from, to);
+                return Ok(donateDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }

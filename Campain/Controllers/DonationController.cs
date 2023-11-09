@@ -1,43 +1,93 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BL_AppService.IServeces;
+using Common;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Campain.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DonationController : ControllerBase
+  
+    public class DonationController : BaseController
     {
-        // GET: api/<DonationController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        IDonationService donationService;
+        public DonationController(IDonationService donationService)
         {
-            return new string[] { "value1", "value2" };
+            this.donationService = donationService;
         }
 
-        // GET api/<DonationController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<DonationController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(DonationDTO donationDTO)
         {
+            try
+            {
+                donationService.Create(donationDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // PUT api/<DonationController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Update(int id, DonationDTO donationDTO)
         {
+            try
+            {
+                donationDTO.Id = id;
+                donationService.Update(donationDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // DELETE api/<DonationController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                donationService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var donations = donationService.GetAll();
+                return Ok(donations);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                var donation = donationService.GetById(id);
+                if (donation == null)
+                {
+                    return NotFound();
+                }
+                return Ok(donation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
