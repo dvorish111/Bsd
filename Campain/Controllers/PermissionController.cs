@@ -1,43 +1,108 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BL_AppService.IServeces;
+using BL_AppService.Services;
+using Common;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Campain.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PermissionController : ControllerBase
+
+    public class PermissionController : BaseController
     {
-        // GET: api/<PermissionController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        IPermissionService permissionService;
+        public PermissionController(IPermissionService permissionService)
         {
-            return new string[] { "value1", "value2" };
+            this.permissionService = permissionService;
         }
 
-        // GET api/<PermissionController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<PermissionController>
+        #region HttpPost
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(PermissionDTO permissionDTO)
         {
+            try
+            {
+                permissionService.Create(permissionDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
 
-        // PUT api/<PermissionController>/5
+        #region HttpPut
+
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Update(int id, PermissionDTO PermissionDTO)
         {
+            try
+            {
+                PermissionDTO.Id = id;
+                permissionService.Update(PermissionDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // DELETE api/<PermissionController>/5
+        #endregion
+
+        #region HttpDelete
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                permissionService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
+
+        #region HttpGetAll
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var permissions = permissionService.GetAll();
+                return Ok(permissions);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region HttpGetById
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                var Permission = permissionService.GetById(id);
+                if (Permission == null)
+                {
+                    return NotFound();
+                }
+                return Ok(Permission);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }
+
