@@ -1,43 +1,92 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using BL_AppService.IServeces;
+using Common;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Campain.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class NeighborhoodController : ControllerBase
+    public class NeighborhoodController : BaseController
     {
-        // GET: api/<NeighborhoodController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+         INeighborhoodService neighborhoodService;
+
+        public NeighborhoodController(INeighborhoodService neighborhoodService)
         {
-            return new string[] { "value1", "value2" };
+            this.neighborhoodService = neighborhoodService;
         }
 
-        // GET api/<NeighborhoodController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<NeighborhoodController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(NeighborhoodDTO neighborhoodDTO)
         {
+            try
+            {
+                neighborhoodService.Create(neighborhoodDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // PUT api/<NeighborhoodController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Update(int id, NeighborhoodDTO neighborhoodDTO)
         {
+            try
+            {
+                neighborhoodDTO.Id = id;
+                neighborhoodService.Update(neighborhoodDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // DELETE api/<NeighborhoodController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                neighborhoodService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var neighborhoods = neighborhoodService.GetAll();
+                return Ok(neighborhoods);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                var neighborhood = neighborhoodService.GetById(id);
+                if (neighborhood == null)
+                {
+                    return NotFound();
+                }
+                return Ok(neighborhood);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
