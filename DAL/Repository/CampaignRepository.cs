@@ -7,7 +7,7 @@ namespace DAL.Repository
 {
     public class CampaignRepository: ICampaignRepository
     {
-        private readonly CampainContext _context;
+         CampainContext _context;
 
         public CampaignRepository(CampainContext context)
         {

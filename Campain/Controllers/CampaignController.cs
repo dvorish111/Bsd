@@ -70,6 +70,7 @@ namespace Campain.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
+            int x=3;
             try
             {
                 var campaigns = campaignService.GetAll();

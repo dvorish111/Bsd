@@ -10,7 +10,7 @@ using DAL.IRepositorys;
 using Microsoft.Extensions.DependencyInjection;
 
 
-using Microsoft.Extensions.DependencyInjection;
+
 
 namespace BL_AppService.IServeces
 {

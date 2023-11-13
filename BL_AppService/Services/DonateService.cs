@@ -6,8 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL_AppService.IServeces;
-using Common;
-using DAL.IRepositorys;
+
 using DAL.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +20,7 @@ namespace BL_AppService.Services
         public DonateService(IDonateRepository repository, IMapper mapper)
         {
             donateRepository = repository;
-            mapper = mapper;
+           this.mapper = mapper;
         }
 
         public void Create(DonateDTO donateDTO)
@@ -37,7 +36,9 @@ namespace BL_AppService.Services
 
         public List<DonateDTO> GetAll()
         {
-            return mapper.Map<List<DonateDTO>>(donateRepository.GetAll());
+            List<Donate> donates = donateRepository.GetAll();
+            return mapper.Map<List<DonateDTO>>(donates);
+          
 
         }
         public List<DonateDTO> GetAllByNumOfChildren(int from, int to)

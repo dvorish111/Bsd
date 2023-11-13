@@ -17,8 +17,8 @@ namespace BL_AppService.Services
         IMapper mapper;
         public CampaignService(ICampaignRepository repository,IMapper mapper)
         {
-            campaignRepository = repository;
-            mapper = mapper;    
+           this.campaignRepository = repository;
+           this.mapper = mapper;    
         }
 
         public void Create(CampaignDTO campaign)

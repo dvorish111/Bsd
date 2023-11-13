@@ -7,7 +7,7 @@ namespace DAL.Repository
 {
     public class DonorRepository: IDonorRepository
     {
-        private readonly CampainContext _context;
+       CampainContext _context;
 
         public DonorRepository(CampainContext context)
         {

@@ -18,7 +18,7 @@ namespace BL_AppService.Services
         public DonationService(IDonationRepository repository, IMapper mapper)
         {
             donationRepository = repository;
-                mapper = mapper;
+            this.mapper = mapper;
            
         }
 
@@ -47,10 +47,8 @@ namespace BL_AppService.Services
         }
 
         public void Update(DonationDTO donationDTO)
-        {
-           
+        {          
             donationRepository.Update(mapper.Map<Donation>(donationDTO));
-
         }
     }
 }

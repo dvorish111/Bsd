@@ -7,7 +7,7 @@ namespace DAL.Repository
 {
     public class NeighborhoodRepository: INeighborhoodRepository
     {
-        private readonly CampainContext _context;
+         CampainContext _context;
 
         public NeighborhoodRepository(CampainContext context)
         {

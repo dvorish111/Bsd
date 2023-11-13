@@ -8,7 +8,7 @@ namespace DAL.Repository
 {
     public class PermissionRepository: IPermissionRepository
     {
-        private readonly CampainContext _context;
+         CampainContext _context;
 
         public PermissionRepository(CampainContext context)
         {
