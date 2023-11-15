@@ -19,7 +19,7 @@ namespace Campain.Controllers
         #region HttpPost
         [HttpPost]
        /* [Microsoft.AspNetCore.Authorization.Authorize]*/
-        public ActionResult Create(DonateAllDTO DonateAllDTO)
+        public async Task<ActionResult<DonateAllDTO>> Create(DonateAllDTO DonateAllDTO)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Campain.Controllers
 
         #region HttpPut
         [HttpPut("{Taz}")]
-        public ActionResult Update(int Taz, DonateAllDTO donateAllDTO)
+        public async Task<IActionResult> Update(int Taz, DonateAllDTO donateAllDTO)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Campain.Controllers
 
         #region HttpDelete
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
@@ -69,10 +69,11 @@ namespace Campain.Controllers
         #region HttpGetAll
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<ActionResult<IEnumerable<DonateDTO>>> GetAll()
         {
             try
             {
+               
                 var donateDTOs = donateService.GetAll();
                 return Ok(donateDTOs);
             }
@@ -86,7 +87,7 @@ namespace Campain.Controllers
         #region HttpGetAllByStatus
 
         [HttpGet("status/{idStatus}")]
-        public ActionResult<List<DonateDTO>> GetAllByStatus(int idStatus)
+        public async Task<ActionResult<IEnumerable<DonateDTO>>> GetAllByStatus(int idStatus)
         {
             try
             {
@@ -102,7 +103,7 @@ namespace Campain.Controllers
 
         #region HttpGetAllByNeeded
         [HttpGet("Needed/{idNeeded}")]
-        public ActionResult<List<DonateDTO>> GetAllByNeeded(double idNeeded)
+        public async Task<ActionResult<IEnumerable<DonateDTO>>> GetAllByNeeded(double idNeeded)
         {
             try
             {
@@ -117,12 +118,12 @@ namespace Campain.Controllers
         #endregion
 
         #region HttpGetById
-        [HttpGet("ID/{idDonate}")]
-        public ActionResult<DonateDTO> GetById( int idDonate)
+        [HttpGet("TazDonate/{tazDonate}")]
+        public async Task<ActionResult<DonateDTO>> GetByTaz( int tazDonate)
         {
             try
             {
-                var donateDTO = donateService.GetById(idDonate);
+                var donateDTO = donateService.GetByTaz(tazDonate);
                 return Ok(donateDTO);
             }
             catch (Exception ex)
@@ -134,7 +135,7 @@ namespace Campain.Controllers
 
         #region HttpGetBynumOfChildren
         [HttpGet("numOfChildren")]
-        public ActionResult<List<DonateDTO>> GetAllByNumOfChildren(int from, int to)
+        public async Task<ActionResult<IEnumerable<DonateDTO>>> GetAllByNumOfChildren(int from, int to)
         {
             try
             {

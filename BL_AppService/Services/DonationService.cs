@@ -41,7 +41,7 @@ namespace BL_AppService.Services
          
         }
 
-        public DonationDTO GetById(int id)
+        public DonationDTO GetByTaz(int id)
         {
             return mapper.Map<DonationDTO>(donationRepository.GetById(id));
 

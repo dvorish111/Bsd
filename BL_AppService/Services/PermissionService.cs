@@ -39,7 +39,7 @@ namespace BL_AppService.Services
            
         }
 
-        public PermissionDTO GetById(int id)
+        public PermissionDTO GetByTaz(int id)
         {
             return mapper.Map<PermissionDTO>(permissionRepository.GetById(id));
         }

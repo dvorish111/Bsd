@@ -35,9 +35,9 @@ namespace DAL.Repository
         //    return _context.Donates.ToList();
         //}
 
-        public Donate GetById(int donateId)
+        public Donate GetByTaz(int donateTaz)
         {
-            return _context.Donates.FirstOrDefault(d => d.Id == donateId);
+            return _context.Donates.FirstOrDefault(d => d.ParentTaz == donateTaz);
         }
 
 
@@ -72,6 +72,11 @@ namespace DAL.Repository
                 _context.Donates.Remove(donate);
                 _context.SaveChanges();
             }
+        }
+
+        public Donate GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

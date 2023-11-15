@@ -12,6 +12,7 @@ namespace BL_AppService.IServeces
     {
         public void Create(DonateAllDTO donate);
         public void Update(DonateAllDTO donate);
+        public DonateDTO GetByTaz(int donateTaz);
         List<DonateDTO> GetAllByNeeded(double id);
         List<DonateDTO> GetAllByStatus(int id);
         List<DonateDTO> GetAllByNumOfChildren(int from, int to);

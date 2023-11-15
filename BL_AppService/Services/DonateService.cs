@@ -60,10 +60,10 @@ namespace BL_AppService.Services
         //    return _context.Donates.ToList();
         //}
 
-        public DonateDTO GetById(int id)
+        public DonateDTO GetByTaz(int taz)
         {
            
-            return mapper.Map<DonateDTO>(donateRepository.GetById(id));
+            return mapper.Map<DonateDTO>(donateRepository.GetByTaz(taz));
 
         }
 
@@ -78,6 +78,11 @@ namespace BL_AppService.Services
         }
 
         public void Update(DonateDTO ObjToUpdate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DonateDTO GetById(int id)
         {
             throw new NotImplementedException();
         }
