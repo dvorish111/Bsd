@@ -10,6 +10,8 @@ namespace BL_AppService.IServeces
 {
     public interface IDonateService: IService<DonateDTO>
     {
+        public void Create(DonateAllDTO donate);
+        public void Update(DonateAllDTO donate);
         List<DonateDTO> GetAllByNeeded(double id);
         List<DonateDTO> GetAllByStatus(int id);
         List<DonateDTO> GetAllByNumOfChildren(int from, int to);

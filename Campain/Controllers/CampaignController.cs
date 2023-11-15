@@ -68,13 +68,13 @@ namespace Campain.Controllers
 
         #region HttpGetAll
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            int x=3;
+           
             try
             {
                 var campaigns = campaignService.GetAll();
-                return Ok(campaigns);
+                return  Ok(campaigns);
             }
             catch (Exception ex)
             {

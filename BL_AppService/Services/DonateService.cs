@@ -17,16 +17,18 @@ namespace BL_AppService.Services
     {
         IDonateRepository donateRepository;
         IMapper mapper;
-        public DonateService(IDonateRepository repository, IMapper mapper)
+        public DonateService(IDonateRepository donateRepository, IMapper mapper)
         {
-            donateRepository = repository;
+           this.donateRepository = donateRepository;
            this.mapper = mapper;
         }
 
-        public void Create(DonateDTO donateDTO)
+        public void Create(DonateAllDTO donateAllDTO)
         {
-            donateRepository.Create(mapper.Map<Donate>(donateDTO));
-
+            Donate donate = mapper.Map<Donate>(donateAllDTO);
+            donateRepository.Create(donate);
+/*            donateRepository.Create(mapper.Map<Donate>(donateAllDTO));
+*/
         }
 
         public void Delete(int id)
@@ -49,9 +51,9 @@ namespace BL_AppService.Services
         {
             return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByStatus(id));
         }
-        public List<DonateDTO> GetAllByNeeded(double id)
+        public List<DonateDTO> GetAllByNeeded(double needed)
         {
-            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByNeeded(id));
+            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByNeeded(needed));
         }
         // public List<Donate> GetAllByGoul()
         //{
@@ -60,14 +62,24 @@ namespace BL_AppService.Services
 
         public DonateDTO GetById(int id)
         {
-
+           
             return mapper.Map<DonateDTO>(donateRepository.GetById(id));
 
         }
 
-        public void Update(DonateDTO donateDTO)
+        public void Update(DonateAllDTO donateAllDTO)
         {                  
-            donateRepository.Update(mapper.Map<Donate>(donateDTO));
+            donateRepository.Update(mapper.Map<Donate>(donateAllDTO));
+        }
+
+        public void Create(DonateDTO ObjToAdd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(DonateDTO ObjToUpdate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

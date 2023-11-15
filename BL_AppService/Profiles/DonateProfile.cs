@@ -13,7 +13,11 @@ namespace BL_AppService.Profiles
     {
         public DonateProfile()
         {
-            CreateMap<Donate, DonateDTO>().ReverseMap();
+            
+           CreateMap<Donate, DonateDTO>().ReverseMap();
+            CreateMap<Donate, DonateAllDTO>().ReverseMap();
         }
+
+
     }
 }
