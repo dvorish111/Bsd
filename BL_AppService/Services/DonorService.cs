@@ -17,14 +17,20 @@ namespace BL_AppService.Services
         IMapper mapper;
         public DonorService(IDonorRepository donorRepository, IMapper mapper)
         {
-            donorRepository = donorRepository;
-            mapper = mapper;
+            this.donorRepository = donorRepository;
+            this.mapper = mapper;
 
         }
 
         public void Create(DonorDTO donor)
         {
             donorRepository.Create(mapper.Map<Donor>(donor));
+        }
+
+        public void Create(DonorAllDTO donorAllDTO)
+        {
+            Donor donor = mapper.Map<Donor>(donorAllDTO);
+            donorRepository.Create(donor);
         }
 
         public void Delete(int id)
@@ -39,7 +45,12 @@ namespace BL_AppService.Services
            
         }
 
-        public DonorDTO GetByTaz(int id)
+        public List<DonorDTO> GetAllByCity(string city)
+        {
+            return mapper.Map<List<DonorDTO>>(donorRepository.GetAllByCity(city));
+        }
+
+        public DonorDTO GetById(int id)
         {
             return mapper.Map<DonorDTO>(donorRepository.GetById(id));
         }
@@ -49,5 +60,10 @@ namespace BL_AppService.Services
             donorRepository.Update(mapper.Map<Donor>(donor));
             
         }
+
+        /*public void Update(DonorAllDTO donorAllDTO)
+        {
+            donorRepository.Update(mapper.Map<Donor>(donorAllDTO));
+        }*/
     }
 }

@@ -55,5 +55,10 @@ namespace DAL.Repository
                 _context.SaveChanges();
             }
         }
+
+        public List<Donor> GetAllByCity(string city)
+        {
+            return _context.Donors.Where(d => d.City == city.ToLower()).ToList();
+        }
     }
 }

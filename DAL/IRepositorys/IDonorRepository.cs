@@ -9,5 +9,6 @@ namespace DAL.IRepositorys
 {
     public interface IDonorRepository:IRepository<Donor>
     {
+        List<Donor> GetAllByCity(string city);
     }
 }

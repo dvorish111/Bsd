@@ -1,43 +1,123 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BL_AppService.IServeces;
+using Common;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Campain.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DonorController : ControllerBase
+    public class DonorController : BaseController
     {
-        // GET: api/<DonorController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        IDonorService donorService;
+        public DonorController(IDonorService donorService)
         {
-            return new string[] { "value1", "value2" };
+            this.donorService = donorService;
         }
 
-        // GET api/<DonorController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<DonorController>
+        #region HttpPost
         [HttpPost]
-        public void Post([FromBody] string value)
+      
+        public async Task<ActionResult<DonorAllDTO>> Create(DonorAllDTO donorDTO)
         {
+            try
+            {
+                donorService.Create(donorDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
 
-        // PUT api/<DonorController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+       /* #region HttpPut
+        [HttpPut("{Taz}")]
+        public async Task<IActionResult> Update(int Taz, DonorDTO donorAllDTO)
         {
+            try
+            {
+                DonorDTO.ParentTaz = Taz;
+                donorService.Update(donorAllDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion*/
 
-        // DELETE api/<DonorController>/5
+        #region HttpDelete
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                donorService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
+
+        #region HttpGetAll
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<DonorDTO>>> GetAll()
+        {
+            try
+            {
+
+                var donorDTOs = donorService.GetAll();
+                return Ok(donorDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region GetAllByCity
+
+        [HttpGet("Donors/{city}")]
+        public async Task<ActionResult<IEnumerable<DonorDTO>>> GetAllByCity(string city)
+        {
+            try
+            {
+                var DonorDTOs = donorService.GetAllByCity(city);
+                return Ok(DonorDTOs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+       
+
+        #region HttpGetById
+        [HttpGet("ID/{id}")]
+        public async Task<ActionResult<DonorDTO>> GetByTaz(int id)
+        {
+            try
+            {
+                var donorDTO = donorService.GetById(id);
+                return Ok(donorDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            } 
+        }
+        #endregion
+
+      
+
     }
 }

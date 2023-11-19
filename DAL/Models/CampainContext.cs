@@ -69,8 +69,6 @@ namespace DAL.Models
 
             modelBuilder.Entity<Donation>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Dedication).HasMaxLength(255);
 
                 entity.Property(e => e.Quetel).HasMaxLength(255);
@@ -79,19 +77,17 @@ namespace DAL.Models
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonated)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__66603565");
+                    .HasConstraintName("FK__Donations__IdDon__00200768");
 
                 entity.HasOne(d => d.IdDonorNavigation)
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__38996AB5");
+                    .HasConstraintName("FK__Donations__IdDon__01142BA1");
             });
 
             modelBuilder.Entity<Donor>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.City).HasMaxLength(32);
 
                 entity.Property(e => e.Email).HasMaxLength(64);
