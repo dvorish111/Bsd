@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public class NeighborhoodDTO
+    public class LogInDTO
     {
-        /*public int Id { get; set; }*/
-        public string Name { get; set; } = null!;
+      
+        public string Password { get; set; } = null!;
+        public string Email { get; set; } = null!;
     }
 }

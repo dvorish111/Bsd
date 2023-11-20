@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public class PermissionDTO
+    public class SignUpDTO
     {
-        public int Id { get; set; }
         public string ManagerName { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string? Email { get; set; }

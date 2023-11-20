@@ -28,7 +28,7 @@ namespace Campain.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+       /* [HttpPut("{id}")]
         public IActionResult Update(int id, NeighborhoodDTO neighborhoodDTO)
         {
             try
@@ -42,8 +42,8 @@ namespace Campain.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpDelete("{id}")]
+*/
+       /* [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try
@@ -55,7 +55,7 @@ namespace Campain.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
+        }*/
 
         [HttpGet]
         public IActionResult GetAll()
@@ -71,7 +71,7 @@ namespace Campain.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+     /*   [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             try
@@ -87,6 +87,6 @@ namespace Campain.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
+        }*/
     }
 }

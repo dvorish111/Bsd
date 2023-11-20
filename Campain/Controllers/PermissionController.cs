@@ -18,12 +18,12 @@ namespace Campain.Controllers
 
         #region HttpPost
         [HttpPost]
-        public IActionResult Create(PermissionDTO permissionDTO)
+        public IActionResult Create(SignUpDTO signUpDTO)
         {
             try
             {
-                permissionService.Create(permissionDTO);
-                return Ok();
+                permissionService.Create(signUpDTO);
+                return Ok("successful");
             }
             catch (Exception ex)
             {
@@ -32,15 +32,15 @@ namespace Campain.Controllers
         }
         #endregion
 
-        #region HttpPut
+        #region UpdateByGmail
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, PermissionDTO PermissionDTO)
+        [HttpPut("UpdateByGmail/{gmail}")]
+        public IActionResult UpdateByGmail(string gmail, LogInDTO logInDTO)
         {
             try
             {
-                PermissionDTO.Id = id;
-                permissionService.Update(PermissionDTO);
+                logInDTO.Email = gmail;
+                permissionService.Update(logInDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -48,11 +48,29 @@ namespace Campain.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
+        #region UpdateByPassword
+
+        [HttpPut("UpdateByPassword/{password}")]
+        public IActionResult UpdateByPassword(string password, LogInDTO logInDTO)
+        {
+            try
+            {
+                logInDTO.Password = password;
+                permissionService.Update(logInDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         #endregion
 
         #region HttpDelete
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]//לא בטוח שצריך
         public IActionResult Delete(int id)
         {
             try
@@ -83,14 +101,14 @@ namespace Campain.Controllers
         }
         #endregion
 
-        #region HttpGetById
+        #region HttpGetByPassword&Email
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        [HttpGet("Password&Email")]
+        public async Task<ActionResult<LogInDTO>> GetByPassword_Email(string password, string email)
         {
             try
             {
-                var Permission = permissionService.GetById(id);
+                var Permission = permissionService.GetByPassword_Email(password,email);
                 if (Permission == null)
                 {
                     return NotFound();
@@ -105,4 +123,5 @@ namespace Campain.Controllers
         #endregion
     }
 }
+
 

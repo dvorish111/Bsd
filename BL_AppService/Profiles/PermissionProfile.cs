@@ -13,7 +13,8 @@ namespace BL_AppService.Profiles
     {
         public PermissionProfile()
         {
-            CreateMap<Permission, PermissionDTO>().ReverseMap();
+            CreateMap<Permission, LogInDTO>().ReverseMap();
+            CreateMap<Permission, SignUpDTO>().ReverseMap();
         }
     }
 }

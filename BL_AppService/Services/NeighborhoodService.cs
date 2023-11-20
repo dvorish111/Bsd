@@ -17,8 +17,8 @@ namespace BL_AppService.Services
         IMapper mapper;
         public NeighborhoodService(INeighborhoodRepository neighborhoodRepository, IMapper mapper)
         {
-            neighborhoodRepository = neighborhoodRepository;
-            mapper = mapper;
+           this. neighborhoodRepository = neighborhoodRepository;
+           this. mapper = mapper;
 
         }
 

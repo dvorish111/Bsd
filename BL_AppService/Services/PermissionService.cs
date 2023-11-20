@@ -16,15 +16,20 @@ namespace BL_AppService.Services
         IMapper mapper;
         public PermissionService(IPermissionRepository permissionRepository, IMapper mapper)
         {
-            permissionRepository = permissionRepository;
-            mapper = mapper;
+           this. permissionRepository = permissionRepository;
+           this.mapper = mapper;
 
         }
 
-        public void Create(PermissionDTO permissionDTO)
+        public void Create(LogInDTO logInDTO)
         {
-            permissionRepository.Create(mapper.Map<Permission>(permissionDTO));
+            permissionRepository.Create(mapper.Map<Permission>(logInDTO));
             
+        }
+
+        public void Create(SignUpDTO signUpDTO)
+        {
+            permissionRepository.Create(mapper.Map<Permission>(signUpDTO));
         }
 
         public void Delete(int id)
@@ -32,22 +37,26 @@ namespace BL_AppService.Services
             permissionRepository.Delete(id);
         }
 
-        public List<PermissionDTO> GetAll()
+        public List<LogInDTO> GetAll()
         {
             List<Permission> permissions = permissionRepository.GetAll();
-            return mapper.Map<List<PermissionDTO>>(permissions);
+            return mapper.Map<List<LogInDTO>>(permissions);
            
         }
 
-        public PermissionDTO GetById(int id)
+        public LogInDTO GetById(int id)
         {
-            return mapper.Map<PermissionDTO>(permissionRepository.GetById(id));
+            return mapper.Map<LogInDTO>(permissionRepository.GetById(id));
         }
 
-        public void Update(PermissionDTO permissionDTO)
+        public LogInDTO GetByPassword_Email(string password, string email)
+        {
+            return mapper.Map<LogInDTO>(permissionRepository.GetByPassword_Email(password,email));
+        }
+        public void Update(LogInDTO logInDTO)
         {
            
-            permissionRepository.Update(mapper.Map<Permission>(permissionDTO));
+            permissionRepository.Update(mapper.Map<Permission>(logInDTO));
         }
     }
 }

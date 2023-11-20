@@ -33,10 +33,11 @@ namespace DAL.Repository
 
         public void Update(Permission permission)
         {
-            var existingPermission = _context.Permissions.FirstOrDefault(c => c.Id == permission.Id);
+            var existingPermission = _context.Permissions.FirstOrDefault(c => c.Password == permission.Password);
             if (existingPermission != null)
             {
                 existingPermission.Password = permission.Password;
+                existingPermission.Email = permission.Email;
                 // existingPermission.Donates = Permission.Donates;
                 _context.SaveChanges();
             }
@@ -50,6 +51,11 @@ namespace DAL.Repository
                 _context.Permissions.Remove(permission);
                 _context.SaveChanges();
             }
+        }
+
+        public Permission GetByPassword_Email(string password, string email)
+        {
+            return _context.Permissions.FirstOrDefault(c => c.Password == password && c.Email==email);
         }
     }
 }
