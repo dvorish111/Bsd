@@ -58,13 +58,13 @@ namespace DAL.Models
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdNeighborhood)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdNeigh__3A4CA8FD");
+                    .HasConstraintName("FK__Donates__IdNeigh__72910220");
 
                 entity.HasOne(d => d.IdStatusNavigation)
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdStatus)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdStatu__4D5F7D71");
+                    .HasConstraintName("FK__Donates__IdStatu__634EBE90");
             });
 
             modelBuilder.Entity<Donation>(entity =>
@@ -77,17 +77,20 @@ namespace DAL.Models
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonated)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__02FC7413");
+                    .HasConstraintName("FK__Donations__IdDon__690797E6");
 
                 entity.HasOne(d => d.IdDonorNavigation)
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__03F0984C");
+                    .HasConstraintName("FK__Donations__IdDon__719CDDE7");
             });
 
             modelBuilder.Entity<Donor>(entity =>
             {
+                entity.HasIndex(e => e.Email, "UC_Email_Donors")
+                    .IsUnique();
+
                 entity.Property(e => e.City).HasMaxLength(32);
 
                 entity.Property(e => e.Email).HasMaxLength(32);
@@ -101,14 +104,16 @@ namespace DAL.Models
 
             modelBuilder.Entity<Neighborhood>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Name).HasMaxLength(32);
             });
 
             modelBuilder.Entity<Permission>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasIndex(e => e.Email, "UC_Email_Permissions")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Password, "UC_Password_Permission")
+                    .IsUnique();
 
                 entity.Property(e => e.Email).HasMaxLength(32);
 

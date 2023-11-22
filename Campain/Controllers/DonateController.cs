@@ -34,12 +34,12 @@ namespace Campain.Controllers
         #endregion
 
         #region HttpPut
-        [HttpPut("{Taz}")]
-        public async Task<IActionResult> Update(int Taz, DonateAllDTO donateAllDTO)
+        [HttpPut]
+        public async Task<IActionResult> Update( DonateAllDTO donateAllDTO)
         {
             try
             {
-                donateAllDTO.ParentTaz = Taz;
+               
                 donateService.Update(donateAllDTO);
                 return Ok();
             }

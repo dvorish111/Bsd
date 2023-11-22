@@ -33,12 +33,11 @@ namespace Campain.Controllers
 
         #region HttpPut
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, CampaignDTO campaignDTO)
+        [HttpPut]
+        public IActionResult Update(CampaignDTO campaignDTO)
         {
             try
             {
-                campaignDTO.Id = id;
                 campaignService.Update(campaignDTO);
                 return Ok();
             }

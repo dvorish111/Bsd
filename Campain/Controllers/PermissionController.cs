@@ -51,12 +51,11 @@ namespace Campain.Controllers
         #endregion
         #region UpdateByPassword
 
-        [HttpPut("UpdateByPassword/{password}")]
-        public IActionResult UpdateByPassword(string password, LogInDTO logInDTO)
+        [HttpPut]
+        public IActionResult UpdateByPassword( LogInDTO logInDTO)
         {
             try
             {
-                logInDTO.Password = password;
                 permissionService.Update(logInDTO);
                 return Ok();
             }

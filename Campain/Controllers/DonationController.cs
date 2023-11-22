@@ -29,12 +29,11 @@ namespace Campain.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, DonationDTO donationDTO)
+        [HttpPut]
+        public IActionResult Update( DonationDTO donationDTO)
         {
             try
             {
-                donationDTO.Id = id;
                 donationService.Update(donationDTO);
                 return Ok();
             }
