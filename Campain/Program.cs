@@ -26,7 +26,7 @@ app.UseAuthorization();
          .AddUserSecrets<Program>()
       .Build();
 app.UseHttpsRedirection();*/
-
+app.UseRouting();
 app.UseCors(options =>
 {
     options.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();

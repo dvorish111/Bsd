@@ -26,18 +26,18 @@ namespace DAL.Repository
         {
             return _context.Donates.Where(d=>d.IdStatus==id).ToList();
         }
-         public List<Donate> GetAllByNeeded(double id)
+         public List<Donate> GetAllByNeeded(double needed)
         {
-            return _context.Donates.Where(d=>d.Needed==id).ToList();
+            return _context.Donates.Where(d=>d.Needed== needed).ToList();
         }
         // public List<Donate> GetAllByGoul()
         //{
         //    return _context.Donates.ToList();
         //}
 
-        public Donate GetById(int donateId)
+        public Donate GetByTaz(int donateTaz)
         {
-            return _context.Donates.FirstOrDefault(d => d.Id == donateId);
+            return _context.Donates.FirstOrDefault(d => d.ParentTaz == donateTaz);
         }
 
 
@@ -49,7 +49,7 @@ namespace DAL.Repository
 
         public void Update(Donate donate)
         {
-            var existingDonate = _context.Donates.FirstOrDefault(d => d.Id == donate.Id);
+            var existingDonate = _context.Donates.FirstOrDefault(d => d.ParentTaz == donate.ParentTaz);
             if (existingDonate != null)
             {
                 existingDonate.Name = donate.Name;
@@ -72,6 +72,11 @@ namespace DAL.Repository
                 _context.Donates.Remove(donate);
                 _context.SaveChanges();
             }
+        }
+
+        public Donate GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

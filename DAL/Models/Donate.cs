@@ -11,6 +11,7 @@ namespace DAL.Models
         }
 
         public int Id { get; set; }
+        public int? ParentTaz { get; set; }
         public string Name { get; set; } = null!;
         public int NumChildren { get; set; }
         public int IdStatus { get; set; }

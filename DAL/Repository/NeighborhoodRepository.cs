@@ -26,6 +26,7 @@ namespace DAL.Repository
 
         public void Create(Neighborhood neighborhood)
         {
+            int id = _context.Neighborhoods.Count() + 1;
             _context.Neighborhoods.Add(neighborhood);
             _context.SaveChanges();
         }

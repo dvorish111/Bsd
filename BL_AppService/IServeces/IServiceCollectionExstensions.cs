@@ -27,6 +27,7 @@ namespace BL_AppService.IServeces
             serviceCollection.AddScoped<IPermissionService, PermissionService>();
             serviceCollection.AddAutoMapper(config => config.AddProfile<CampaignProfile>());
             serviceCollection.AddAutoMapper(config => config.AddProfile<DonorProfile>());
+            serviceCollection.AddAutoMapper(config => config.AddProfile<DonateProfile>());
             serviceCollection.AddAutoMapper(config => config.AddProfile<PermissionProfile>());
             serviceCollection.AddAutoMapper(config => config.AddProfile<NeighborhoodProfile>());
             serviceCollection.AddAutoMapper(config => config.AddProfile<DonationProfile>());

@@ -9,5 +9,6 @@ namespace DAL.IRepositorys
 {
     public interface IPermissionRepository :IRepository<Permission>
     {
+        public Permission GetByPassword_Email(string password, string email);
     }
 }

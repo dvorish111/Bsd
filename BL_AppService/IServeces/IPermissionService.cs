@@ -7,8 +7,9 @@ using Common;
 using DAL.Models;
 namespace BL_AppService.IServeces
 {
-    public interface IPermissionService: IService<PermissionDTO>
+    public interface IPermissionService: IService<LogInDTO>
     {
-       
+        public void Create(SignUpDTO donate);
+        public LogInDTO GetByPassword_Email(string password, string email);
     }
 }
