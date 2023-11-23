@@ -58,7 +58,7 @@ namespace DAL.Models
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdNeighborhood)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdNeigh__6754599E");
+                    .HasConstraintName("FK__Donates__IdNeigh__2DE6D218");
 
                 entity.HasOne(d => d.IdStatusNavigation)
                     .WithMany(p => p.Donates)
@@ -83,11 +83,14 @@ namespace DAL.Models
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__01142BA1");
+                    .HasConstraintName("FK__Donations__IdDon__2B0A656D");
             });
 
             modelBuilder.Entity<Donor>(entity =>
             {
+                entity.HasIndex(e => e.Email, "UC_Email_Donors")
+                    .IsUnique();
+
                 entity.Property(e => e.City).HasMaxLength(32);
 
                 entity.Property(e => e.Email).HasMaxLength(64);
@@ -101,13 +104,20 @@ namespace DAL.Models
 
             modelBuilder.Entity<Neighborhood>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Name).HasMaxLength(32);
             });
 
             modelBuilder.Entity<Permission>(entity =>
             {
+                entity.HasIndex(e => e.Email, "UC_Email")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Email, "UC_Email_Permissions")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Password, "UC_Password_Permissions")
+                    .IsUnique();
+
                 entity.Property(e => e.Email).HasMaxLength(50);
 
                 entity.Property(e => e.ManagerName).HasMaxLength(50);

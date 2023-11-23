@@ -16,8 +16,8 @@ namespace DAL.Models
         public string Email { get; set; } = null!;
         public int Phone { get; set; }
         public string City { get; set; } = null!;
-        public string Street { get; set; } = null!;
-        public int ZipCode { get; set; }
+        public string? Street { get; set; }
+        public int? ZipCode { get; set; }
 
         public virtual ICollection<Donation> Donations { get; set; }
     }

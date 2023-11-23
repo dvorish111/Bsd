@@ -102,7 +102,7 @@ namespace Campain.Controllers
        
 
         #region HttpGetById
-        [HttpGet("ID/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<DonorDTO>> GetByTaz(int id)
         {
             try
