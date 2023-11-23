@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Microsoft.AspNetCore.Mvc;
+
 using DAL.Models;
 
 namespace BL_AppService.IServeces
@@ -15,7 +17,7 @@ namespace BL_AppService.IServeces
         public DonateDTO GetByTaz(int donateTaz);
         List<DonateDTO> GetAllByNeeded(double id);
         List<DonateDTO> GetAllByStatus(int id);
-        List<DonateDTO> GetAllByNumOfChildren(int from, int to);
+        List<DonateDTO> GetAllByNumOfChildren( int to);
 
     }
 }

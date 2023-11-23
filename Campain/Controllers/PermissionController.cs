@@ -102,7 +102,8 @@ namespace Campain.Controllers
 
         #region HttpGetByPassword&Email
 
-        [HttpGet("Password&Email")]
+      
+        [HttpGet("Password/{password}/Email/{email}")]
         public async Task<ActionResult<LogInDTO>> GetByPassword_Email(string password, string email)
         {
             try

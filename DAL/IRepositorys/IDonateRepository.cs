@@ -12,6 +12,6 @@ namespace DAL.IRepositorys
         Donate GetByTaz(int donateTaz);
          List<Donate> GetAllByNeeded(double id);
          List<Donate> GetAllByStatus(int id);
-         List<Donate> GetAllByNumOfChildren(int from, int to);
+         List<Donate> GetAllByNumOfChildren(int to);
     }
 }
