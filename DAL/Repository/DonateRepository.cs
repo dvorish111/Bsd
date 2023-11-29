@@ -20,8 +20,7 @@ namespace DAL.Repository
         }
         public List<Donate> GetAllByNumOfChildren(int to)
         {
-            int from = to-5;
-            
+            int from = to-5;            
             return _context.Donates.Where(d=>d.NumChildren>from&&d.NumChildren<to).ToList();
         }
          public List<Donate> GetAllByStatus(int id)
@@ -79,6 +78,15 @@ namespace DAL.Repository
         public Donate GetById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetNumChildren()
+        {          
+            return _context.Donates.Sum(s => s.NumChildren);
+        }
+        public int GetNumFamily()
+        {
+            return _context.Donates.Count();
         }
     }
 }

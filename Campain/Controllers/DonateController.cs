@@ -149,7 +149,39 @@ namespace Campain.Controllers
         }
         #endregion
 
+        #region HttpGetNumFamily
+        [HttpGet("NumFamily")]
+        public async Task<ActionResult<int>> GetNumFamily()
+        {
+            try { 
+            
+                int NumFamily = donateService.GetNumFamily();
+                return Ok(NumFamily);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
 
+
+        #region HttpGetNumChildren
+        [HttpGet("NumChildren")]
+        public async Task<ActionResult<int>> GetNumChildren()
+        {
+            try
+            {
+
+                int NumCildren = donateService.GetNumChildren();
+                return Ok(NumCildren);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
 
     }
 }

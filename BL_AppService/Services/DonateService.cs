@@ -85,5 +85,15 @@ namespace BL_AppService.Services
         {
             throw new NotImplementedException();
         }
+
+        public int GetNumChildren()
+        {
+           return donateRepository.GetNumChildren();
+        }
+
+        public int GetNumFamily()
+        {
+            return donateRepository.GetNumFamily();
+        }
     }
 }

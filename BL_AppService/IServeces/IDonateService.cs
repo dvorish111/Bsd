@@ -18,6 +18,8 @@ namespace BL_AppService.IServeces
         List<DonateDTO> GetAllByNeeded(double id);
         List<DonateDTO> GetAllByStatus(int id);
         List<DonateDTO> GetAllByNumOfChildren( int to);
+        int GetNumChildren();
+        int GetNumFamily();
 
     }
 }
