@@ -23,7 +23,7 @@ namespace Campain.Controllers
             try
             {
                 permissionService.Create(signUpDTO);
-                return Ok("successful");
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -51,12 +51,11 @@ namespace Campain.Controllers
         #endregion
         #region UpdateByPassword
 
-        [HttpPut("UpdateByPassword/{password}")]
-        public IActionResult UpdateByPassword(string password, LogInDTO logInDTO)
+        [HttpPut]
+        public IActionResult UpdateByPassword( LogInDTO logInDTO)
         {
             try
             {
-                logInDTO.Password = password;
                 permissionService.Update(logInDTO);
                 return Ok();
             }
@@ -103,7 +102,8 @@ namespace Campain.Controllers
 
         #region HttpGetByPassword&Email
 
-        [HttpGet("Password&Email")]
+      
+        [HttpGet("Password/{password}/Email/{email}")]
         public async Task<ActionResult<LogInDTO>> GetByPassword_Email(string password, string email)
         {
             try

@@ -9,6 +9,6 @@ namespace BL_AppService.IServeces
 {
     public interface IDonationService: IService<DonationDTO>
     {
-       
+      public int GetSumDonation();
     }
 }

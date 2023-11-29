@@ -9,5 +9,6 @@ namespace DAL.IRepositorys
 {
     public interface IDonationRepository: IRepository<Donation>
     {
+        public int GetSumDonation();
     }
 }

@@ -28,12 +28,11 @@ namespace Campain.Controllers
             }
         }
 
-       /* [HttpPut("{id}")]
-        public IActionResult Update(int id, NeighborhoodDTO neighborhoodDTO)
+       /* [HttpPut]
+        public IActionResult Update( NeighborhoodDTO neighborhoodDTO)
         {
             try
             {
-                neighborhoodDTO.Id = id;
                 neighborhoodService.Update(neighborhoodDTO);
                 return Ok();
             }

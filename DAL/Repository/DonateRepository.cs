@@ -18,8 +18,10 @@ namespace DAL.Repository
         {
             return _context.Donates.ToList();
         }
-        public List<Donate> GetAllByNumOfChildren(int from,int to)
+        public List<Donate> GetAllByNumOfChildren(int to)
         {
+            int from = to-5;
+            
             return _context.Donates.Where(d=>d.NumChildren>from&&d.NumChildren<to).ToList();
         }
          public List<Donate> GetAllByStatus(int id)

@@ -29,12 +29,11 @@ namespace Campain.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, DonationDTO donationDTO)
+        [HttpPut]
+        public IActionResult Update( DonationDTO donationDTO)
         {
             try
             {
-                donationDTO.Id = id;
                 donationService.Update(donationDTO);
                 return Ok();
             }
@@ -89,5 +88,22 @@ namespace Campain.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        #region HttpGetSumDonation
+        [HttpGet("SumDonation")]
+        public async Task<ActionResult<int>> GetSumDonation()
+        {
+            try
+            {
+                int SumDonation = donationService.GetSumDonation();
+                return Ok(SumDonation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }

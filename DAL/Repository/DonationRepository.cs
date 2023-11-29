@@ -58,5 +58,10 @@ namespace DAL.Repositories
                 _context.SaveChanges();
             }
         }
+
+        public int GetSumDonation()
+        {
+            return _context.Donations.Sum(s=> s.Amount);
+        }
     }
 }

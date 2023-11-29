@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL_AppService.IServeces;
-
 using DAL.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -43,9 +42,9 @@ namespace BL_AppService.Services
           
 
         }
-        public List<DonateDTO> GetAllByNumOfChildren(int from, int to)
+        public List<DonateDTO> GetAllByNumOfChildren( int to)
         {
-            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByNumOfChildren(from, to));
+            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByNumOfChildren(to));
         }
         public List<DonateDTO> GetAllByStatus(int id)
         {

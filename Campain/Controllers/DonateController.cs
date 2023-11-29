@@ -34,12 +34,12 @@ namespace Campain.Controllers
         #endregion
 
         #region HttpPut
-        [HttpPut("{Taz}")]
-        public async Task<IActionResult> Update(int Taz, DonateAllDTO donateAllDTO)
+        [HttpPut]
+        public async Task<IActionResult> Update( DonateAllDTO donateAllDTO)
         {
             try
             {
-                donateAllDTO.ParentTaz = Taz;
+               
                 donateService.Update(donateAllDTO);
                 return Ok();
             }
@@ -86,7 +86,7 @@ namespace Campain.Controllers
 
         #region HttpGetAllByStatus
 
-        [HttpGet("status/{idStatus}")]
+        [HttpGet("Status/{idStatus}")]
         public async Task<ActionResult<IEnumerable<DonateDTO>>> GetAllByStatus(int idStatus)
         {
             try
@@ -117,7 +117,7 @@ namespace Campain.Controllers
         }
         #endregion
 
-        #region HttpGetById
+        #region HttpGetByTaz
         [HttpGet("TazDonate/{tazDonate}")]
         public async Task<ActionResult<DonateDTO>> GetByTaz( int tazDonate)
         {
@@ -134,12 +134,12 @@ namespace Campain.Controllers
         #endregion
 
         #region HttpGetBynumOfChildren
-        [HttpGet("numOfChildren")]
-        public async Task<ActionResult<IEnumerable<DonateDTO>>> GetAllByNumOfChildren(int from, int to)
+        [HttpGet("NumOfChildren/{maxNumOfChildren}")]
+        public async Task<ActionResult<IEnumerable<DonateDTO>>> GetAllByNumOfChildren(int maxNumOfChildren)
         {
             try
             {
-                var donateDTOs = donateService.GetAllByNumOfChildren(from, to);
+                var donateDTOs = donateService.GetAllByNumOfChildren(maxNumOfChildren);
                 return Ok(donateDTOs);
             }
             catch (Exception ex)
