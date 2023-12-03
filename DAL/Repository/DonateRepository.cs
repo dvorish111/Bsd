@@ -1,5 +1,6 @@
 ﻿using DAL.IRepositorys;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +17,7 @@ namespace DAL.Repository
 
         public List<Donate> GetAll()
         {
-            return _context.Donates.ToList();
+            return _context.Donates.Include(d => d.IdNeighborhoodNavigation).ToList();
         }
         public List<Donate> GetAllByNumOfChildren(int to)
         {

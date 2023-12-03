@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace DAL.IRepositorys
 {
     public interface IDonationRepository: IRepository<Donation>
     {
+        
         public int GetSumDonation();
+
+        public int GetSumDonationsByDonated(int IdDonated);
+       
+
     }
 }

@@ -8,6 +8,7 @@ using BL_AppService.IServeces;
 using Common;
 using DAL.IRepositorys;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BL_AppService.Services
 {
@@ -40,7 +41,11 @@ namespace BL_AppService.Services
             return mapper.Map<List<DonationDTO>>(donations);
          
         }
-
+        //public List<DonationDTO> GetAllByDonated(int IdDonated)
+        //{
+        //    List<Donation> donations = donationRepository.GetAllByDonated();
+        //    return mapper.Map<List<DonationDTO>>(donations);
+        //}
         public DonationDTO GetById(int id)
         {
             return mapper.Map<DonationDTO>(donationRepository.GetById(id));
@@ -52,6 +57,12 @@ namespace BL_AppService.Services
             return  donationRepository.GetSumDonation();
 
         }
+
+        public int GetSumDonationsByDonated(int IdDonated)
+        {
+            return donationRepository.GetSumDonationsByDonated(IdDonated);
+        }
+
 
         public void Update(DonationDTO donationDTO)
         {          
