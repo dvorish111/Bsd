@@ -22,11 +22,11 @@ namespace DAL.Repository
         public List<Donate> GetAllByNumOfChildren(int to)
         {
             int from = to-5;            
-            return _context.Donates.Where(d=>d.NumChildren>=from&&d.NumChildren<=to).ToList();
+            return _context.Donates.Where(d=>d.NumChildren>=from&&d.NumChildren<=to).Include(d => d.IdNeighborhoodNavigation).ToList();
         }
          public List<Donate> GetAllByStatus(int id)
         {
-            return _context.Donates.Where(d=>d.IdStatus==id).ToList();
+            return _context.Donates.Where(d=>d.IdStatus==id).Include(d => d.IdNeighborhoodNavigation).ToList();
         }
          public List<Donate> GetAllByNeeded(double needed)
         {
@@ -34,7 +34,7 @@ namespace DAL.Repository
             if (needed == 10000) {
                 from = 2000;
             }
-            return _context.Donates.Where(d => d.Needed >= from && d.Needed <= needed).ToList();
+            return _context.Donates.Where(d => d.Needed >= from && d.Needed <= needed).Include(d => d.IdNeighborhoodNavigation).ToList();
         }
         // public List<Donate> GetAllByGoul()
         //{
@@ -43,7 +43,7 @@ namespace DAL.Repository
 
         public Donate GetByTaz(int donateTaz)
         {
-            return _context.Donates.FirstOrDefault(d => d.ParentTaz == donateTaz);
+            return _context.Donates.Include(d => d.IdNeighborhoodNavigation).FirstOrDefault(d => d.ParentTaz == donateTaz);
         }
 
 
