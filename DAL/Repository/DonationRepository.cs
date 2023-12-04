@@ -26,6 +26,19 @@ namespace DAL.Repositories
             return _context.Donations.ToList();
         }
 
+        public List<int> GetAllSumDonationsByDonated()
+        {
+            var donorIds = _context.Donations.Select(d => d.IdDonated).Distinct().ToList();
+            var donationAmounts = new List<int>();
+
+            foreach (var donorId in donorIds)
+            {
+                var sumDonations = _context.Donations.Where(d => d.IdDonated == donorId).Sum(d => d.Amount);
+                donationAmounts.Add(sumDonations);
+            }
+
+            return donationAmounts;
+        }
 
         public int GetSumDonationsByDonated(int IdDonated)
         {
