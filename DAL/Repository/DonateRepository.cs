@@ -22,7 +22,7 @@ namespace DAL.Repository
         public List<Donate> GetAllByNumOfChildren(int to)
         {
             int from = to-5;            
-            return _context.Donates.Where(d=>d.NumChildren>from&&d.NumChildren<to).ToList();
+            return _context.Donates.Where(d=>d.NumChildren>=from&&d.NumChildren<=to).ToList();
         }
          public List<Donate> GetAllByStatus(int id)
         {
@@ -30,7 +30,11 @@ namespace DAL.Repository
         }
          public List<Donate> GetAllByNeeded(double needed)
         {
-            return _context.Donates.Where(d=>d.Needed== needed).ToList();
+            double from = needed-500;
+            if (needed == 10000) {
+                from = 2000;
+            }
+            return _context.Donates.Where(d => d.Needed >= from && d.Needed <= needed).ToList();
         }
         // public List<Donate> GetAllByGoul()
         //{
