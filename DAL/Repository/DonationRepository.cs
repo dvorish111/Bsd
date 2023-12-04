@@ -26,6 +26,16 @@ namespace DAL.Repositories
             return _context.Donations.ToList();
         }
 
+
+        public int GetSumDonationsByDonated(int IdDonated)
+        {
+          return _context.Donations.Where(d=>d.IdDonated== IdDonated).Sum(d=>d.Amount);
+        }
+        public int GetSumDonation()
+        {
+            return _context.Donations.Sum(s => s.Amount);
+        }
+
         public void Create(Donation donation)
         {
             _context.Donations.Add(donation);
@@ -59,9 +69,6 @@ namespace DAL.Repositories
             }
         }
 
-        public int GetSumDonation()
-        {
-            return _context.Donations.Sum(s=> s.Amount);
-        }
+     
     }
 }

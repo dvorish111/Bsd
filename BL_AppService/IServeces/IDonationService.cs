@@ -10,5 +10,7 @@ namespace BL_AppService.IServeces
     public interface IDonationService: IService<DonationDTO>
     {
       public int GetSumDonation();
+      public int GetSumDonationsByDonated(int IdDonated);
+
     }
 }

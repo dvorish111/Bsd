@@ -1,6 +1,8 @@
 ﻿using BL_AppService.IServeces;
+using BL_AppService.Services;
 using Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -105,5 +107,23 @@ namespace Campain.Controllers
             }
         }
         #endregion
+        #region HttpGetSumDonationByDonated
+        [HttpGet("GetSumDonationsByDonated/{IdDonated}")]
+
+
+        public ActionResult<int> GetSumDonationsByDonated(int IdDonated)
+        {
+            try
+            {
+                int SumDonation = donationService.GetSumDonationsByDonated(IdDonated);
+                return Ok(SumDonation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }
+
