@@ -124,6 +124,23 @@ namespace Campain.Controllers
             }
         }
         #endregion
+        #region HttpGetAllSumDonationsByDonated
+        [HttpGet("GetAllSumDonationsByDonated")]
+
+
+        public ActionResult <List<int>> GetAllSumDonationsByDonated()
+        {
+            try
+            {
+                List<int> SumDonations = donationService.GetAllSumDonationsByDonated();
+                return Ok(SumDonations);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }
 

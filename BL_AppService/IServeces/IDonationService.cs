@@ -11,6 +11,8 @@ namespace BL_AppService.IServeces
     {
       public int GetSumDonation();
       public int GetSumDonationsByDonated(int IdDonated);
+        public List<int> GetAllSumDonationsByDonated();
+
 
     }
 }

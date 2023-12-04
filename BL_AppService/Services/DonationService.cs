@@ -63,7 +63,10 @@ namespace BL_AppService.Services
             return donationRepository.GetSumDonationsByDonated(IdDonated);
         }
 
-
+        public List<int> GetAllSumDonationsByDonated()
+        {
+            return donationRepository.GetAllSumDonationsByDonated();
+        }
         public void Update(DonationDTO donationDTO)
         {          
             donationRepository.Update(mapper.Map<Donation>(donationDTO));
