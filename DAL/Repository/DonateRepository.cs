@@ -93,5 +93,18 @@ namespace DAL.Repository
         {
             return _context.Donates.Count();
         }
+
+        public void CraeteDonatesByExcel(List<Donate> donates) {
+
+            // Add the records to the table
+            foreach (var donate in donates)
+            {
+            _context.Donates.Add(donate);
+            _context.SaveChanges();
+            }
+          
+
+        }
+
     }
 }
