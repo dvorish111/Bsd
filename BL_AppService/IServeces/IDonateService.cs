@@ -7,6 +7,7 @@ using Common;
 using Microsoft.AspNetCore.Mvc;
 
 using DAL.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace BL_AppService.IServeces
 {
@@ -20,6 +21,8 @@ namespace BL_AppService.IServeces
         List<DonateDTO> GetAllByNumOfChildren( int to);
         int GetNumChildren();
         int GetNumFamily();
+        public void CraeteDonatesByExcel(IFormFile file);
+
 
     }
 }

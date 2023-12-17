@@ -182,6 +182,25 @@ namespace Campain.Controllers
             }
         }
         #endregion
-
+        #region HttpPost
+        [HttpPost("CraeteDonatesByExcel")]
+        /* [Microsoft.AspNetCore.Authorization.Authorize]*/
+        public async Task<IActionResult> CraeteDonatesByExcel(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                return BadRequest("No file was uploaded.");
+            }
+            try
+            {
+                donateService.CraeteDonatesByExcel(file);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }
