@@ -52,5 +52,26 @@ namespace DAL.Repository
                 _context.SaveChanges();
             }
         }
+        public void DeleteAllEntities()
+        {
+            // Select all entities from the table
+            var entitiesToDelete = _context.Campaigns.ToList();
+           
+            // Remove all selected entities
+            _context.Campaigns.RemoveRange(entitiesToDelete);
+           
+
+            // Save changes to delete the entities
+            _context.SaveChanges();
+            Campaign campaign = new Campaign();
+            campaign.Id = 1;
+            campaign.Name = "OOOO";
+            campaign.Goul = 00000;
+            campaign.StartDate= DateTime.Now;
+            campaign.Duration =DateTime.Now.AddMonths(3);
+            Create(campaign);
+            _context.SaveChanges();
+        }
+
     }
 }

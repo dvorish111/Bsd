@@ -82,6 +82,16 @@ namespace DAL.Repositories
             }
         }
 
-     
+        public void DeleteAllEntities()
+        {
+            // Select all entities from the table
+            var entitiesToDelete = _context.Donations.ToList();
+
+            // Remove all selected entities
+            _context.Donations.RemoveRange(entitiesToDelete);
+
+            // Save changes to delete the entities
+            _context.SaveChanges();
+        }
     }
 }

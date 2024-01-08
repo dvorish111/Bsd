@@ -37,6 +37,11 @@ namespace BL_AppService.Services
             permissionRepository.Delete(id);
         }
 
+        public void DeleteAllEntities()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<LogInDTO> GetAll()
         {
             List<Permission> permissions = permissionRepository.GetAll();

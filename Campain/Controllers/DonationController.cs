@@ -141,6 +141,23 @@ namespace Campain.Controllers
             }
         }
         #endregion
+
+
+        #region HttpDeleteAllEntities
+        [HttpDelete("DeleteAllEntities")]
+        public IActionResult DeleteAllEntities()
+        {
+            try
+            {
+                donationService.DeleteAllEntities();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }
 

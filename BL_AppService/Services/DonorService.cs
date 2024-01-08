@@ -65,5 +65,9 @@ namespace BL_AppService.Services
         {
             donorRepository.Update(mapper.Map<Donor>(donorAllDTO));
         }*/
+        public void DeleteAllEntities()
+        {
+            donorRepository.DeleteAllEntities();
+        }
     }
 }

@@ -60,5 +60,17 @@ namespace DAL.Repository
         {
             return _context.Donors.Where(d => d.City == city.ToLower()).ToList();
         }
+
+        public void DeleteAllEntities()
+        {
+            // Select all entities from the table
+            var entitiesToDelete = _context.Donors.ToList();
+
+            // Remove all selected entities
+            _context.Donors.RemoveRange(entitiesToDelete);
+
+            // Save changes to delete the entities
+            _context.SaveChanges();
+        }
     }
 }

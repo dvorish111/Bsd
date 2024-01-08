@@ -57,5 +57,10 @@ namespace DAL.Repository
         {
             return _context.Permissions.FirstOrDefault(c => c.Password == password && c.Email==email);
         }
+
+        public void DeleteAllEntities()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

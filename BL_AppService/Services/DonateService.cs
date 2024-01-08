@@ -113,7 +113,7 @@ namespace BL_AppService.Services
 
                     var line = reader.ReadLine();
                     var values = line.Split(',');
-                    if (values[0]!= "ParentTaz" &&
+                    if (values[0]!=  "ParentTaz" &&
                         values[1] != "Name" &&
                         values[2] != "NumChildren" && 
                         values[3] != "IdStatus"&&
@@ -158,11 +158,28 @@ namespace BL_AppService.Services
                 donateRepository.CraeteDonatesByExcel(donates);
 
             }
-
-
-
-
         }
+        public Stream GetDonatesByExcel()
+        {
+            var data = donateRepository.GetAll();  
+            var csvContent = new StringBuilder();
+            csvContent.AppendLine("ParentTaz, Name, NumChildren, Status, Street, Needed, NumberBuilding, Neighborhood");
+            foreach (var item in data)
+            {
+                csvContent.AppendLine($"{item.ParentTaz},{item.Name},{item.NumChildren},{item.IdStatusNavigation.StatusName},{item.Street},{item.Needed},{item.NumberBuilding},{item.IdNeighborhoodNavigation.Name}"); // Add data rows               
+            }
+            var csvData = Encoding.UTF8.GetBytes(csvContent.ToString());
+            var csvStream = new MemoryStream(csvData);
+
+            return csvStream;
+        }                        
+        
+    public void DeleteAllEntities()
+    {
+            donateRepository.DeleteAllEntities();
     }
 
-}
+}      }                          
+                                 
+                                 
+                                 

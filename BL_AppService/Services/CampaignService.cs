@@ -50,7 +50,10 @@ namespace BL_AppService.Services
         }
 
 
-
+        public void  DeleteAllEntities()
+        {
+            campaignRepository.DeleteAllEntities();
+        }
 
     }
 }

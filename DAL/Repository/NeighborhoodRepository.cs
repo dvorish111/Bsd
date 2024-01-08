@@ -51,5 +51,10 @@ namespace DAL.Repository
                 _context.SaveChanges();
             }
         }
+
+        public void DeleteAllEntities()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
