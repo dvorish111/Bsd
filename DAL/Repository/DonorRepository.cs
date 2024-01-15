@@ -30,6 +30,14 @@ namespace DAL.Repository
             _context.SaveChanges();
         }
 
+        public int Create_ReturnID(Donor donor)
+        {
+            _context.Donors.Add(donor);
+            _context.SaveChanges();
+            Donor newDonor= _context.Donors.FirstOrDefault(c => c.Email == donor.Email);
+            return newDonor.Id;
+        }
+
         public void Update(Donor donor)
         {
             var existingDonor = _context.Donors.FirstOrDefault(c => c.Id == donor.Id);

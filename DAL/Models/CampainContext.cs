@@ -76,14 +76,19 @@ namespace DAL.Models
                 entity.HasOne(d => d.IdDonatedNavigation)
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonated)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__00200768");
+                    .HasConstraintName("FK__Donations__IdDon__73852659");
 
                 entity.HasOne(d => d.IdDonorNavigation)
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Donations__IdDon__2B0A656D");
+
+                entity.HasOne(d => d.IdNeighborhoodsNavigation)
+                    .WithMany(p => p.Donations)
+                    .HasForeignKey(d => d.IdNeighborhoods)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Donations__IdNei__756D6ECB");
             });
 
             modelBuilder.Entity<Donor>(entity =>

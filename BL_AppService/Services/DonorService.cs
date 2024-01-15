@@ -25,12 +25,15 @@ namespace BL_AppService.Services
         public void Create(DonorDTO donor)
         {
             donorRepository.Create(mapper.Map<Donor>(donor));
+
+           
         }
 
-        public void Create(DonorAllDTO donorAllDTO)
+        public int Create(DonorAllDTO donorAllDTO)
         {
-            Donor donor = mapper.Map<Donor>(donorAllDTO);
-            donorRepository.Create(donor);
+            int idNewDonor = donorRepository.Create_ReturnID(mapper.Map<Donor>(donorAllDTO));
+            return idNewDonor;
+            
         }
 
         public void Delete(int id)

@@ -10,5 +10,6 @@ namespace DAL.IRepositorys
     public interface IDonorRepository:IRepository<Donor>
     {
         List<Donor> GetAllByCity(string city);
+        int Create_ReturnID(Donor donor);
     }
 }
