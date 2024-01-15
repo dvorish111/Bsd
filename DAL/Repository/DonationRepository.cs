@@ -93,5 +93,10 @@ namespace DAL.Repositories
             // Save changes to delete the entities
             _context.SaveChanges();
         }
+
+        public List<Donation> GetAllFullDetails()
+        {
+            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdDonatedNavigation.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToList();
+        }
     }
 }

@@ -75,5 +75,37 @@ namespace BL_AppService.Services
         {
             donationRepository.DeleteAllEntities();
         }
+
+
+        public Stream GetDonationsByExcel()
+        {
+            var data = donationRepository.GetAllFullDetails();
+            var csvContent = new StringBuilder();
+            csvContent.AppendLine(" ID,Amount,Donated Name, Donated ParentTaz,Status,Needed,NumberBuilding,Neighborhood,Donor Name,Donor Email,Donor City,Donor Phone");
+         //   csvContent.AppendLine("מספר תרומה, סכום תרומה, שם הנתרם, תז הנתרם, סטטוס הנתרם, כמה צריך, מספר בנין,שכונה,ןשם התורם , מייל התורם, עיר, טלפון התורם");
+            foreach (var item in data)
+            {
+                csvContent.AppendLine($"{item.Id},{item.Amount},{item.IdDonatedNavigation.Name},{item.IdDonatedNavigation.ParentTaz},{item.IdDonatedNavigation.IdStatusNavigation.StatusName},{item.IdDonatedNavigation.Needed},{item.IdDonatedNavigation.NumberBuilding},{item.IdDonatedNavigation.IdNeighborhoodNavigation.Name}" +
+                    $",{item.IdDonorNavigation.FirstName+ " "+item.IdDonorNavigation.LastName},{item.IdDonorNavigation.Email},{item.IdDonorNavigation.City},{item.IdDonorNavigation.Phone}"); // Add data rows               
+            }
+           
+            var csvData = Encoding.GetEncoding("windows-1255").GetBytes(csvContent.ToString());
+            var csvStream = new MemoryStream(csvData);
+
+            return csvStream;
+        }
     }
 }
+
+/*Id
+{
+    get; set;
+? IsAnonymous
+ng? Dedication
+Amount {
+        get;
+        IdDonated {
+            ge
+        IdDonor {
+                get;
+*/

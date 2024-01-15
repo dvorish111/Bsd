@@ -62,5 +62,18 @@ namespace DAL.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateByGmail(Permission signUp, string gmail)
+        {
+            var existingPermission = _context.Permissions.FirstOrDefault(c => c.Password == gmail);
+            if (existingPermission != null)
+            {
+                existingPermission.ManagerName = signUp.ManagerName;
+                existingPermission.Password = signUp.Password;
+                existingPermission.Email = signUp.Email;
+                // existingPermission.Donates = Permission.Donates;
+                _context.SaveChanges();
+            }
+        }
     }
 }
