@@ -14,8 +14,9 @@ namespace BL_AppService.IServeces
     public interface IDonateService: IService<DonateDTO>
     {
         public void Create(DonateAllDTO donate);
+        //public void Create(DonateAllDTO donate);
         public void Update(DonateAllDTO donate);
-        public DonateDTO GetByTaz(int donateTaz);
+        public DonateAllDTO GetByTaz(int donateTaz);
         List<DonateDTO> GetAllByNeeded(double id);
         List<DonateDTO> GetAllByStatus(int id);
         List<DonateDTO> GetAllByNumOfChildren( int to);

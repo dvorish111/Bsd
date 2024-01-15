@@ -11,10 +11,12 @@ namespace DAL.Models
         public string? Quetel { get; set; }
         public int Amount { get; set; }
         public int? NumPayments { get; set; }
-        public int IdDonated { get; set; }
+        public int? IdDonated { get; set; }
         public int IdDonor { get; set; }
+        public int? IdNeighborhood { get; set; }
 
-        public virtual Donate IdDonatedNavigation { get; set; } = null!;
+        public virtual Donate? IdDonatedNavigation { get; set; }
         public virtual Donor IdDonorNavigation { get; set; } = null!;
+        public virtual Neighborhood? IdNeighborhoodNavigation { get; set; }
     }
 }

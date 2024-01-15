@@ -64,10 +64,10 @@ namespace BL_AppService.Services
         //    return _context.Donates.ToList();
         //}
 
-        public DonateDTO GetByTaz(int taz)
+        public DonateAllDTO GetByTaz(int taz)
         {
 
-            return mapper.Map<DonateDTO>(donateRepository.GetByTaz(taz));
+            return mapper.Map<DonateAllDTO>(donateRepository.GetByTaz(taz));
 
         }
 
