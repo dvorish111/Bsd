@@ -65,6 +65,22 @@ namespace Campain.Controllers
             }
         }
         #endregion
+        #region HttpGetById
+
+        [HttpGet("DonateId/{donateId}")]
+        public async Task<ActionResult<DonateDTO>> GetById(int donateId)
+        {
+            try
+            {
+                var donateDTO = donateService.GetById(donateId);
+                return Ok(donateDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
 
         #region HttpGetAll
 
@@ -105,7 +121,6 @@ namespace Campain.Controllers
         [HttpGet("Needed/{idNeeded}")]
         public async Task<ActionResult<IEnumerable<DonateDTO>>> GetAllByNeeded(double idNeeded)
         {
-        
             try
             {
                 var donateDTOs = donateService.GetAllByNeeded(idNeeded);
@@ -120,7 +135,7 @@ namespace Campain.Controllers
 
         #region HttpGetByTaz
         [HttpGet("TazDonate/{tazDonate}")]
-        public async Task<ActionResult<DonateDTO>> GetByTaz( int tazDonate)
+        public async Task<ActionResult<DonateAllDTO>> GetByTaz( int tazDonate)
         {
             try
             {
@@ -183,7 +198,7 @@ namespace Campain.Controllers
             }
         }
         #endregion
-        #region CraeteDonatesByExcel
+        #region HttpCraeteDonatesByExcel
         [HttpPost("CraeteDonatesByExcel")]
         /* [Microsoft.AspNetCore.Authorization.Authorize]*/
         public async Task<IActionResult> CraeteDonatesByExcel(IFormFile file)

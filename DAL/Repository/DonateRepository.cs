@@ -49,6 +49,9 @@ namespace DAL.Repository
 
         public void Create(Donate donate)
         {
+            //Donate donate1 = new() { ParentTaz = 0, Name = "", NumChildren = 0, IdStatus = 0, Street = "", Needed = 0, NumberBuilding = 0, IdNeighborhood = 0};
+
+        //donate.Id = 14;
             _context.Donates.Add(donate);
             _context.SaveChanges();
         }
