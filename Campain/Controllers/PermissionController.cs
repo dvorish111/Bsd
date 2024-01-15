@@ -35,12 +35,12 @@ namespace Campain.Controllers
         #region UpdateByGmail
 
         [HttpPut("UpdateByGmail/{gmail}")]
-        public IActionResult UpdateByGmail(string gmail, LogInDTO logInDTO)
+        public IActionResult UpdateByGmail(string gmail, SignUpDTO signUpDTO)
         {
             try
             {
-                logInDTO.Email = gmail;
-                permissionService.Update(logInDTO);
+                
+                permissionService.UpdateByGmail(signUpDTO, gmail);
                 return Ok();
             }
             catch (Exception ex)

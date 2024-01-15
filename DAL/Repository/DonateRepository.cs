@@ -17,7 +17,7 @@ namespace DAL.Repository
 
         public List<Donate> GetAll()
         {
-            return _context.Donates.Include(d => d.IdNeighborhoodNavigation).ToList();
+            return _context.Donates.Include(d => d.IdNeighborhoodNavigation).Include(d => d.IdStatusNavigation).ToList();
         }
         public List<Donate> GetAllByNumOfChildren(int to)
         {
@@ -107,6 +107,18 @@ namespace DAL.Repository
             }
           
 
+        }
+
+        public void DeleteAllEntities()
+        {
+            // Select all entities from the table
+            var entitiesToDelete = _context.Donates.ToList();
+
+            // Remove all selected entities
+            _context.Donates.RemoveRange(entitiesToDelete);
+
+            // Save changes to delete the entities
+            _context.SaveChanges();
         }
 
     }

@@ -12,5 +12,6 @@ namespace BL_AppService.IServeces
         public void Create(DonorAllDTO donate);
        // public void Update(DonorAllDTO donate);//לא צריך עדכון לתורם
         List<DonorDTO> GetAllByCity(string city);
+      
     }
 }

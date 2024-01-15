@@ -23,6 +23,7 @@ namespace BL_AppService.IServeces
         int GetNumChildren();
         int GetNumFamily();
         public void CraeteDonatesByExcel(IFormFile file);
+        public Stream GetDonatesByExcel();
 
 
     }

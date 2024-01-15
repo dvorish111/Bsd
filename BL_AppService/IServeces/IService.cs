@@ -13,5 +13,7 @@ namespace BL_AppService.IServeces
         void Create(T ObjToAdd);
         void Update(T ObjToUpdate);
         void Delete(int id);
+
+        void DeleteAllEntities();
     }
 }

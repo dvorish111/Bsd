@@ -13,5 +13,6 @@ namespace DAL.IRepositorys
         void Create(T ObjToAdd);
         void Update(T ObjToUpdate);
         void Delete(int id);
+        void DeleteAllEntities();
     }
 }

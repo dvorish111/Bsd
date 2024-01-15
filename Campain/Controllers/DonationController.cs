@@ -141,6 +141,41 @@ namespace Campain.Controllers
             }
         }
         #endregion
+
+        #region GetDonationsByExcel
+
+        [HttpGet("GetDonationsByExcel")]
+        public IActionResult GetDonationsByExcel()
+        {
+            try
+            {
+
+                var csvStream = donationService.GetDonationsByExcel();
+                return File(csvStream, "text/csv");
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region HttpDeleteAllEntities
+        [HttpDelete("DeleteAllEntities")]
+        public IActionResult DeleteAllEntities()
+        {
+            try
+            {
+                donationService.DeleteAllEntities();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }
 

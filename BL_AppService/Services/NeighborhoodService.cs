@@ -33,6 +33,11 @@ namespace BL_AppService.Services
             neighborhoodRepository.Delete(id);
         }
 
+        public void DeleteAllEntities()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<NeighborhoodDTO> GetAll()
         {
             List<Neighborhood> neighborhoods = neighborhoodRepository.GetAll();

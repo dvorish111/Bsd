@@ -37,6 +37,11 @@ namespace BL_AppService.Services
             permissionRepository.Delete(id);
         }
 
+        public void DeleteAllEntities()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<LogInDTO> GetAll()
         {
             List<Permission> permissions = permissionRepository.GetAll();
@@ -49,14 +54,19 @@ namespace BL_AppService.Services
             return mapper.Map<LogInDTO>(permissionRepository.GetById(id));
         }
 
-        public LogInDTO GetByPassword_Email(string password, string email)
+        public SignUpDTO GetByPassword_Email(string password, string email)
         {
-            return mapper.Map<LogInDTO>(permissionRepository.GetByPassword_Email(password,email));
+            return mapper.Map<SignUpDTO>(permissionRepository.GetByPassword_Email(password,email));
         }
         public void Update(LogInDTO logInDTO)
         {
            
             permissionRepository.Update(mapper.Map<Permission>(logInDTO));
+        }
+
+        public void UpdateByGmail(SignUpDTO signUpDTO, string gmail)
+        {
+            permissionRepository.UpdateByGmail(mapper.Map<Permission>(signUpDTO),gmail);
         }
     }
 }

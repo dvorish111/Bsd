@@ -10,6 +10,7 @@ namespace BL_AppService.IServeces
     public interface IPermissionService: IService<LogInDTO>
     {
         public void Create(SignUpDTO donate);
-        public LogInDTO GetByPassword_Email(string password, string email);
+        public SignUpDTO GetByPassword_Email(string password, string email);
+        public void UpdateByGmail(SignUpDTO signUpDTO, string gmail);
     }
 }
