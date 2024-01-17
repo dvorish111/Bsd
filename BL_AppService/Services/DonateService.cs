@@ -88,7 +88,7 @@ namespace BL_AppService.Services
 
         public DonateDTO GetById(int id)
         {
-            throw new NotImplementedException();
+            return mapper.Map<DonateDTO> (donateRepository.GetById(id));
         }
 
         public int GetNumChildren()
