@@ -85,7 +85,7 @@ namespace DAL.Repository
 
         public Donate GetById(int id)
         {
-            throw new NotImplementedException();
+           return _context.Donates.FirstOrDefault(d => d.Id == id);
         }
 
         public int GetNumChildren()

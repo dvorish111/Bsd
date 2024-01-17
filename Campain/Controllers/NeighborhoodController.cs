@@ -70,7 +70,7 @@ namespace Campain.Controllers
             }
         }
 
-     /*   [HttpGet("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             try
@@ -86,6 +86,6 @@ namespace Campain.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }*/
+        }
     }
 }
