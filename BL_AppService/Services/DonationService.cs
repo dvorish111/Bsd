@@ -76,7 +76,10 @@ namespace BL_AppService.Services
             donationRepository.DeleteAllEntities();
         }
 
-
+        public List<DonationDTO> GetAllDonationsByDonated(int IdDonated)
+        {
+            return mapper.Map<List<DonationDTO>>(donationRepository.GetAllDonationsByDonated(IdDonated));
+        }
         public Stream GetDonationsByExcel()
         {
             var data = donationRepository.GetAllFullDetails();

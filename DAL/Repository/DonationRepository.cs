@@ -25,10 +25,12 @@ namespace DAL.Repositories
         {
             return _context.Donations.ToList();
         }
-      public List<Donation> GetAllDonationByDonated(int IdDonated)
+
+      public List<Donation> GetAllDonationsByDonated(int IdDonated)
         {
             return _context.Donations.Where(d=>d.IdDonated==IdDonated).ToList();
         }
+
         public List<int> GetAllSumDonationsByDonated()
         {
             var donorIds = _context.Donations.Select(d => d.IdDonated).Distinct().ToList();

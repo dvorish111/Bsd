@@ -13,7 +13,7 @@ namespace BL_AppService.IServeces
       public int GetSumDonationsByDonated(int IdDonated);
         public List<int> GetAllSumDonationsByDonated();
         public Stream GetDonationsByExcel();
-
+        public List<DonationDTO> GetAllDonationsByDonated(int IdDonated);
 
     }
 }
