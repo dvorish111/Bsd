@@ -18,7 +18,7 @@ namespace DAL.IRepositorys
 
         public List<Donation> GetAllFullDetails();
 
-
+        public List<Donation> GetAllDonationsByDonated(int IdDonated);
 
     }
 }

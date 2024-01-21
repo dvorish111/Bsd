@@ -17,6 +17,7 @@ namespace Common
         public double Needed { get; set; }
         public int NumberBuilding { get; set; }
         public int IdNeighborhood { get; set; }
-       
+        public virtual NeighborhoodDTO IdNeighborhoodNavigation { get; set; } = null!;
+
     }
 }

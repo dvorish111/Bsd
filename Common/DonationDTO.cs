@@ -15,5 +15,8 @@ namespace Common
         public int? IdDonated { get; set; }
         public int IdDonor { get; set; }
         public int IdNeighborhoods { get; set; }
+        public virtual DonateDTO? IdDonatedNavigation { get; set; }
+        public virtual DonorDTO IdDonorNavigation { get; set; } = null!;
+        public virtual NeighborhoodDTO? IdNeighborhoodNavigation { get; set; }
     }
 }

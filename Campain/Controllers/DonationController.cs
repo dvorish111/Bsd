@@ -124,9 +124,9 @@ namespace Campain.Controllers
             }
         }
         #endregion
+
         #region HttpGetAllSumDonationsByDonated
         [HttpGet("GetAllSumDonationsByDonated")]
-
 
         public ActionResult <List<int>> GetAllSumDonationsByDonated()
         {
@@ -141,6 +141,25 @@ namespace Campain.Controllers
             }
         }
         #endregion
+
+        #region HttpGetAllDonationsByDonated
+        [HttpGet("GetAllDonationsByDonated/{IdDonated}")]
+
+        public ActionResult<List<DonationDTO>> GetAllDonationsByDonated(int IdDonated)
+        {
+            try
+            {
+                List<DonationDTO> Donations = donationService.GetAllDonationsByDonated( IdDonated);
+                return Ok(Donations);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+
 
         #region GetDonationsByExcel
 
