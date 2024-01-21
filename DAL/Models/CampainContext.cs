@@ -29,7 +29,7 @@ namespace DAL.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-E0FAPSB\\SQLEXPRESS;Initial Catalog=CampainDB;Integrated Security=True;Pooling=False");
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CampainDB;Integrated Security=True;Pooling=False");
             }
         }
 
@@ -50,6 +50,9 @@ namespace DAL.Models
 
             modelBuilder.Entity<Donate>(entity =>
             {
+                entity.HasIndex(e => e.ParentTaz, "UC_ParentTaz_Donates")
+                    .IsUnique();
+
                 entity.Property(e => e.Name).HasMaxLength(32);
 
                 entity.Property(e => e.Street).HasMaxLength(32);
@@ -58,17 +61,19 @@ namespace DAL.Models
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdNeighborhood)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdNeigh__72910220");
+                    .HasConstraintName("FK__Donates__IdNeigh__2DE6D218");
 
                 entity.HasOne(d => d.IdStatusNavigation)
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdStatus)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdStatu__1A9EF37A");
+                    .HasConstraintName("FK__Donates__IdStatu__68487DD7");
             });
 
             modelBuilder.Entity<Donation>(entity =>
             {
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
                 entity.Property(e => e.Dedication).HasMaxLength(255);
 
                 entity.Property(e => e.Quetel).HasMaxLength(255);
@@ -93,9 +98,6 @@ namespace DAL.Models
 
             modelBuilder.Entity<Donor>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UC_Email_Donors")
-                    .IsUnique();
-
                 entity.Property(e => e.City).HasMaxLength(32);
 
                 entity.Property(e => e.Email).HasMaxLength(32);
@@ -116,17 +118,22 @@ namespace DAL.Models
 
             modelBuilder.Entity<Permission>(entity =>
             {
+                entity.HasIndex(e => e.Email, "UC_Email")
+                    .IsUnique();
+
                 entity.HasIndex(e => e.Email, "UC_Email_Permissions")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Password, "UC_Password_Permission")
+                entity.HasIndex(e => e.Password, "UC_Password_Permissions")
                     .IsUnique();
 
-                entity.Property(e => e.Email).HasMaxLength(32);
+                entity.Property(e => e.Email).HasMaxLength(50);
 
-                entity.Property(e => e.ManagerName).HasMaxLength(32);
+                entity.Property(e => e.ManagerName).HasMaxLength(50);
 
-                entity.Property(e => e.Password).HasMaxLength(32);
+                entity.Property(e => e.Password)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Status>(entity =>
@@ -135,7 +142,7 @@ namespace DAL.Models
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.StatusName).HasMaxLength(32);
+                entity.Property(e => e.StatusName).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);

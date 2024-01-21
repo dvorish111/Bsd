@@ -14,6 +14,7 @@ namespace DAL.Models
         public int? IdDonated { get; set; }
         public int IdDonor { get; set; }
         public int IdNeighborhoods { get; set; }
+        public DateTime Date { get; set; }
 
         public virtual Donate? IdDonatedNavigation { get; set; }
         public virtual Donor IdDonorNavigation { get; set; } = null!;

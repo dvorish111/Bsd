@@ -12,7 +12,7 @@ namespace Common
         public bool? IsAnonymous { get; set; }
         public string? Dedication { get; set; }
         public int Amount { get; set; }
-        public int IdDonated { get; set; }
+        public int? IdDonated { get; set; }
         public int IdDonor { get; set; }
         public int IdNeighborhoods { get; set; }
     }

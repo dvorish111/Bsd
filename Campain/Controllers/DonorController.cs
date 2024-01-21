@@ -17,7 +17,7 @@ namespace Campain.Controllers
         #region HttpPost
         [HttpPost]
       
-        public async Task<ActionResult<DonorAllDTO>> Create(DonorAllDTO donorDTO)
+        public async Task<ActionResult<int>> Create(DonorAllDTO donorDTO)
         {
             try
             {

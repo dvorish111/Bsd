@@ -11,7 +11,7 @@ namespace Common
         public string LastName { get; set; } = null!;
         public string FirstName { get; set; } = null!;
         public string Email { get; set; } = null!;
-        public int Phone { get; set; }
+        public string Phone { get; set; } = null!;
         public string City { get; set; } = null!;
         public string Street { get; set; } = null!;
         public int ZipCode { get; set; }
