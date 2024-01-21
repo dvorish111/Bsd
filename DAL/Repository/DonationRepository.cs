@@ -23,12 +23,12 @@ namespace DAL.Repositories
 
         public List<Donation> GetAll()
         {
-            return _context.Donations.ToList();
+            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdDonatedNavigation.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToList();
         }
 
-      public List<Donation> GetAllDonationsByDonated(int IdDonated)
+        public List<Donation> GetAllDonationsByDonated(int IdDonated)
         {
-            return _context.Donations.Where(d=>d.IdDonated==IdDonated).ToList();
+            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdDonatedNavigation.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).Where(d=>d.IdDonated==IdDonated).ToList();
         }
 
         public List<int> GetAllSumDonationsByDonated()
@@ -72,6 +72,7 @@ namespace DAL.Repositories
                 existingDonation.IdDonated = donation.IdDonated;
                 existingDonation.IdDonor = donation.IdDonor;
                 existingDonation.Dedication = donation.Dedication;
+                existingDonation.Date = donation.Date;
               
                 _context.SaveChanges();
             }

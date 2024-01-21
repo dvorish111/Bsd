@@ -69,6 +69,8 @@ namespace DAL.Models
 
             modelBuilder.Entity<Donation>(entity =>
             {
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
                 entity.Property(e => e.Dedication).HasMaxLength(255);
 
                 entity.Property(e => e.Quetel).HasMaxLength(255);
@@ -92,9 +94,6 @@ namespace DAL.Models
 
             modelBuilder.Entity<Donor>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UC_Email_Donors")
-                    .IsUnique();
-
                 entity.Property(e => e.City).HasMaxLength(32);
 
                 entity.Property(e => e.Email).HasMaxLength(32);

@@ -14,5 +14,8 @@ namespace Common
         public int Amount { get; set; }
         public int IdDonated { get; set; }
         public int IdDonor { get; set; }
+        public virtual DonateDTO? IdDonatedNavigation { get; set; }
+        public virtual DonorDTO IdDonorNavigation { get; set; } = null!;
+        public virtual NeighborhoodDTO? IdNeighborhoodNavigation { get; set; }
     }
 }

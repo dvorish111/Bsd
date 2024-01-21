@@ -14,6 +14,7 @@ namespace Common
         public string Street { get; set; } = null!;
         public double Needed { get; set; }
         public int IdNeighborhood { get; set; }
+
         public virtual NeighborhoodDTO IdNeighborhoodNavigation { get; set; } = null!;
 
 

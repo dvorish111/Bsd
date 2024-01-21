@@ -85,7 +85,8 @@ namespace DAL.Repository
 
         public Donate GetById(int id)
         {
-           return _context.Donates.FirstOrDefault(d => d.Id == id);
+
+            return _context.Donates.Include(d => d.IdNeighborhoodNavigation).FirstOrDefault(d => d.Id == id);
         }
 
         public int GetNumChildren()

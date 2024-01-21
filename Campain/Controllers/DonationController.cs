@@ -143,7 +143,7 @@ namespace Campain.Controllers
         #endregion
 
         #region HttpGetAllDonationsByDonated
-        [HttpGet("GetAllDonationsByDonated")]
+        [HttpGet("GetAllDonationsByDonated/{IdDonated}")]
 
         public ActionResult<List<DonationDTO>> GetAllDonationsByDonated(int IdDonated)
         {
