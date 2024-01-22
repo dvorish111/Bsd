@@ -18,7 +18,7 @@ namespace Campain.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DonationDTO donationDTO)
+        public IActionResult Create(DonationAllDTO donationDTO)
         {
             try
             {

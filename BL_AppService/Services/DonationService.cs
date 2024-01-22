@@ -24,7 +24,7 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(DonationDTO donationDTO)
+        public void Create(DonationAllDTO donationDTO)
         {
             donationRepository.Create(mapper.Map<Donation>(donationDTO));
 
@@ -88,7 +88,7 @@ namespace BL_AppService.Services
          //   csvContent.AppendLine("מספר תרומה, סכום תרומה, שם הנתרם, תז הנתרם, סטטוס הנתרם, כמה צריך, מספר בנין,שכונה,ןשם התורם , מייל התורם, עיר, טלפון התורם");
             foreach (var item in data)
             {
-                csvContent.AppendLine($"{item.Id},{item.Amount},{item.IdDonatedNavigation.Name},{item.IdDonatedNavigation.ParentTaz},{item.IdDonatedNavigation.IdStatusNavigation.StatusName},{item.IdDonatedNavigation.Needed},{item.IdDonatedNavigation.NumberBuilding},{item.IdDonatedNavigation.IdNeighborhoodNavigation.Name}" +
+                csvContent.AppendLine($"{item.Id},{item.Amount},{item.IdDonatedNavigation.Name},{item.IdDonatedNavigation.ParentTaz},{item.IdDonatedNavigation.IdStatusNavigation.StatusName},{item.IdDonatedNavigation.Needed},{item.IdDonatedNavigation.NumberBuilding},{item.IdNeighborhoodsNavigation.Name}" +
                     $",{item.IdDonorNavigation.FirstName+ " "+item.IdDonorNavigation.LastName},{item.IdDonorNavigation.Email},{item.IdDonorNavigation.City},{item.IdDonorNavigation.Phone}"); // Add data rows               
             }
            
@@ -96,6 +96,11 @@ namespace BL_AppService.Services
             var csvStream = new MemoryStream(csvData);
 
             return csvStream;
+        }
+
+        public void Create(DonationDTO ObjToAdd)
+        {
+            throw new NotImplementedException();
         }
     }
 }
