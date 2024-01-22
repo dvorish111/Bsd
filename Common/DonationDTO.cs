@@ -8,14 +8,18 @@ namespace Common
 {
     public class DonationDTO
     {
+ 
         public int Id { get; set; }
         public bool? IsAnonymous { get; set; }
         public string? Dedication { get; set; }
         public int Amount { get; set; }
-        public int IdDonated { get; set; }
+        public int? IdDonated { get; set; }
         public int IdDonor { get; set; }
+        public int IdNeighborhood { get; set; }
+        public DateTime Date { get; set; }
+
         public virtual DonateDTO? IdDonatedNavigation { get; set; }
         public virtual DonorDTO IdDonorNavigation { get; set; } = null!;
-        public virtual NeighborhoodDTO? IdNeighborhoodNavigation { get; set; }
+        public virtual NeighborhoodDTO IdNeighborhoodNavigation { get; set; } = null!;
     }
 }
