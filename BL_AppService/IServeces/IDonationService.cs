@@ -15,5 +15,7 @@ namespace BL_AppService.IServeces
         public Stream GetDonationsByExcel();
         public List<DonationDTO> GetAllDonationsByDonated(int IdDonated);
 
+        public void Create(DonationAllDTO donationDTO);
+
     }
 }

@@ -24,7 +24,7 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(DonationDTO donationDTO)
+        public void Create(DonationAllDTO donationDTO)
         {
             donationRepository.Create(mapper.Map<Donation>(donationDTO));
 
@@ -96,6 +96,11 @@ namespace BL_AppService.Services
             var csvStream = new MemoryStream(csvData);
 
             return csvStream;
+        }
+
+        public void Create(DonationDTO ObjToAdd)
+        {
+            throw new NotImplementedException();
         }
     }
 }

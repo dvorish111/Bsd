@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public class DonationDTO
+    public class DonationAllDTO
     {
         public int Id { get; set; }
         public bool? IsAnonymous { get; set; }
         public string? Dedication { get; set; }
+        public string? Quetel { get; set; }
         public int Amount { get; set; }
         public int? IdDonated { get; set; }
         public int? IdDonor { get; set; }
         public int IdNeighborhoods { get; set; }
-        public virtual DonateDTO? IdDonatedNavigation { get; set; }
-        public virtual DonorDTO? IdDonorNavigation { get; set; }
-        public virtual NeighborhoodDTO? IdNeighborhoodNavigation { get; set; }
     }
 }

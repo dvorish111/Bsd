@@ -55,7 +55,8 @@ namespace DAL.Repositories
         }
 
         public void Create(Donation donation)
-        {
+                    {
+            donation.Date=DateTime.Now;
             _context.Donations.Add(donation);
             _context.SaveChanges();
         }
