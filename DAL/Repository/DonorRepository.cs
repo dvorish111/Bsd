@@ -34,7 +34,7 @@ namespace DAL.Repository
         {
             _context.Donors.Add(donor);
             _context.SaveChanges();
-            Donor newDonor= _context.Donors.FirstOrDefault(c => c.Email == donor.Email);
+            Donor newDonor = _context.Donors.OrderByDescending(d => d.Id).FirstOrDefault();
             return newDonor.Id;
         }
 

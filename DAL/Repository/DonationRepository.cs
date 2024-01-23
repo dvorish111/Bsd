@@ -103,7 +103,7 @@ namespace DAL.Repositories
 
         public List<Donation> GetAllFullDetails()
         {
-            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdNeighborhoodsNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToList();
+            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToList();
         }
     }
 }
