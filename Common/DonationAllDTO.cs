@@ -16,5 +16,6 @@ namespace Common
         public int? IdDonated { get; set; }
         public int? IdDonor { get; set; }
         public int IdNeighborhood { get; set; }
+        public int? NumPayments { get; set; }
     }
 }
