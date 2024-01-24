@@ -23,7 +23,7 @@ namespace DAL.Repositories
 
         public List<Donation> GetAll()
         {
-            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdDonatedNavigation.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToList();
+            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToList();
         }
 
         public List<Donation> GetAllDonationsByDonated(int IdDonated)
@@ -39,7 +39,10 @@ namespace DAL.Repositories
             foreach (var donorId in donorIds)
             {
                 var sumDonations = _context.Donations.Where(d => d.IdDonated == donorId).Sum(d => d.Amount);
+                if(sumDonations!=null)
                 donationAmounts.Add(sumDonations);
+                else
+                    donationAmounts.Add(0);
             }
 
             return donationAmounts;
@@ -103,7 +106,7 @@ namespace DAL.Repositories
 
         public List<Donation> GetAllFullDetails()
         {
-            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdNeighborhoodsNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToList();
+            return _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToList();
         }
     }
 }
