@@ -11,14 +11,14 @@ namespace DAL.IRepositorys
     public interface IDonationRepository: IRepository<Donation>
     {
         
-        public int GetSumDonation();
-
-        public int GetSumDonationsByDonated(int IdDonated);
-        public List<int> GetAllSumDonationsByDonated();
-
-        public List<Donation> GetAllFullDetails();
-
-        public List<Donation> GetAllDonationsByDonated(int IdDonated);
+       Task<int> GetSumDonation();
+       
+       Task<int> GetSumDonationsByDonated(int IdDonated);
+       Task<List<int>> GetAllSumDonationsByDonated();
+       
+       Task<List<Donation>> GetAllFullDetails();
+       
+       Task<List<Donation>> GetAllDonationsByDonated(int IdDonated);
 
     }
 }

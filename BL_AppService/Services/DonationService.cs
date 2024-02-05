@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BL_AppService.Services
 {
-    public class DonationService : IDonationService
+    public class DonationService: IDonationService
     {
         IDonationRepository donationRepository;
             IMapper mapper;
@@ -24,21 +24,21 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(DonationAllDTO donationDTO)
+        public async Task Create(DonationAllDTO donationDTO)
         {
-            donationRepository.Create(mapper.Map<Donation>(donationDTO));
+            await donationRepository.Create(mapper.Map<Donation>(donationDTO));
 
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            donationRepository.Delete(id);
+           await donationRepository.Delete(id);
         }
 
-        public List<DonationDTO> GetAll()
+        public async Task<List<DonationDTO>> GetAll()
         {
-            List<Donation> donations = donationRepository.GetAll();
-            return mapper.Map<List<DonationDTO>>(donations);
+            List<Donation> donations =await donationRepository.GetAll();
+            return  mapper.Map<List<DonationDTO>>(donations);
          
         }
         //public List<DonationDTO> GetAllByDonated(int IdDonated)
@@ -46,43 +46,43 @@ namespace BL_AppService.Services
         //    List<Donation> donations = donationRepository.GetAllByDonated();
         //    return mapper.Map<List<DonationDTO>>(donations);
         //}
-        public DonationDTO GetById(int id)
+        public async Task<DonationDTO> GetById(int id)
         {
-            return mapper.Map<DonationDTO>(donationRepository.GetById(id));
+            return  mapper.Map<DonationDTO>(await donationRepository.GetById(id));
 
         }
 
-        public int GetSumDonation()
+        public async Task<int> GetSumDonation()
         {
-            return  donationRepository.GetSumDonation();
+            return await donationRepository.GetSumDonation();
 
         }
 
-        public int GetSumDonationsByDonated(int IdDonated)
+        public async Task<int> GetSumDonationsByDonated(int IdDonated)
         {
-            return donationRepository.GetSumDonationsByDonated(IdDonated);
+            return await donationRepository.GetSumDonationsByDonated(IdDonated);
         }
 
-        public List<int> GetAllSumDonationsByDonated()
+        public async Task< List<int>> GetAllSumDonationsByDonated()
         {
-            return donationRepository.GetAllSumDonationsByDonated();
+            return await donationRepository.GetAllSumDonationsByDonated();
         }
-        public void Update(DonationDTO donationDTO)
+        public async Task Update(DonationDTO donationDTO)
         {          
-            donationRepository.Update(mapper.Map<Donation>(donationDTO));
+           await donationRepository.Update(mapper.Map<Donation>(donationDTO));
         }
-        public void DeleteAllEntities()
+        public async Task DeleteAllEntities()
         {
-            donationRepository.DeleteAllEntities();
+           await donationRepository.DeleteAllEntities();
         }
 
-        public List<DonationDTO> GetAllDonationsByDonated(int IdDonated)
+        public async Task<List<DonationDTO>> GetAllDonationsByDonated(int IdDonated)
         {
-            return mapper.Map<List<DonationDTO>>(donationRepository.GetAllDonationsByDonated(IdDonated));
+            return  mapper.Map<List<DonationDTO>>(await donationRepository.GetAllDonationsByDonated(IdDonated));
         }
-        public Stream GetDonationsByExcel()
+        public async Task<Stream> GetDonationsByExcel()
         {
-            var data = donationRepository.GetAllFullDetails();
+            var data =await donationRepository.GetAllFullDetails();
             var csvContent = new StringBuilder();
             csvContent.AppendLine(" ID,Amount,Donated Name, Donated ParentTaz,Status,Needed,NumberBuilding,Neighborhood,Donor Name,Donor Email,Donor City,Donor Phone");
          //   csvContent.AppendLine("מספר תרומה, סכום תרומה, שם הנתרם, תז הנתרם, סטטוס הנתרם, כמה צריך, מספר בנין,שכונה, שם התורם , מייל התורם, עיר, טלפון התורם");
@@ -95,10 +95,15 @@ namespace BL_AppService.Services
             var csvData = Encoding.GetEncoding("windows-1255").GetBytes(csvContent.ToString());
             var csvStream = new MemoryStream(csvData);
 
-            return csvStream;
+            return  csvStream;
         }
 
         public void Create(DonationDTO ObjToAdd)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IService<DonationDTO>.Create(DonationDTO ObjToAdd)
         {
             throw new NotImplementedException();
         }

@@ -9,12 +9,12 @@ namespace DAL.IRepositorys
 {
     public interface IDonateRepository: IRepository<Donate>
     {
-        Donate GetByTaz(int donateTaz);
-         List<Donate> GetAllByNeeded(double id);
-         List<Donate> GetAllByStatus(int id);
-         List<Donate> GetAllByNumOfChildren(int to);
-         int GetNumFamily();
-         int GetNumChildren();
-        void CraeteDonatesByExcel(List<Donate> donates);
+        Task<Donate> GetByTaz(int donateTaz);
+        Task<List<Donate>> GetAllByNeeded(double id);
+        Task<List<Donate>> GetAllByStatus(int id);
+        Task<List<Donate>> GetAllByNumOfChildren(int to);
+         Task<int> GetNumFamily();
+         Task<int> GetNumChildren();
+         Task CraeteDonatesByExcel(List<Donate> donates);
     }
 }

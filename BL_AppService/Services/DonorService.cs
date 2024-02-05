@@ -22,45 +22,45 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(DonorDTO donor)
+        public async Task Create(DonorDTO donor)
         {
-            donorRepository.Create(mapper.Map<Donor>(donor));
+           await donorRepository.Create(mapper.Map<Donor>(donor));
 
            
         }
 
-        public int Create(DonorAllDTO donorAllDTO)
+        public async Task<int> Create(DonorAllDTO donorAllDTO)
         {
-            int idNewDonor = donorRepository.Create_ReturnID(mapper.Map<Donor>(donorAllDTO));
-            return idNewDonor;
+            int idNewDonor =await donorRepository.Create_ReturnID(mapper.Map<Donor>(donorAllDTO));
+            return  idNewDonor;
             
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            donorRepository.Delete(id);
+           await donorRepository.Delete(id);
         }
 
-        public List<DonorDTO> GetAll()
+        public async Task<List<DonorDTO>> GetAll()
         {
-            List<Donor> donors = donorRepository.GetAll();
+            List<Donor> donors =await donorRepository.GetAll();
             return  mapper.Map < List<DonorDTO>>(donors);
            
         }
 
-        public List<DonorDTO> GetAllByCity(string city)
+        public async Task<List<DonorDTO>> GetAllByCity(string city)
         {
-            return mapper.Map<List<DonorDTO>>(donorRepository.GetAllByCity(city));
+            return  mapper.Map<List<DonorDTO>>(await donorRepository.GetAllByCity(city));
         }
 
-        public DonorDTO GetById(int id)
+        public async Task<DonorDTO> GetById(int id)
         {
-            return mapper.Map<DonorDTO>(donorRepository.GetById(id));
+            return  mapper.Map<DonorDTO>(await donorRepository.GetById(id));
         }
 
-        public void Update(DonorDTO donor)
+        public async Task Update(DonorDTO donor)
         {
-            donorRepository.Update(mapper.Map<Donor>(donor));
+           await donorRepository.Update(mapper.Map<Donor>(donor));
             
         }
 
@@ -68,9 +68,9 @@ namespace BL_AppService.Services
         {
             donorRepository.Update(mapper.Map<Donor>(donorAllDTO));
         }*/
-        public void DeleteAllEntities()
+        public async Task DeleteAllEntities()
         {
-            donorRepository.DeleteAllEntities();
+           await donorRepository.DeleteAllEntities();
         }
     }
 }

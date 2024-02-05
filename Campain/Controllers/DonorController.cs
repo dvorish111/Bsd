@@ -21,7 +21,7 @@ namespace Campain.Controllers
         {
             try
             {
-               int IdNewDonor= donorService.Create(donorDTO);
+               int IdNewDonor=await donorService.Create(donorDTO);
                 return Ok(IdNewDonor);
             }
             catch (Exception ex)

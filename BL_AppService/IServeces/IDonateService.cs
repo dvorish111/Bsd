@@ -13,17 +13,16 @@ namespace BL_AppService.IServeces
 {
     public interface IDonateService: IService<DonateDTO>
     {
-        public void Create(DonateAllDTO donate);
-        //public void Create(DonateAllDTO donate);
-        public void Update(DonateAllDTO donate);
-        public DonateAllDTO GetByTaz(int donateTaz);
-        List<DonateDTO> GetAllByNeeded(double id);
-        List<DonateDTO> GetAllByStatus(int id);
-        List<DonateDTO> GetAllByNumOfChildren( int to);
-        int GetNumChildren();
-        int GetNumFamily();
-        public void CraeteDonatesByExcel(IFormFile file);
-        public Stream GetDonatesByExcel();
+         Task  Create(DonateAllDTO donate);
+         Task Update(DonateAllDTO donate);
+        Task<DonateAllDTO> GetByTaz(int donateTaz);
+        Task<List<DonateDTO>> GetAllByNeeded(double id);
+        Task<List<DonateDTO>> GetAllByStatus(int id);
+        Task<List<DonateDTO>> GetAllByNumOfChildren( int to);
+        Task<int> GetNumChildren();
+        Task<int>  GetNumFamily();
+        public Task CraeteDonatesByExcel(IFormFile file);
+        public Task< Stream> GetDonatesByExcel();
 
 
     }

@@ -9,8 +9,8 @@ namespace DAL.IRepositorys
 {
     public interface IPermissionRepository :IRepository<Permission>
     {
-        public Permission GetByPassword_Email(string password, string email);
-        public void UpdateByGmail(Permission signUp, string gmail);
+        Task<Permission> GetByPassword_Email(string password, string email);
+        Task UpdateByGmail(Permission signUp, string gmail);
 
 
     }

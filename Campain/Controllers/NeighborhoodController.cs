@@ -15,11 +15,11 @@ namespace Campain.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(NeighborhoodDTO neighborhoodDTO)
+        public async Task<IActionResult> Create(NeighborhoodDTO neighborhoodDTO)
         {
             try
             {
-                neighborhoodService.Create(neighborhoodDTO);
+                await neighborhoodService.Create(neighborhoodDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -57,11 +57,11 @@ namespace Campain.Controllers
         }*/
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var neighborhoods = neighborhoodService.GetAll();
+                var neighborhoods = await neighborhoodService.GetAll();
                 return Ok(neighborhoods);
             }
             catch (Exception ex)
@@ -71,11 +71,11 @@ namespace Campain.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                var neighborhood = neighborhoodService.GetById(id);
+                var neighborhood = await neighborhoodService.GetById(id);
                 if (neighborhood == null)
                 {
                     return NotFound();

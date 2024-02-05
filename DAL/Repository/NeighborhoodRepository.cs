@@ -1,5 +1,6 @@
 ﻿using DAL.IRepositorys;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,45 +15,46 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public List<Neighborhood> GetAll()
+        public async Task<List<Neighborhood>> GetAll()
         {
-            return _context.Neighborhoods.ToList();
+            return await _context.Neighborhoods.ToListAsync();
         }
 
-        public Neighborhood GetById(int neighborhoodId)
+        public async Task<Neighborhood> GetById(int neighborhoodId)
         {
-            return _context.Neighborhoods.FirstOrDefault(c => c.Id == neighborhoodId);
+            return await _context.Neighborhoods.FirstOrDefaultAsync(c => c.Id == neighborhoodId);
         }
 
-        public void Create(Neighborhood neighborhood)
+        public async Task Create(Neighborhood neighborhood)
         {
             int id = _context.Neighborhoods.Count() + 1;
-            _context.Neighborhoods.Add(neighborhood);
-            _context.SaveChanges();
+          await  _context.Neighborhoods.AddAsync(neighborhood);
+            await _context.SaveChangesAsync();
+
         }
 
-        public void Update(Neighborhood neighborhood)
+        public async Task Update(Neighborhood neighborhood)
         {
-            var existingNeighborhood = _context.Neighborhoods.FirstOrDefault(c => c.Id == neighborhood.Id);
+            var existingNeighborhood =await _context.Neighborhoods.FirstOrDefaultAsync(c => c.Id == neighborhood.Id);
             if (existingNeighborhood != null)
             {
                 existingNeighborhood.Name = neighborhood.Name;
-               // existingNeighborhood.Donates = neighborhood.Donates;
-                _context.SaveChanges();
+                // existingNeighborhood.Donates = neighborhood.Donates;
+                await _context.SaveChangesAsync();
             }
         }
 
-        public void Delete(int neighborhoodId)
+        public async Task Delete(int neighborhoodId)
         {
             var neighborhood = _context.Neighborhoods.FirstOrDefault(c => c.Id == neighborhoodId);
             if (neighborhood != null)
             {
                 _context.Neighborhoods.Remove(neighborhood);
-                _context.SaveChanges();
+              await  _context.SaveChangesAsync();
             }
         }
 
-        public void DeleteAllEntities()
+        public async Task DeleteAllEntities()
         {
             throw new NotImplementedException();
         }

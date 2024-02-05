@@ -22,37 +22,37 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(NeighborhoodDTO neighborhood)
+        public async Task Create(NeighborhoodDTO neighborhood)
         {
-            neighborhoodRepository.Create(mapper.Map<Neighborhood>(neighborhood));
+          await neighborhoodRepository.Create(mapper.Map<Neighborhood>(neighborhood));
             
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            neighborhoodRepository.Delete(id);
+            await neighborhoodRepository.Delete(id);
         }
 
-        public void DeleteAllEntities()
+        public async Task DeleteAllEntities()
         {
             throw new NotImplementedException();
         }
 
-        public List<NeighborhoodDTO> GetAll()
+        public async Task<List<NeighborhoodDTO>> GetAll()
         {
-            List<Neighborhood> neighborhoods = neighborhoodRepository.GetAll();
-            return mapper.Map<List<NeighborhoodDTO>>(neighborhoods);
+            List<Neighborhood> neighborhoods = await neighborhoodRepository.GetAll();
+            return  mapper.Map<List<NeighborhoodDTO>>(neighborhoods);
           
         }
 
-        public NeighborhoodDTO GetById(int id)
+        public async Task< NeighborhoodDTO> GetById(int id)
         {
-            return mapper.Map<NeighborhoodDTO>(neighborhoodRepository.GetById(id));
+            return  mapper.Map<NeighborhoodDTO>(await neighborhoodRepository.GetById(id));
         }
 
-        public void Update(NeighborhoodDTO neighborhood)
+        public async Task Update(NeighborhoodDTO neighborhood)
         {
-            neighborhoodRepository.Update(mapper.Map<Neighborhood>(neighborhood));
+          await  neighborhoodRepository.Update(mapper.Map<Neighborhood>(neighborhood));
            
         }
     }

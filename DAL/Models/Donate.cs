@@ -19,6 +19,7 @@ namespace DAL.Models
         public double Needed { get; set; }
         public int NumberBuilding { get; set; }
         public int IdNeighborhood { get; set; }
+        public int Raised { get; set; }
 
         public virtual Neighborhood IdNeighborhoodNavigation { get; set; } = null!;
         public virtual Status IdStatusNavigation { get; set; } = null!;
