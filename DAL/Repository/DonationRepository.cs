@@ -23,7 +23,7 @@ namespace DAL.Repositories
 
         public async Task<List<Donation>> GetAll()
         {
-            return await _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdDonatedNavigation.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToListAsync();
+            return await _context.Donations.Include(d => d.IdDonorNavigation).Include(d => d.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdNeighborhoodNavigation).Include(d => d.IdDonatedNavigation.IdStatusNavigation).Include(d => d.IdDonatedNavigation).ToListAsync();
         }
 
         public async Task<List<Donation>> GetAllDonationsByDonated(int IdDonated)
