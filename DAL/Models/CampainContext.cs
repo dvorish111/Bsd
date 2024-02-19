@@ -41,16 +41,18 @@ namespace DAL.Models
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Duration).HasColumnType("datetime");
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Name).HasMaxLength(32);
 
-                entity.Property(e => e.StartDate).HasColumnType("date");
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Donate>(entity =>
             {
                 entity.Property(e => e.Name).HasMaxLength(32);
+
+                entity.Property(e => e.Raised).HasColumnName("raised");
 
                 entity.Property(e => e.Street).HasMaxLength(32);
 
@@ -90,7 +92,7 @@ namespace DAL.Models
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdNeighborhood)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdNei__22401542");
+                    .HasConstraintName("FK__Donations__IdNei__3FD07829");
             });
 
             modelBuilder.Entity<Donor>(entity =>

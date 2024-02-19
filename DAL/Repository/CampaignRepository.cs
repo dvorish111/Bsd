@@ -38,7 +38,7 @@ namespace DAL.Repository
                 existingCampaign.Name = campaign.Name;
                 existingCampaign.StartDate = campaign.StartDate;
                 existingCampaign.Goul = campaign.Goul;
-                existingCampaign.Duration = campaign.Duration;
+                existingCampaign.EndDate = campaign.EndDate;
                 _context.SaveChanges();
             }
         }
@@ -68,7 +68,7 @@ namespace DAL.Repository
             campaign.Name = "OOOO";
             campaign.Goul = 00000;
             campaign.StartDate= DateTime.Now;
-            campaign.Duration =DateTime.Now.AddMonths(3);
+            campaign.EndDate = DateTime.Now;
             Create(campaign);
             _context.SaveChanges();
         }

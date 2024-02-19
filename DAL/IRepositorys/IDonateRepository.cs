@@ -16,5 +16,6 @@ namespace DAL.IRepositorys
          int GetNumFamily();
          int GetNumChildren();
         void CraeteDonatesByExcel(List<Donate> donates);
+        void UpdateRaised(int? id, int raised);
     }
 }

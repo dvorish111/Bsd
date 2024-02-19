@@ -68,12 +68,21 @@ namespace DAL.Repository
                 existingDonate.Needed = donate.Needed;
                 existingDonate.NumberBuilding = donate.NumberBuilding;
                 existingDonate.IdNeighborhood = donate.IdNeighborhood;
+                existingDonate.Raised = donate.Raised;
                 _context.SaveChanges();
             }
         }
+        public void UpdateRaised(int? id, int raised)
+        {
+            var existingDonate = _context.Donates.FirstOrDefault(d => d.Id == id);
+            if (existingDonate != null)
+            {
+                existingDonate.Raised = raised;
+            }
+            _context.SaveChanges();
+        }
 
-
-        public void Delete(int donateId)
+            public void Delete(int donateId)
         {
             var donate = _context.Donates.FirstOrDefault(d => d.Id == donateId);
             if (donate != null)
@@ -81,6 +90,7 @@ namespace DAL.Repository
                 _context.Donates.Remove(donate);
                 _context.SaveChanges();
             }
+
         }
 
         public Donate GetById(int id)

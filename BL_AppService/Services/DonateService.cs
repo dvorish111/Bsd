@@ -73,7 +73,14 @@ namespace BL_AppService.Services
 
         public void Update(DonateAllDTO donateAllDTO)
         {
-            donateRepository.Update(mapper.Map<Donate>(donateAllDTO));
+            if (donateAllDTO.Name != null)
+            {
+                donateRepository.Update(mapper.Map<Donate>(donateAllDTO));
+            }
+            else
+            {
+                donateRepository.UpdateRaised(donateAllDTO.Id, donateAllDTO.Raised);
+            }
         }
 
         public void Create(DonateDTO ObjToAdd)
