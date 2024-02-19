@@ -27,55 +27,56 @@ namespace BL_AppService.Services
             this.mapper = mapper;
         }
 
-        public void Create(DonateAllDTO donateAllDTO)
+        public async Task Create(DonateAllDTO donateAllDTO)
         {
             Donate donate = mapper.Map<Donate>(donateAllDTO);
-            donateRepository.Create(donate);
+            await donateRepository.Create(donate);
             /*            donateRepository.Create(mapper.Map<Donate>(donateAllDTO));
             */
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            donateRepository.Delete(id);
+          await  donateRepository.Delete(id);
         }
 
-        public List<DonateDTO> GetAll()
+        public async Task <List<DonateDTO>> GetAll()
         {
-            List<Donate> donates = donateRepository.GetAll();
+            List<Donate> donates = await donateRepository.GetAll();
             return mapper.Map<List<DonateDTO>>(donates);
 
 
         }
-        public List<DonateDTO> GetAllByNumOfChildren(int to)
+        public async Task<List<DonateDTO>> GetAllByNumOfChildren(int to)
         {
-            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByNumOfChildren(to));
+            return   mapper.Map<List<DonateDTO>>(await donateRepository.GetAllByNumOfChildren(to));
         }
-        public List<DonateDTO> GetAllByStatus(int id)
+        public async Task<List<DonateDTO>> GetAllByStatus(int id)
         {
-            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByStatus(id));
+            return  mapper.Map<List<DonateDTO>>(await donateRepository.GetAllByStatus(id));
         }
-        public List<DonateDTO> GetAllByNeeded(double needed)
+        public async Task<List<DonateDTO>> GetAllByNeeded(double needed)
         {
-            return mapper.Map<List<DonateDTO>>(donateRepository.GetAllByNeeded(needed));
+            return  mapper.Map<List<DonateDTO>>(await donateRepository.GetAllByNeeded(needed));
         }
         // public List<Donate> GetAllByGoul()
         //{
         //    return _context.Donates.ToList();
         //}
 
-        public DonateAllDTO GetByTaz(int taz)
+        public async Task<DonateAllDTO> GetByTaz(int taz)
         {
 
-            return mapper.Map<DonateAllDTO>(donateRepository.GetByTaz(taz));
+            return  mapper.Map<DonateAllDTO>(await donateRepository.GetByTaz(taz));
 
         }
 
-        public void Update(DonateAllDTO donateAllDTO)
+        public async Task Update(DonateAllDTO donateAllDTO)
         {
             if (donateAllDTO.Name != null)
             {
-                donateRepository.Update(mapper.Map<Donate>(donateAllDTO));
+                await donateRepository.Update(mapper.Map<Donate>(donateAllDTO));
+
             }
             else
             {
@@ -83,33 +84,25 @@ namespace BL_AppService.Services
             }
         }
 
-        public void Create(DonateDTO ObjToAdd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(DonateDTO ObjToUpdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public DonateDTO GetById(int id)
-        {
-            return mapper.Map<DonateDTO> (donateRepository.GetById(id));
-        }
-
-        public int GetNumChildren()
-        {
-            return donateRepository.GetNumChildren();
-        }
-
-        public int GetNumFamily()
-        {
-            return donateRepository.GetNumFamily();
-        }
        
 
-        public void CraeteDonatesByExcel(IFormFile file)
+        public async Task<DonateDTO> GetById(int id)
+        {
+            return  mapper.Map<DonateDTO> (await donateRepository.GetById(id));
+        }
+
+        public async Task<int> GetNumChildren()
+        {
+            return await donateRepository.GetNumChildren();
+        }
+
+        public async Task<int> GetNumFamily()
+        {
+            return await donateRepository.GetNumFamily();
+        }
+
+
+        public async Task CraeteDonatesByExcel(IFormFile file)
         {
             using (var reader = new StreamReader(file.OpenReadStream()/*,Encoding.GetEncoding("ISO-8859-1")*/))
             {  
@@ -162,13 +155,13 @@ namespace BL_AppService.Services
                     donates.Add(mapper.Map<Donate>(item));
                 }
 
-                donateRepository.CraeteDonatesByExcel(donates);
+             await   donateRepository.CraeteDonatesByExcel(donates);
 
             }
         }
-        public Stream GetDonatesByExcel()
+        public async Task<Stream>  GetDonatesByExcel()
         {
-            var data = donateRepository.GetAll();  
+            var data =await donateRepository.GetAll();  
             var csvContent = new StringBuilder();
             csvContent.AppendLine("ParentTaz, Name, NumChildren, Status, Street, Needed, NumberBuilding, Neighborhood");
             foreach (var item in data)
@@ -178,15 +171,24 @@ namespace BL_AppService.Services
             var csvData = Encoding.UTF8.GetBytes(csvContent.ToString());
             var csvStream = new MemoryStream(csvData);
 
-            return csvStream;
+            return  csvStream;
         }                        
         
-    public void DeleteAllEntities()
+    public async Task DeleteAllEntities()
     {
-            donateRepository.DeleteAllEntities();
+          await  donateRepository.DeleteAllEntities();
     }
 
-}      }                          
+        public Task Create(DonateDTO ObjToAdd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Update(DonateDTO ObjToUpdate)
+        {
+            throw new NotImplementedException();
+        }
+    }      }                          
                                  
                                  
                                  

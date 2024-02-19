@@ -23,7 +23,7 @@ namespace Campain.Controllers
         {
             try
             {
-                donateService.Create(DonateAllDTO);
+               await donateService.Create(DonateAllDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -40,7 +40,7 @@ namespace Campain.Controllers
             try
             {
                
-                donateService.Update(donateAllDTO);
+               await donateService.Update(donateAllDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace Campain.Controllers
         {
             try
             {
-                donateService.Delete(id);
+               await donateService.Delete(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -72,7 +72,7 @@ namespace Campain.Controllers
         {
             try
             {
-                var donateDTO = donateService.GetById(donateId);
+                var donateDTO =await donateService.GetById(donateId);
                 return Ok(donateDTO);
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@ namespace Campain.Controllers
             try
             {
                
-                var donateDTOs = donateService.GetAll();
+                var donateDTOs =await donateService.GetAll();
                 return Ok(donateDTOs);
             }
             catch (Exception ex)
@@ -107,7 +107,7 @@ namespace Campain.Controllers
         {
             try
             {
-                var donateDTOs = donateService.GetAllByStatus(idStatus);
+                var donateDTOs =await donateService.GetAllByStatus(idStatus);
                 return Ok(donateDTOs);
             }
             catch (Exception ex)
@@ -123,7 +123,7 @@ namespace Campain.Controllers
         {
             try
             {
-                var donateDTOs = donateService.GetAllByNeeded(idNeeded);
+                var donateDTOs =await donateService.GetAllByNeeded(idNeeded);
                 return Ok(donateDTOs);
             }
             catch (Exception ex)
@@ -139,7 +139,7 @@ namespace Campain.Controllers
         {
             try
             {
-                var donateDTO = donateService.GetByTaz(tazDonate);
+                var donateDTO =await donateService.GetByTaz(tazDonate);
                 return Ok(donateDTO);
             }
             catch (Exception ex)
@@ -155,7 +155,7 @@ namespace Campain.Controllers
         {
             try
             {
-                var donateDTOs = donateService.GetAllByNumOfChildren(maxNumOfChildren);
+                var donateDTOs =await donateService.GetAllByNumOfChildren(maxNumOfChildren);
                 return Ok(donateDTOs);
             }
             catch (Exception ex)
@@ -171,7 +171,7 @@ namespace Campain.Controllers
         {
             try { 
             
-                int NumFamily = donateService.GetNumFamily();
+                int NumFamily = await donateService.GetNumFamily();
                 return Ok(NumFamily);
             }
             catch (Exception ex)
@@ -189,7 +189,7 @@ namespace Campain.Controllers
             try
             {
 
-                int NumCildren = donateService.GetNumChildren();
+                int NumCildren = await donateService.GetNumChildren();
                 return Ok(NumCildren);
             }
             catch (Exception ex)
@@ -209,7 +209,7 @@ namespace Campain.Controllers
             }
             try
             {
-                donateService.CraeteDonatesByExcel(file);
+                await donateService.CraeteDonatesByExcel(file);
                 return Ok();
             }
             catch (Exception ex)
@@ -221,12 +221,12 @@ namespace Campain.Controllers
         #region GetDonatesByExcel
 
         [HttpGet("GetDonatesByExcel")]
-        public IActionResult GetDonatesByExcel()
+        public async Task<IActionResult> GetDonatesByExcel()
         {
             try
             {
 
-                var csvStream = donateService.GetDonatesByExcel();
+                var csvStream = await donateService.GetDonatesByExcel();
                 return File(csvStream, "text/csv");
                 
             }
@@ -239,11 +239,11 @@ namespace Campain.Controllers
 
         #region HttpDeleteAllEntities
         [HttpDelete("DeleteAllEntities")]
-        public IActionResult DeleteAllEntities()
+        public async Task<IActionResult> DeleteAllEntities()
         {
             try
             {
-                donateService.DeleteAllEntities();
+                await donateService.DeleteAllEntities();
                 return Ok();
             }
             catch (Exception ex)

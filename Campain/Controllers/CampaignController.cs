@@ -17,11 +17,11 @@ namespace Campain.Controllers
 
         #region HttpPost
         [HttpPost]
-        public IActionResult Create(CampaignDTO campaignDTO)
+        public async Task<IActionResult> Create(CampaignDTO campaignDTO)
         {
             try
             {
-                campaignService.Create(campaignDTO);
+              await  campaignService.Create(campaignDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -34,11 +34,11 @@ namespace Campain.Controllers
         #region HttpPut
 
         [HttpPut]
-        public IActionResult Update(CampaignDTO campaignDTO)
+        public async Task<IActionResult> Update(CampaignDTO campaignDTO)
         {
             try
             {
-                campaignService.Update(campaignDTO);
+               await campaignService.Update(campaignDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -51,11 +51,11 @@ namespace Campain.Controllers
 
         #region HttpDelete
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                campaignService.Delete(id);
+               await campaignService.Delete(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -72,7 +72,7 @@ namespace Campain.Controllers
            
             try
             {
-                var campaigns = campaignService.GetAll();
+                var campaigns =await campaignService.GetAll();
                 return  Ok(campaigns);
             }
             catch (Exception ex)
@@ -85,11 +85,11 @@ namespace Campain.Controllers
         #region HttpGetById
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult>  GetById(int id)
         {
             try
             {
-                var campaign = campaignService.GetById(id);
+                var campaign =await campaignService.GetById(id);
                 if (campaign == null)
                 {
                     return NotFound();
@@ -105,11 +105,11 @@ namespace Campain.Controllers
 
         #region HttpDeleteAllEntities
         [HttpDelete("DeleteAllEntities")]
-        public IActionResult DeleteAllEntities()
+        public async Task<IActionResult> DeleteAllEntities()
         {
             try
             {
-                campaignService.DeleteAllEntities();
+              await campaignService.DeleteAllEntities();
                 return Ok();
             }
             catch (Exception ex)

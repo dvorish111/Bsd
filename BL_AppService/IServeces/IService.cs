@@ -8,12 +8,12 @@ namespace BL_AppService.IServeces
 {
     public interface IService<T>
     {
-        List<T> GetAll();
-        T GetById(int id);
-        void Create(T ObjToAdd);
-        void Update(T ObjToUpdate);
-        void Delete(int id);
+        Task<List<T>> GetAll();
+        Task<T> GetById(int id);
+        Task Create(T ObjToAdd);
+        Task Update(T ObjToUpdate);
+        Task Delete(int id);
 
-        void DeleteAllEntities();
+        Task DeleteAllEntities();
     }
 }

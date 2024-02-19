@@ -9,7 +9,7 @@ namespace DAL.IRepositorys
 {
     public interface IDonorRepository:IRepository<Donor>
     {
-        List<Donor> GetAllByCity(string city);
-        int Create_ReturnID(Donor donor);
+        Task<List<Donor>> GetAllByCity(string city);
+        Task<int> Create_ReturnID(Donor donor);
     }
 }

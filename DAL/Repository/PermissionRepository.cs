@@ -1,5 +1,6 @@
 ﻿using DAL.IRepositorys;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
@@ -15,64 +16,64 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public List<Permission> GetAll()
+        public async Task<List<Permission>> GetAll()
         {
-            return _context.Permissions.ToList();
+            return await _context.Permissions.ToListAsync();
         }
 
-        public Permission GetById(int permissionId)
+        public async Task<Permission> GetById(int permissionId)
         {
-            return _context.Permissions.FirstOrDefault(c => c.Id == permissionId);
+            return await _context.Permissions.FirstOrDefaultAsync(c => c.Id == permissionId);
         }
 
-        public void Create(Permission permission)
+        public async Task Create(Permission permission)
         {
-            _context.Permissions.Add(permission);
-            _context.SaveChanges();
+            await _context.Permissions.AddAsync(permission);
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Permission permission)
+        public async Task Update(Permission permission)
         {
-            var existingPermission = _context.Permissions.FirstOrDefault(c => c.Password == permission.Password);
+            var existingPermission = await _context.Permissions.FirstOrDefaultAsync(c => c.Password == permission.Password);
             if (existingPermission != null)
             {
                 existingPermission.Password = permission.Password;
                 existingPermission.Email = permission.Email;
                 // existingPermission.Donates = Permission.Donates;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public void Delete(int permissionId)
+        public async Task Delete(int permissionId)
         {
-            var permission = _context.Permissions.FirstOrDefault(c => c.Id == permissionId);
+            var permission = await _context.Permissions.FirstOrDefaultAsync(c => c.Id == permissionId);
             if (permission != null)
             {
                 _context.Permissions.Remove(permission);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public Permission GetByPassword_Email(string password, string email)
+        public async Task<Permission> GetByPassword_Email(string password, string email)
         {
-            return _context.Permissions.FirstOrDefault(c => c.Password == password && c.Email==email);
+            return await _context.Permissions.FirstOrDefaultAsync(c => c.Password == password && c.Email==email);
         }
 
-        public void DeleteAllEntities()
+        public async Task DeleteAllEntities()
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateByGmail(Permission signUp, string gmail)
+        public async Task UpdateByGmail(Permission signUp, string gmail)
         {
-            var existingPermission = _context.Permissions.FirstOrDefault(c => c.Password == gmail);
+            var existingPermission = await _context.Permissions.FirstOrDefaultAsync(c => c.Password == gmail);
             if (existingPermission != null)
             {
                 existingPermission.ManagerName = signUp.ManagerName;
                 existingPermission.Password = signUp.Password;
                 existingPermission.Email = signUp.Email;
                 // existingPermission.Donates = Permission.Donates;
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
         }
     }

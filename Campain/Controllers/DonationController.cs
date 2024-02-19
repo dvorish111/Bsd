@@ -18,11 +18,11 @@ namespace Campain.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DonationAllDTO donationDTO)
+        public async Task<IActionResult> Create(DonationAllDTO donationDTO)
         {
             try
             {
-                donationService.Create(donationDTO);
+               await donationService.Create(donationDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -32,11 +32,11 @@ namespace Campain.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update( DonationDTO donationDTO)
+        public async Task<IActionResult> Update( DonationDTO donationDTO)
         {
             try
             {
-                donationService.Update(donationDTO);
+               await donationService.Update(donationDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -46,11 +46,11 @@ namespace Campain.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                donationService.Delete(id);
+               await donationService.Delete(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -60,11 +60,11 @@ namespace Campain.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var donations = donationService.GetAll();
+                var donations =await donationService.GetAll();
                 return Ok(donations);
             }
             catch (Exception ex)
@@ -74,11 +74,11 @@ namespace Campain.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                var donation = donationService.GetById(id);
+                var donation =await donationService.GetById(id);
                 if (donation == null)
                 {
                     return NotFound();
@@ -98,7 +98,7 @@ namespace Campain.Controllers
         {
             try
             {
-                int SumDonation = donationService.GetSumDonation();
+                int SumDonation =await donationService.GetSumDonation();
                 return Ok(SumDonation);
             }
             catch (Exception ex)
@@ -111,11 +111,11 @@ namespace Campain.Controllers
         [HttpGet("GetSumDonationsByDonated/{IdDonated}")]
 
 
-        public ActionResult<int> GetSumDonationsByDonated(int IdDonated)
+        public async Task<ActionResult<int>> GetSumDonationsByDonated(int IdDonated)
         {
             try
             {
-                int SumDonation = donationService.GetSumDonationsByDonated(IdDonated);
+                int SumDonation =await donationService.GetSumDonationsByDonated(IdDonated);
                 return Ok(SumDonation);
             }
             catch (Exception ex)
@@ -128,11 +128,11 @@ namespace Campain.Controllers
         #region HttpGetAllSumDonationsByDonated
         [HttpGet("GetAllSumDonationsByDonated")]
 
-        public ActionResult <List<int>> GetAllSumDonationsByDonated()
+        public async Task<ActionResult <List<int>>> GetAllSumDonationsByDonated()
         {
             try
             {
-                List<int> SumDonations = donationService.GetAllSumDonationsByDonated();
+                List<int> SumDonations =await donationService.GetAllSumDonationsByDonated();
                 return Ok(SumDonations);
             }
             catch (Exception ex)
@@ -145,16 +145,16 @@ namespace Campain.Controllers
         #region HttpGetAllDonationsByDonated
         [HttpGet("GetAllDonationsByDonated/{IdDonated}")]
 
-        public ActionResult<List<DonationDTO>> GetAllDonationsByDonated(int IdDonated)
+        public async Task<ActionResult<List<DonationDTO>>> GetAllDonationsByDonated(int IdDonated)
         {
             try
             {
-                List<DonationDTO> Donations = donationService.GetAllDonationsByDonated( IdDonated);
-                return Ok(Donations);
+                List<DonationDTO> Donations =await donationService.GetAllDonationsByDonated( IdDonated);
+                return  Ok(Donations);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return  BadRequest(ex.Message);
             }
         }
         #endregion
@@ -164,12 +164,12 @@ namespace Campain.Controllers
         #region GetDonationsByExcel
 
         [HttpGet("GetDonationsByExcel")]
-        public IActionResult GetDonationsByExcel()
+        public async Task<IActionResult> GetDonationsByExcel()
         {
             try
             {
 
-                var csvStream = donationService.GetDonationsByExcel();
+                var csvStream =await donationService.GetDonationsByExcel();
                 return File(csvStream, "text/csv");
 
             }
@@ -182,11 +182,11 @@ namespace Campain.Controllers
 
         #region HttpDeleteAllEntities
         [HttpDelete("DeleteAllEntities")]
-        public IActionResult DeleteAllEntities()
+        public async Task<IActionResult>  DeleteAllEntities()
         {
             try
             {
-                donationService.DeleteAllEntities();
+              await donationService.DeleteAllEntities();
                 return Ok();
             }
             catch (Exception ex)

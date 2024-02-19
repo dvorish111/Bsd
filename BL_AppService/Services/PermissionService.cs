@@ -21,52 +21,52 @@ namespace BL_AppService.Services
 
         }
 
-        public void Create(LogInDTO logInDTO)
+        public async Task Create(LogInDTO logInDTO)
         {
-            permissionRepository.Create(mapper.Map<Permission>(logInDTO));
+           await permissionRepository.Create(mapper.Map<Permission>(logInDTO));
             
         }
 
-        public void Create(SignUpDTO signUpDTO)
+        public async Task Create(SignUpDTO signUpDTO)
         {
-            permissionRepository.Create(mapper.Map<Permission>(signUpDTO));
+           await permissionRepository.Create(mapper.Map<Permission>(signUpDTO));
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            permissionRepository.Delete(id);
+          await  permissionRepository.Delete(id);
         }
 
-        public void DeleteAllEntities()
+        public async Task DeleteAllEntities()
         {
             throw new NotImplementedException();
         }
 
-        public List<LogInDTO> GetAll()
+        public async Task<List<LogInDTO>> GetAll()
         {
-            List<Permission> permissions = permissionRepository.GetAll();
-            return mapper.Map<List<LogInDTO>>(permissions);
+            List<Permission> permissions =await permissionRepository.GetAll();
+            return  mapper.Map<List<LogInDTO>>(permissions);
            
         }
 
-        public LogInDTO GetById(int id)
+        public async Task<LogInDTO> GetById(int id)
         {
-            return mapper.Map<LogInDTO>(permissionRepository.GetById(id));
+            return  mapper.Map<LogInDTO>(await permissionRepository.GetById(id));
         }
 
-        public SignUpDTO GetByPassword_Email(string password, string email)
+        public async Task<SignUpDTO> GetByPassword_Email(string password, string email)
         {
-            return mapper.Map<SignUpDTO>(permissionRepository.GetByPassword_Email(password,email));
+            return  mapper.Map<SignUpDTO>(await permissionRepository.GetByPassword_Email(password,email));
         }
-        public void Update(LogInDTO logInDTO)
+        public async Task Update(LogInDTO logInDTO)
         {
            
-            permissionRepository.Update(mapper.Map<Permission>(logInDTO));
+           await permissionRepository.Update(mapper.Map<Permission>(logInDTO));
         }
 
-        public void UpdateByGmail(SignUpDTO signUpDTO, string gmail)
+        public async Task UpdateByGmail(SignUpDTO signUpDTO, string gmail)
         {
-            permissionRepository.UpdateByGmail(mapper.Map<Permission>(signUpDTO),gmail);
+           await permissionRepository.UpdateByGmail(mapper.Map<Permission>(signUpDTO),gmail);
         }
     }
 }

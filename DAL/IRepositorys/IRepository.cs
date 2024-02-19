@@ -8,11 +8,11 @@ namespace DAL.IRepositorys
 {
     public interface IRepository<T>
     {
-        List<T> GetAll();
-        T GetById(int id);
-        void Create(T ObjToAdd);
-        void Update(T ObjToUpdate);
-        void Delete(int id);
-        void DeleteAllEntities();
+       Task< List<T>> GetAll();
+        Task< T> GetById(int id);
+        Task Create(T ObjToAdd);
+        Task Update(T ObjToUpdate);
+        Task Delete(int id);
+        Task DeleteAllEntities();
     }
 }

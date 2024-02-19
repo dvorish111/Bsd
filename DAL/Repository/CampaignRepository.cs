@@ -1,5 +1,6 @@
 ﻿using DAL.IRepositorys;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,55 +15,55 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public List<Campaign> GetAll()
+        public async Task<List<Campaign>> GetAll()
         {
-            return _context.Campaigns.ToList();
+            return await _context.Campaigns.ToListAsync();
         }
 
-        public Campaign GetById(int campaignId)
+        public async Task<Campaign> GetById(int campaignId)
         {
-            return _context.Campaigns.FirstOrDefault(c => c.Id == campaignId);
+            return await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaignId);
         }
 
-        public void Create(Campaign campaign)
+        public async Task Create(Campaign campaign)
         {
-            _context.Campaigns.Add(campaign);
-            _context.SaveChanges();
+           await _context.Campaigns.AddAsync(campaign);
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Campaign campaign)
+        public async Task Update(Campaign campaign)
         {
-            var existingCampaign = _context.Campaigns.FirstOrDefault(c => c.Id == campaign.Id);
+            var existingCampaign =await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaign.Id);
             if (existingCampaign != null)
             {
                 existingCampaign.Name = campaign.Name;
                 existingCampaign.StartDate = campaign.StartDate;
                 existingCampaign.Goul = campaign.Goul;
                 existingCampaign.EndDate = campaign.EndDate;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public void Delete(int campaignId)
+        public async Task Delete(int campaignId)
         {
-            var campaign = _context.Campaigns.FirstOrDefault(c => c.Id == campaignId);
+            var campaign =await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaignId);
             if (campaign != null)
             {
                 _context.Campaigns.Remove(campaign);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
         }
-        public void DeleteAllEntities()
+        public async Task DeleteAllEntities()
         {
             // Select all entities from the table
-            var entitiesToDelete = _context.Campaigns.ToList();
+            var entitiesToDelete =await _context.Campaigns.ToListAsync();
            
             // Remove all selected entities
             _context.Campaigns.RemoveRange(entitiesToDelete);
            
 
             // Save changes to delete the entities
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
             Campaign campaign = new Campaign();
             campaign.Id = 1;
             campaign.Name = "OOOO";
@@ -70,7 +71,7 @@ namespace DAL.Repository
             campaign.StartDate= DateTime.Now;
             campaign.EndDate = DateTime.Now;
             Create(campaign);
-            _context.SaveChanges();
+          await  _context.SaveChangesAsync();
         }
 
     }

@@ -21,38 +21,38 @@ namespace BL_AppService.Services
            this.mapper = mapper;    
         }
 
-        public void Create(CampaignDTO campaign)
-        {
-            campaignRepository.Create(mapper.Map<Campaign>(campaign));
+        public async Task Create(CampaignDTO campaign)
+        { 
+            await campaignRepository.Create(mapper.Map<Campaign>(campaign));
 
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            campaignRepository.Delete(id);
+           await campaignRepository.Delete(id);
         }
 
-        public List<CampaignDTO> GetAll()
+        public async Task<List<CampaignDTO>> GetAll()
         {
-            List<Campaign> campaigns = campaignRepository.GetAll();
-            return mapper.Map <List<CampaignDTO>> (campaigns);          
+            List<Campaign> campaigns = await campaignRepository.GetAll();
+            return  mapper.Map <List<CampaignDTO>> (campaigns);          
         }
 
-        public CampaignDTO GetById(int id)
+        public async Task<CampaignDTO> GetById(int id)
         {
-             return mapper.Map<CampaignDTO>(campaignRepository.GetById(id));
+             return  mapper.Map<CampaignDTO>(await campaignRepository.GetById(id));
         }
 
-        public void Update(CampaignDTO campaign)
+        public async Task Update(CampaignDTO campaign)
         {
-            campaignRepository.Update(mapper.Map<Campaign>(campaign));
+            await campaignRepository.Update(mapper.Map<Campaign>(campaign));
            
         }
 
 
-        public void  DeleteAllEntities()
+        public async Task  DeleteAllEntities()
         {
-            campaignRepository.DeleteAllEntities();
+            await campaignRepository.DeleteAllEntities();
         }
 
     }

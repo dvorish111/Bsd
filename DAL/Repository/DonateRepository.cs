@@ -15,48 +15,48 @@ namespace DAL.Repository
             _context = context;
         }
 
-        public List<Donate> GetAll()
+        public async Task< List<Donate>> GetAll()
         {
-            return _context.Donates.Include(d => d.IdNeighborhoodNavigation).Include(d => d.IdStatusNavigation).ToList();
+            return await _context.Donates.Include(d => d.IdNeighborhoodNavigation).Include(d => d.IdStatusNavigation).ToListAsync();
         }
-        public List<Donate> GetAllByNumOfChildren(int to)
+        public async Task<List<Donate>> GetAllByNumOfChildren(int to)
         {
             int from = to-5;            
-            return _context.Donates.Where(d=>d.NumChildren>=from&&d.NumChildren<=to).Include(d => d.IdNeighborhoodNavigation).ToList();
+            return await _context.Donates.Where(d=>d.NumChildren>=from&&d.NumChildren<=to).Include(d => d.IdNeighborhoodNavigation).ToListAsync();
         }
-         public List<Donate> GetAllByStatus(int id)
+        public async Task<List<Donate>> GetAllByStatus(int id)
         {
-            return _context.Donates.Where(d=>d.IdStatus==id).Include(d => d.IdNeighborhoodNavigation).ToList();
+            return await _context.Donates.Where(d=>d.IdStatus==id).Include(d => d.IdNeighborhoodNavigation).ToListAsync();
         }
-         public List<Donate> GetAllByNeeded(double needed)
+        public async Task<List<Donate>> GetAllByNeeded(double needed)
         {
             double from = needed-500;
             if (needed == 10000) {
                 from = 2000;
             }
-            return _context.Donates.Where(d => d.Needed >= from && d.Needed <= needed).Include(d => d.IdNeighborhoodNavigation).ToList();
+            return await _context.Donates.Where(d => d.Needed >= from && d.Needed <= needed).Include(d => d.IdNeighborhoodNavigation).ToListAsync();
         }
         // public List<Donate> GetAllByGoul()
         //{
         //    return _context.Donates.ToList();
         //}
 
-        public Donate GetByTaz(int donateTaz)
+        public async Task<Donate>  GetByTaz(int donateTaz)
         {
-            return _context.Donates.Include(d => d.IdNeighborhoodNavigation).FirstOrDefault(d => d.ParentTaz == donateTaz);
+            return await _context.Donates.Include(d => d.IdNeighborhoodNavigation).FirstOrDefaultAsync(d => d.ParentTaz == donateTaz);
         }
 
 
-        public void Create(Donate donate)
+        public async Task Create(Donate donate)
         {
             //Donate donate1 = new() { ParentTaz = 0, Name = "", NumChildren = 0, IdStatus = 0, Street = "", Needed = 0, NumberBuilding = 0, IdNeighborhood = 0};
 
         //donate.Id = 14;
-            _context.Donates.Add(donate);
-            _context.SaveChanges();
+          await  _context.Donates.AddAsync(donate);
+          await _context.SaveChangesAsync();
         }
 
-        public void Update(Donate donate)
+        public async Task Update(Donate donate)
         {
             var existingDonate = _context.Donates.FirstOrDefault(d => d.ParentTaz == donate.ParentTaz);
             if (existingDonate != null)
@@ -69,7 +69,7 @@ namespace DAL.Repository
                 existingDonate.NumberBuilding = donate.NumberBuilding;
                 existingDonate.IdNeighborhood = donate.IdNeighborhood;
                 existingDonate.Raised = donate.Raised;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
         public void UpdateRaised(int? id, int raised)
@@ -82,54 +82,55 @@ namespace DAL.Repository
             _context.SaveChanges();
         }
 
-            public void Delete(int donateId)
+
+        public async Task Delete(int donateId)
         {
             var donate = _context.Donates.FirstOrDefault(d => d.Id == donateId);
             if (donate != null)
             {
-                _context.Donates.Remove(donate);
-                _context.SaveChanges();
+               _context.Donates.Remove(donate);
+              await  _context.SaveChangesAsync();
             }
 
         }
 
-        public Donate GetById(int id)
+        public async Task<Donate> GetById(int id)
         {
 
-            return _context.Donates.Include(d => d.IdNeighborhoodNavigation).FirstOrDefault(d => d.Id == id);
+            return await _context.Donates.Include(d => d.IdNeighborhoodNavigation).FirstOrDefaultAsync(d => d.Id == id);
         }
 
-        public int GetNumChildren()
+        public async Task<int> GetNumChildren()
         {          
-            return _context.Donates.Sum(s => s.NumChildren);
+            return await _context.Donates.SumAsync(s => s.NumChildren);
         }
-        public int GetNumFamily()
+        public async Task<int> GetNumFamily()
         {
-            return _context.Donates.Count();
+            return await _context.Donates.CountAsync();
         }
 
-        public void CraeteDonatesByExcel(List<Donate> donates) {
+        public async Task CraeteDonatesByExcel(List<Donate> donates) {
 
             // Add the records to the table
             foreach (var donate in donates)
             {
-            _context.Donates.Add(donate);
-            _context.SaveChanges();
+           await _context.Donates.AddAsync(donate);
+                await _context.SaveChangesAsync();
             }
           
 
         }
 
-        public void DeleteAllEntities()
+        public async Task DeleteAllEntities()
         {
             // Select all entities from the table
-            var entitiesToDelete = _context.Donates.ToList();
+            var entitiesToDelete =await _context.Donates.ToListAsync();
 
             // Remove all selected entities
-            _context.Donates.RemoveRange(entitiesToDelete);
+           _context.Donates.RemoveRange(entitiesToDelete);
 
             // Save changes to delete the entities
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
     }

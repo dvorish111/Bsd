@@ -9,13 +9,12 @@ namespace BL_AppService.IServeces
 {
     public interface IDonationService: IService<DonationDTO>
     {
-      public int GetSumDonation();
-      public int GetSumDonationsByDonated(int IdDonated);
-        public List<int> GetAllSumDonationsByDonated();
-        public Stream GetDonationsByExcel();
-        public List<DonationDTO> GetAllDonationsByDonated(int IdDonated);
-
-        public void Create(DonationAllDTO donationDTO);
+        Task <int> GetSumDonation();
+        Task <int> GetSumDonationsByDonated(int IdDonated);
+        Task <List<int>> GetAllSumDonationsByDonated();
+        Task <Stream> GetDonationsByExcel();
+        Task <List<DonationDTO>> GetAllDonationsByDonated(int IdDonated);        
+        Task  Create(DonationAllDTO donationDTO);
 
     }
 }

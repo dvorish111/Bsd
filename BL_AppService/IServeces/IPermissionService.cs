@@ -9,8 +9,8 @@ namespace BL_AppService.IServeces
 {
     public interface IPermissionService: IService<LogInDTO>
     {
-        public void Create(SignUpDTO donate);
-        public SignUpDTO GetByPassword_Email(string password, string email);
-        public void UpdateByGmail(SignUpDTO signUpDTO, string gmail);
+        Task Create(SignUpDTO donate);
+        Task <SignUpDTO> GetByPassword_Email(string password, string email);
+        Task UpdateByGmail(SignUpDTO signUpDTO, string gmail);
     }
 }
