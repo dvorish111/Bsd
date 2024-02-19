@@ -11,7 +11,7 @@ namespace Common
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public DateTime StartDate { get; set; }
-        public DateTime Duration { get; set; }
+        public DateTime EndDate { get; set; }
         public int Goul { get; set; }
     }
 }

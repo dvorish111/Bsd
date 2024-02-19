@@ -73,7 +73,15 @@ namespace BL_AppService.Services
 
         public async Task Update(DonateAllDTO donateAllDTO)
         {
-           await donateRepository.Update(mapper.Map<Donate>(donateAllDTO));
+            if (donateAllDTO.Name != null)
+            {
+                await donateRepository.Update(mapper.Map<Donate>(donateAllDTO));
+
+            }
+            else
+            {
+                donateRepository.UpdateRaised(donateAllDTO.Id, donateAllDTO.Raised);
+            }
         }
 
        

@@ -68,8 +68,18 @@ namespace DAL.Repository
                 existingDonate.Needed = donate.Needed;
                 existingDonate.NumberBuilding = donate.NumberBuilding;
                 existingDonate.IdNeighborhood = donate.IdNeighborhood;
-               await _context.SaveChangesAsync();
+                existingDonate.Raised = donate.Raised;
+                await _context.SaveChangesAsync();
             }
+        }
+        public void UpdateRaised(int? id, int raised)
+        {
+            var existingDonate = _context.Donates.FirstOrDefault(d => d.Id == id);
+            if (existingDonate != null)
+            {
+                existingDonate.Raised = raised;
+            }
+            _context.SaveChanges();
         }
 
 
@@ -81,6 +91,7 @@ namespace DAL.Repository
                _context.Donates.Remove(donate);
               await  _context.SaveChangesAsync();
             }
+
         }
 
         public async Task<Donate> GetById(int id)
