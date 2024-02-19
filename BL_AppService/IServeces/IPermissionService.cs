@@ -12,5 +12,7 @@ namespace BL_AppService.IServeces
         Task Create(SignUpDTO donate);
         Task <SignUpDTO> GetByPassword_Email(string password, string email);
         Task UpdateByGmail(SignUpDTO signUpDTO, string gmail);
+
+        Task<bool> ConfirmPassword (string password);
     }
 }

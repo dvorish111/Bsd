@@ -98,6 +98,7 @@ namespace Campain.Controllers
             }
             catch (Exception ex)
             {
+                
                 return BadRequest(ex.Message);
             }
         }
