@@ -15,7 +15,7 @@ namespace BL_AppService.IServeces
     {
          Task  Create(DonateAllDTO donate);
          Task Update(DonateAllDTO donate);
-        Task<DonateAllDTO> GetByTaz(int donateTaz);
+        Task<DonateAllDTO> GetByTaz(string donateTaz);
         Task<List<DonateDTO>> GetAllByNeeded(double id);
         Task<List<DonateDTO>> GetAllByStatus(int id);
         Task<List<DonateDTO>> GetAllByNumOfChildren( int to);

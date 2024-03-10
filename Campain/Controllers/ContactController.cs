@@ -21,7 +21,7 @@ namespace Campain.Controllers
             msg.To.Add("chanylev100@gmail.com");
 
             //msg.ReplyToList.Add(string.Concat(recipients, ",", "123@gmail.com"));
-            msg.Subject = "Hello from C#:)";
+            msg.Subject = "הודעה מקמפיין רמות";
            // msg.Attachments.Add(new System.Net.Mail.Attachment(reportPath));
            // msg.IsBodyHtml = true;
             msg.Body =  contact1.FirstName+ ":שם פרטי"+"\n" + contact1.LastName+ ":שם משפחה" + "\n" + contact1.Email+ ":מייל" + "\n" +contact1.Message+ ":הודעה" ;

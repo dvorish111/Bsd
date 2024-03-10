@@ -52,6 +52,8 @@ namespace DAL.Models
             {
                 entity.Property(e => e.Name).HasMaxLength(32);
 
+                entity.Property(e => e.ParentTaz).HasMaxLength(32);
+
                 entity.Property(e => e.Raised).HasColumnName("raised");
 
                 entity.Property(e => e.Street).HasMaxLength(32);

@@ -67,6 +67,7 @@ namespace Campain.Controllers
         #endregion
         #region HttpGetById
 
+
         [HttpGet("DonateId/{donateId}")]
         public async Task<ActionResult<DonateDTO>> GetById(int donateId)
         {
@@ -133,9 +134,11 @@ namespace Campain.Controllers
         }
         #endregion
 
-        #region HttpGetByTaz
+        #region Http
+
+
         [HttpGet("TazDonate/{tazDonate}")]
-        public async Task<ActionResult<DonateAllDTO>> GetByTaz( int tazDonate)
+        public async Task<ActionResult<DonateAllDTO>> GetByTaz( string tazDonate)
         {
             try
             {

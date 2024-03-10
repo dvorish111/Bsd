@@ -9,7 +9,7 @@ namespace Common
     public class DonateAllDTO
     {
          public int? Id { get; set; }
-        public int? ParentTaz{ get; set; } = 0!;
+        public string? ParentTaz{ get; set; } = null!;
         public string? Name { get; set; } = null!;
         public int NumChildren { get; set; }
         public int IdStatus { get; set; }
