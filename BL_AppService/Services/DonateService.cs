@@ -64,7 +64,7 @@ namespace BL_AppService.Services
         //    return _context.Donates.ToList();
         //}
 
-        public async Task<DonateAllDTO> GetByTaz(int taz)
+        public async Task<DonateAllDTO> GetByTaz(string taz)
         {
 
             return  mapper.Map<DonateAllDTO>(await donateRepository.GetByTaz(taz));
@@ -138,7 +138,7 @@ namespace BL_AppService.Services
 
                     DonateAllDTO donate = new DonateAllDTO
                     {
-                        ParentTaz = int.Parse(values[0]),
+                        ParentTaz = values[0],
                         Name = values[1],
                         NumChildren = int.Parse(values[2]),
                         IdStatus = int.Parse(values[3]),

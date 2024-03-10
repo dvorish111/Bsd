@@ -41,7 +41,7 @@ namespace DAL.Repository
         //    return _context.Donates.ToList();
         //}
 
-        public async Task<Donate>  GetByTaz(int donateTaz)
+        public async Task<Donate>  GetByTaz(string donateTaz)
         {
             return await _context.Donates.Include(d => d.IdNeighborhoodNavigation).FirstOrDefaultAsync(d => d.ParentTaz == donateTaz);
         }
