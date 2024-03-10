@@ -18,11 +18,11 @@ namespace Campain.Controllers
 
         #region HttpPost
         [HttpPost]
-        public IActionResult Create(SignUpDTO signUpDTO)
+        public async Task<IActionResult> Create(SignUpDTO signUpDTO)
         {
             try
             {
-                permissionService.Create(signUpDTO);
+              await  permissionService.Create(signUpDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -35,12 +35,12 @@ namespace Campain.Controllers
         #region UpdateByGmail
 
         [HttpPut("UpdateByGmail/{gmail}")]
-        public IActionResult UpdateByGmail(string gmail, SignUpDTO signUpDTO)
+        public async Task<IActionResult> UpdateByGmail(string gmail, SignUpDTO signUpDTO)
         {
             try
             {
                 
-                permissionService.UpdateByGmail(signUpDTO, gmail);
+              permissionService.UpdateByGmail(signUpDTO, gmail);
                 return Ok();
             }
             catch (Exception ex)
@@ -52,11 +52,11 @@ namespace Campain.Controllers
         #region UpdateByPassword
 
         [HttpPut]
-        public IActionResult UpdateByPassword( LogInDTO logInDTO)
+        public async Task<IActionResult> UpdateByPassword( LogInDTO logInDTO)
         {
             try
             {
-                permissionService.Update(logInDTO);
+               await permissionService.Update(logInDTO);
                 return Ok();
             }
             catch (Exception ex)
@@ -70,11 +70,11 @@ namespace Campain.Controllers
 
         #region HttpDelete
         [HttpDelete("{id}")]//לא בטוח שצריך
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                permissionService.Delete(id);
+               await permissionService.Delete(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -86,11 +86,11 @@ namespace Campain.Controllers
 
         #region HttpGetAll
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var permissions = permissionService.GetAll();
+                var permissions =await permissionService.GetAll();
                 return Ok(permissions);
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace Campain.Controllers
         {
             try
             {
-                var Permission = permissionService.GetByPassword_Email(password,email);
+                var Permission =await permissionService.GetByPassword_Email(password,email);
                 if (Permission == null)
                 {
                     return NotFound();
@@ -120,6 +120,26 @@ namespace Campain.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
+
+
+        #region confirmPassword
+
+        [HttpPut("ConfirmPassword/{password}")]
+        public async Task<ActionResult<bool>> ConfirmPassword(string password)
+        {   bool passwordOk = false;
+            try
+            {
+                passwordOk =  await permissionService.ConfirmPassword(password);
+                return Ok(passwordOk);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(passwordOk);
+            }
+        }
+
+
         #endregion
     }
 }

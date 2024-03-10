@@ -21,6 +21,12 @@ namespace BL_AppService.Services
 
         }
 
+        public async Task<bool> ConfirmPassword(string password)
+        {
+            bool result =await permissionRepository.ConfirmPassword(password);
+            return result;
+        }
+
         public async Task Create(LogInDTO logInDTO)
         {
            await permissionRepository.Create(mapper.Map<Permission>(logInDTO));

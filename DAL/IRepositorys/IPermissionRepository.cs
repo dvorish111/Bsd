@@ -11,6 +11,7 @@ namespace DAL.IRepositorys
     {
         Task<Permission> GetByPassword_Email(string password, string email);
         Task UpdateByGmail(Permission signUp, string gmail);
+        Task<bool> ConfirmPassword(string password);
 
 
     }

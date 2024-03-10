@@ -66,7 +66,7 @@ namespace DAL.Repository
 
         public async Task UpdateByGmail(Permission signUp, string gmail)
         {
-            var existingPermission = await _context.Permissions.FirstOrDefaultAsync(c => c.Password == gmail);
+            var existingPermission =  _context.Permissions.FirstOrDefault(c => c.Email == gmail);
             if (existingPermission != null)
             {
                 existingPermission.ManagerName = signUp.ManagerName;
@@ -75,6 +75,16 @@ namespace DAL.Repository
                 // existingPermission.Donates = Permission.Donates;
                await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> ConfirmPassword(string password)
+        {
+            var confirmPassword =await _context.Permissions.FirstOrDefaultAsync(c => c.Password == password);
+            if(confirmPassword != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
