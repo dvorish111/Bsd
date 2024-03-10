@@ -55,7 +55,7 @@ namespace DAL.Models
 
                 entity.Property(e => e.Name).HasMaxLength(32);
 
-                entity.Property(e => e.Raised).HasColumnName("raised");
+                entity.Property(e => e.ParentTaz).HasMaxLength(32);
 
                 entity.Property(e => e.Street).HasMaxLength(32);
 
@@ -95,7 +95,7 @@ namespace DAL.Models
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdNeighborhood)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdNei__3FD07829");
+                    .HasConstraintName("FK__Donations__IdNei__22401542");
             });
 
             modelBuilder.Entity<Donor>(entity =>
@@ -133,9 +133,7 @@ namespace DAL.Models
 
                 entity.Property(e => e.ManagerName).HasMaxLength(50);
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.Password).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Status>(entity =>

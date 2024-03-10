@@ -88,7 +88,7 @@ namespace BL_AppService.Services
          //   csvContent.AppendLine("מספר תרומה, סכום תרומה, שם הנתרם, תז הנתרם, סטטוס הנתרם, כמה צריך, מספר בנין,שכונה, שם התורם , מייל התורם, עיר, טלפון התורם");
             foreach (var item in data)
             {
-                csvContent.AppendLine($"{item.Id},{item.Amount},{item.IdDonatedNavigation.Name},{item.IdDonatedNavigation.ParentTaz},{item.IdDonatedNavigation.IdStatusNavigation.StatusName},{item.IdDonatedNavigation.Needed},{item.IdDonatedNavigation.NumberBuilding},{item.IdNeighborhoodNavigation.Name}" +
+                csvContent.AppendLine($"{item.Id},{item.Amount},{item.IdDonatedNavigation?.Name},{item.IdDonatedNavigation?.ParentTaz},{item.IdDonatedNavigation?.IdStatusNavigation.StatusName},{item.IdDonatedNavigation?.Needed},{item.IdDonatedNavigation?.NumberBuilding},{item.IdNeighborhoodNavigation.Name}" +
                     $",{item.IdDonorNavigation.FirstName+ " "+item.IdDonorNavigation.LastName},{item.IdDonorNavigation.Email},{item.IdDonorNavigation.City},{item.IdDonorNavigation.Phone}"); // Add data rows               
             }
            
