@@ -13,7 +13,7 @@ namespace Campain.Controllers
     {
  
         [HttpPost]
-       public IActionResult SendMail(Contact1 contact1)
+       public IActionResult SendMail(Contact contact)
         {
             MailMessage msg = new MailMessage();
           //  var msg = new System.Net.Mail.MailMessage();
@@ -24,7 +24,7 @@ namespace Campain.Controllers
             msg.Subject = "הודעה מקמפיין רמות";
            // msg.Attachments.Add(new System.Net.Mail.Attachment(reportPath));
            // msg.IsBodyHtml = true;
-            msg.Body =  contact1.FirstName+ ":שם פרטי"+"\n" + contact1.LastName+ ":שם משפחה" + "\n" + contact1.Email+ ":מייל" + "\n" +contact1.Message+ ":הודעה" ;
+            msg.Body =  contact.FirstName+ ":שם פרטי"+"\n" + contact.LastName+ ":שם משפחה" + "\n" + contact.Email+ ":מייל" + "\n" +contact.Message+ ":הודעה" ;
 
             var client = new SmtpClient();
             client.Credentials = new NetworkCredential("chanylev100@gmail.com", @"v p u l o c d r u b l w e d b g");
