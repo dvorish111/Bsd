@@ -55,7 +55,7 @@ namespace Campain.Controllers
                     await file.CopyToAsync(stream);
                 }
                 ImagesDTO imagesDTO=new ImagesDTO() {FileSize=1,FileName=file.FileName,ContentType=file.ContentType,Id=num };
-                this.ImageService.SaveImage(imagesDTO);
+                ImageService.SaveImage(imagesDTO);
                 
                 return Ok("File uploaded successfully.");
             }
