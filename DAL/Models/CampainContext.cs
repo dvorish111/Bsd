@@ -20,6 +20,7 @@ namespace DAL.Models
         public virtual DbSet<Donate> Donates { get; set; } = null!;
         public virtual DbSet<Donation> Donations { get; set; } = null!;
         public virtual DbSet<Donor> Donors { get; set; } = null!;
+        public virtual DbSet<Images> Images { get; set; } = null!;
         public virtual DbSet<Neighborhood> Neighborhoods { get; set; } = null!;
         public virtual DbSet<Permission> Permissions { get; set; } = null!;
         public virtual DbSet<Status> Statuses { get; set; } = null!;
@@ -110,6 +111,22 @@ namespace DAL.Models
                 entity.Property(e => e.Phone).HasMaxLength(32);
 
                 entity.Property(e => e.Street).HasMaxLength(32);
+            });
+
+            modelBuilder.Entity<Images>(entity =>
+            {
+                entity.HasIndex(e => e.Id, "UQ__tmp_ms_x__3214EC069DC27615")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.ContentType).HasMaxLength(100);
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.FileName).HasMaxLength(255);
             });
 
             modelBuilder.Entity<Neighborhood>(entity =>

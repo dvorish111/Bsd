@@ -21,6 +21,7 @@ namespace DAL.IRepositorys
             serviceCollection.AddScoped<IDonationRepository, DonationRepository>();
             serviceCollection.AddScoped<IDonateRepository, DonateRepository>();
             serviceCollection.AddScoped<IPermissionRepository, PermissionRepository>();
+            serviceCollection.AddScoped<IImageRepository, ImageRepository>();
             serviceCollection.AddDbContext<CampainContext>();
 
 
