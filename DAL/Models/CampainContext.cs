@@ -29,7 +29,7 @@ namespace DAL.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CampainDB;Integrated Security=True;Pooling=False");
+                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\user\\Desktop\\כולם\\דבורי\\אתר קופות צדקה רמות\\BSD-17-03\\DB\\CampainDB.mdf;Integrated Security=True;Connect Timeout=30;Pooling=False");
             }
         }
 
@@ -43,7 +43,9 @@ namespace DAL.Models
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Name).HasMaxLength(32);
+                entity.Property(e => e.Name)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
             });
@@ -53,11 +55,17 @@ namespace DAL.Models
                 entity.HasIndex(e => e.ParentTaz, "UC_ParentTaz_Donates")
                     .IsUnique();
 
-                entity.Property(e => e.Name).HasMaxLength(32);
+                entity.Property(e => e.Name)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.ParentTaz).HasMaxLength(32);
+                entity.Property(e => e.ParentTaz)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.Street).HasMaxLength(32);
+                entity.Property(e => e.Street)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
                 entity.HasOne(d => d.IdNeighborhoodNavigation)
                     .WithMany(p => p.Donates)
@@ -76,9 +84,13 @@ namespace DAL.Models
             {
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
-                entity.Property(e => e.Dedication).HasMaxLength(255);
+                entity.Property(e => e.Dedication)
+                    .HasMaxLength(255)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.Quetel).HasMaxLength(255);
+                entity.Property(e => e.Quetel)
+                    .HasMaxLength(255)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
                 entity.HasOne(d => d.IdDonatedNavigation)
                     .WithMany(p => p.Donations)
@@ -100,22 +112,36 @@ namespace DAL.Models
 
             modelBuilder.Entity<Donor>(entity =>
             {
-                entity.Property(e => e.City).HasMaxLength(32);
+                entity.Property(e => e.City)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.Email).HasMaxLength(32);
+                entity.Property(e => e.Email)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.FirstName).HasMaxLength(32);
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.LastName).HasMaxLength(32);
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.Phone).HasMaxLength(32);
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.Street).HasMaxLength(32);
+                entity.Property(e => e.Street)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             });
 
             modelBuilder.Entity<Neighborhood>(entity =>
             {
-                entity.Property(e => e.Name).HasMaxLength(32);
+                entity.Property(e => e.Name)
+                    .HasMaxLength(32)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             });
 
             modelBuilder.Entity<Permission>(entity =>
@@ -129,11 +155,17 @@ namespace DAL.Models
                 entity.HasIndex(e => e.Password, "UC_Password_Permissions")
                     .IsUnique();
 
-                entity.Property(e => e.Email).HasMaxLength(50);
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.ManagerName).HasMaxLength(50);
+                entity.Property(e => e.ManagerName)
+                    .HasMaxLength(50)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.Password).HasMaxLength(50);
+                entity.Property(e => e.Password)
+                    .HasMaxLength(50)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             });
 
             modelBuilder.Entity<Status>(entity =>
@@ -142,7 +174,9 @@ namespace DAL.Models
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.StatusName).HasMaxLength(50);
+                entity.Property(e => e.StatusName)
+                    .HasMaxLength(50)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             });
 
             OnModelCreatingPartial(modelBuilder);

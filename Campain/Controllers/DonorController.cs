@@ -107,6 +107,7 @@ namespace Campain.Controllers
             try
             {
                 var donorDTO = donorService.GetById(id);
+                
                 return Ok(donorDTO);
             }
             catch (Exception ex)
