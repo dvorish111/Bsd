@@ -21,7 +21,7 @@ namespace BL_AppService.IServeces
         Task<List<DonateDTO>> GetAllByNumOfChildren( int to);
         Task<int> GetNumChildren();
         Task<int>  GetNumFamily();
-        public Task CraeteDonatesByExcel(IFormFile file);
+        public Task<List<int>> CraeteDonatesByExcel(IFormFile file);
         public Task< Stream> GetDonatesByExcel();
 
 

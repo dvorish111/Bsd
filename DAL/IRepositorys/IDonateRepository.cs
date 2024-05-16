@@ -15,7 +15,7 @@ namespace DAL.IRepositorys
         Task<List<Donate>> GetAllByNumOfChildren(int to);
          Task<int> GetNumFamily();
          Task<int> GetNumChildren();
-         Task CraeteDonatesByExcel(List<Donate> donates);
+        Task<List<int>> CraeteDonatesByExcel(List<Donate> donates);
         void UpdateRaised(int? id, int raised);
     }
 }

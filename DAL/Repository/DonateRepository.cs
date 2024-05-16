@@ -1,5 +1,6 @@
 ﻿using DAL.IRepositorys;
 using DAL.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,17 +110,33 @@ namespace DAL.Repository
             return await _context.Donates.CountAsync();
         }
 
-        public async Task CraeteDonatesByExcel(List<Donate> donates) {
-
-            // Add the records to the table
+        public async Task<List<int>> CraeteDonatesByExcel(List<Donate> donates)
+        {
+            int i = 1;
+            List<int> invalidDonates = new List<int>();
             foreach (var donate in donates)
             {
-           await _context.Donates.AddAsync(donate);
+                if (donate.ParentTaz != null) { 
+                bool isDuplicate = await _context.Donates.AnyAsync(d => d.ParentTaz == donate.ParentTaz);
+                int ParentTazLength = donate.ParentTaz.Length;
+                // אם הערך קיים כבר, נדלג על הכנסתו למסד הנתונים
+                if (isDuplicate || ParentTazLength != 9)
+                {
+                        i++;
+                        invalidDonates.Add(i);
+                        continue;
+                }
+}
+                i++;
+                // אם הערך לא קיים, נכניס אותו למסד הנתונים
+                _context.Donates.Add(donate);
                 await _context.SaveChangesAsync();
-            }
-          
 
-        }
+            }
+
+            return invalidDonates;
+            }
+
 
         public async Task DeleteAllEntities()
         {
