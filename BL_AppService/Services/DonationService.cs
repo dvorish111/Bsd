@@ -84,8 +84,8 @@ namespace BL_AppService.Services
         {
             var data =await donationRepository.GetAllFullDetails();
             var csvContent = new StringBuilder();
-            csvContent.AppendLine(" ID,Amount,Donated Name, Donated ParentTaz,Status,Needed,NumberBuilding,Neighborhood,Donor Name,Donor Email,Donor City,Donor Phone");
-         //   csvContent.AppendLine("מספר תרומה, סכום תרומה, שם הנתרם, תז הנתרם, סטטוס הנתרם, כמה צריך, מספר בנין,שכונה, שם התורם , מייל התורם, עיר, טלפון התורם");
+/*            csvContent.AppendLine(" ID,Amount,Donated Name, Donated ParentTaz,Status,Needed,NumberBuilding,Neighborhood,Donor Name,Donor Email,Donor City,Donor Phone");
+*/            csvContent.AppendLine("מספר תרומה, סכום תרומה, שם הנתרם, תז הנתרם, סטטוס הנתרם, כמה צריך, מספר בנין,שכונה, שם התורם , מייל התורם, עיר, טלפון התורם");
             foreach (var item in data)
             {
                 csvContent.AppendLine($"{item.Id},{item.Amount},{item.IdDonatedNavigation?.Name},{item.IdDonatedNavigation?.ParentTaz},{item.IdDonatedNavigation?.IdStatusNavigation.StatusName},{item.IdDonatedNavigation?.Needed},{item.IdDonatedNavigation?.NumberBuilding},{item.IdNeighborhoodNavigation.Name}" +

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.OtherObject
 {
-    public class Contact1
+    public class Contact
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

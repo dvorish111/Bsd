@@ -278,12 +278,14 @@ ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         {
             var data =await donateRepository.GetAll();  
             var csvContent = new StringBuilder();
-            csvContent.AppendLine("ParentTaz, Name, NumChildren, Status, Street, Needed, NumberBuilding, Neighborhood");
-            foreach (var item in data)
+             csvContent.AppendLine(" תז הנתרם, שם הנתרם , מספר ילדים, סטטוס, רחוב, כמה צריך, מס בנין, שכונה ");
+
+/*            csvContent.AppendLine("ParentTaz, Name, NumChildren, Status, Street, Needed, NumberBuilding, Neighborhood");
+*/            foreach (var item in data)
             {
                 csvContent.AppendLine($"{item.ParentTaz},{item.Name},{item.NumChildren},{item.IdStatusNavigation.StatusName},{item.Street},{item.Needed},{item.NumberBuilding},{item.IdNeighborhoodNavigation.Name}"); // Add data rows               
             }
-            var csvData = Encoding.UTF8.GetBytes(csvContent.ToString());
+            var csvData = Encoding.GetEncoding("windows-1255").GetBytes(csvContent.ToString());
             var csvStream = new MemoryStream(csvData);
 
             return  csvStream;
