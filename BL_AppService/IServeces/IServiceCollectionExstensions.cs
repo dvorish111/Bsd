@@ -25,8 +25,10 @@ namespace BL_AppService.IServeces
              serviceCollection.AddScoped<IDonationService, DonationService>();
              serviceCollection.AddScoped<IDonateService, DonateService>();
             serviceCollection.AddScoped<ImageService, ImageService>();
-/*           serviceCollection.AddScoped<IPermissionService, PermissionService>();
-*/            serviceCollection.AddAutoMapper(config => config.AddProfile<CampaignProfile>());
+            
+            /*           serviceCollection.AddScoped<IPermissionService, PermissionService>();
+            */
+            serviceCollection.AddAutoMapper(config => config.AddProfile<CampaignProfile>());
             serviceCollection.AddAutoMapper(config => config.AddProfile<DonorProfile>());
             serviceCollection.AddAutoMapper(config => config.AddProfile<DonateProfile>());
             serviceCollection.AddAutoMapper(config => config.AddProfile<PermissionProfile>());

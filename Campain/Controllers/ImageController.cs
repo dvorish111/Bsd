@@ -19,7 +19,7 @@ namespace Campain.Controllers
         {
             this.ImageService = ImageService;
         }
-        [HttpGet("{id}")]
+       /* [HttpGet("{id}")]
         public async Task<ActionResult> GetImage(int id)
         {
             string imagePath =await this.ImageService.GetImage(id);
@@ -30,42 +30,63 @@ namespace Campain.Controllers
 
 
 
-        }
-       
+        }*/
 
-        [HttpPost("{num}")]
-        public async Task<IActionResult> SaveImage(IFormFile file,int num)
-        {
-            try
-            
-            {
-                // Check if file exists and is not empty
-                if (file == null || file.Length == 0)
-                    return BadRequest("No file uploaded.");
 
-                //DeleteImage( num);
-                // Define the path where you want to save the file
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-                var filePath = Path.Combine(uploadsFolder, file.FileName);
-                
+        /* [HttpPost("{num}")]
+         public async Task<IActionResult> SaveImage(IFormFile file, int num)
+         {
+             try
 
-                // Save the file to the specified path
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-                ImagesDTO imagesDTO=new ImagesDTO() {FileSize=1,FileName=file.FileName,ContentType=file.ContentType,Id=num };
-                ImageService.SaveImage(imagesDTO);
-                
-                return Ok("File uploaded successfully.");
-            }
-            catch (System.Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex}");
-             
-            }
-        }
+             {
+                 // Check if file exists and is not empty
+                 if (file == null || file.Length == 0)
+                     return BadRequest("No file uploaded.");
 
+                 //DeleteImage( num);
+                 // Define the path where you want to save the file
+                 var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                 var filePath = Path.Combine(uploadsFolder, file.FileName);
+
+
+                 // Save the file to the specified path
+                 using (var stream = new FileStream(filePath, FileMode.Create))
+                 {
+                     await file.CopyToAsync(stream);
+                 }
+                 ImagesDTO imagesDTO = new ImagesDTO() { FileSize = 1, FileName = file.FileName, ContentType = file.ContentType, Id = num };
+                 ImageService.SaveImage(imagesDTO);
+
+                 return Ok("File uploaded successfully.");
+             }
+             catch (System.Exception ex)
+             {
+                 return StatusCode(500, $"Internal server error: {ex}");
+
+             }
+
+             return BadRequest("No image provided");
+
+          *//*   if (file == null || file.Length == 0)
+                 return BadRequest("No file uploaded.");
+             using (var memoryStream = new MemoryStream())
+             {
+
+                 await file.CopyToAsync(memoryStream);
+                 var imageData = memoryStream.ToArray();
+
+                 var imagesDTO = new ImagesDTO
+                 {
+                     Id = num,
+                     Name = file.FileName,
+                     Data = imageData,
+                     Size = imageData.Length
+                 };
+                 await ImageService.SaveImage(imagesDTO);
+
+                 return Ok("File uploaded successfully.");
+             }*//*
+         }*/
 
         //[HttpDelete("{id}")]
         //public async Task<IActionResult> DeleteImage(int id)
@@ -91,7 +112,38 @@ namespace Campain.Controllers
         //        return StatusCode(500, $"Internal server error: {ex}");
         //    }
         //}
+        [HttpPost("{num}")]
+        public async Task<IActionResult> SaveImage([FromForm] IFormFile file, int num)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
 
+            var imagesSaveDTO = new ImagesSaveDTO
+            {
+                Id = num,
+                FileName = Path.GetFileNameWithoutExtension(file.FileName),
+                ContentType = file.ContentType,
+                FileData = await ConvertToBytes(file),
+                Size= file.Length
+                
+            };
+
+          
+            await ImageService.SaveImage(imagesSaveDTO);
+
+            return Ok(new { imagesSaveDTO.Id });
+        }
+
+
+
+        private async Task<byte[]> ConvertToBytes(IFormFile file)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.CopyToAsync(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
 
         [HttpGet("ImageId/{imageId}")]
         public async Task<ActionResult<ImagesDTO>> GetById(int imageId)
@@ -99,6 +151,7 @@ namespace Campain.Controllers
             try
             {
                 var imageDTO = await ImageService.GetById(imageId);
+
                 return Ok(imageDTO);
             }
             catch (Exception ex)

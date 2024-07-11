@@ -4,6 +4,7 @@ using Common;
 using DAL.IRepositorys;
 using DAL.Models;
 using DAL.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -45,35 +46,61 @@ namespace BL_AppService.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ImagesDTO> GetById(int id)
+     /*   public async Task<ImagesDTO> GetById(int id)
         {
             ImagesDTO imagesDTO= mapper.Map<ImagesDTO>(await imageRepository.GetById(id));
             imagesDTO.FileName= imagesDTO.FileName.Split('.')[0];
             return imagesDTO;
 
-        }
+        }*/
 
-        public async Task SaveImage(ImagesDTO imageDTO)
+        public async Task SaveImage(ImagesSaveDTO ImagesSaveDTO)
         {
-            await imageRepository.SaveImage(mapper.Map<Images>(imageDTO));
+
+            Images images= mapper.Map<Images>(ImagesSaveDTO);
+            await imageRepository.SaveImage(images);
         }
 
         public Task Update(ImagesDTO ObjToUpdate)
         {
             throw new NotImplementedException();
         }
-        public async Task<string> GetImage(int id)
+    /*    public async Task<string> GetImage(int id)
         {
-            Images images =await this.imageRepository.GetById(id);
-
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-
-            var imagePath = Path.Combine(uploadsFolder, $"{images.FileName}"); // לדוגמה, התמונות בשרת נשמרות בפורמט JPG ושמות הקבצים הם ה-ID של התמונה
            
-            return imagePath;
+            *//* var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
 
+             var imagePath = Path.Combine(uploadsFolder, $"{images.FileName}"); // לדוגמה, התמונות בשרת נשמרות בפורמט JPG ושמות הקבצים הם ה-ID של התמונה
 
+             return imagePath;*//*
 
+        }*/
+        public async Task<ImagesDTO> GetById(int id)
+        {
+            var image =  await imageRepository.GetById(id);
+
+            if (image == null)
+                return null;
+
+            return new ImagesDTO
+            {
+                Id = image.Id,
+                FileName = image.FileName,
+                FileData = Convert.ToBase64String(image.FileData),
+                ContentType = image.ContentType,
+                Size = image.Size.Value
+            };
+            /*            return mapper.Map<ImagesDTO>(await imageRepository.GetById(id));
+            */
+        }
+
+        private async Task<byte[]> ConvertToBytes(IFormFile file)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.CopyToAsync(memoryStream);
+                return memoryStream.ToArray();
+            }
         }
     }
 }

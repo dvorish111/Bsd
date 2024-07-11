@@ -18,7 +18,7 @@ namespace DAL.Repository
         public ImageRepository(CampainContext context)
         {
             _context = context;
-            _context = context;
+          
         }
         public Task Create(Images ObjToAdd)
         {
@@ -57,14 +57,21 @@ namespace DAL.Repository
 
         public async Task<Images> GetById(int id)
         {
+           
             return await _context.Images.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task SaveImage(Images image)
+        public async Task SaveImage(Images images)
         {
-            Delete(image.Id);
-            _context.Images.Add(image);
-            _context.SaveChanges();
+            Delete(images.Id);
+
+            /*
+                         _context.Images.AddAsync(images);
+                        await _context.SaveChangesAsync();*/
+
+            _context.Images.Add(images);
+            await _context.SaveChangesAsync();
+
         }
 
 

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public class ImagesDTO {
+    public class ImagesSaveDTO
+    {
         /*        public int Id { get; set; }
                 public string FileName { get; set; }
                 public string ContentType { get; set; }
@@ -14,16 +15,16 @@ namespace Common
 
 
 
-        /* public int Id { get; set; }
-         public string FileName { get; set; } = null!;
-         public byte[]? FileData { get; set; }
-         public string? ContentType { get; set; }
-         public long? Size { get; set; }*/
         public int Id { get; set; }
         public string FileName { get; set; } = null!;
-        public string FileData { get; set; } = null!; // Base64 encoded string
-        public string ContentType { get; set; } = null!;
-        public long Size { get; set; }
+        public byte[]? FileData { get; set; }
+        public string? ContentType { get; set; }
+        public long? Size { get; set; }
+        /* public int Id { get; set; }
+         public string FileName { get; set; } = null!;
+         public string FileData { get; set; } = null!; // Base64 encoded string
+         public string ContentType { get; set; } = null!;
+         public long Size { get; set; }*/
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DAL.Models
 {
-    public partial class Images
+    public partial class Image
     {
         public int Id { get; set; }
         public string FileName { get; set; } = null!;

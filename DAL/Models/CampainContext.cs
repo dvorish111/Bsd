@@ -30,7 +30,7 @@ namespace DAL.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\user\\Desktop\\כולם\\דבורי\\אתר קופות צדקה רמות\\BSD-17-03\\DB\\CampainDB.mdf;Integrated Security=True;Connect Timeout=30;Pooling=False");
+                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename= C:\\USERS\\USER\\DESKTOP\\כולנו\\דבורי\\אתר קופות צדקה רמות\\BSD-17-03\\DB\\CAMPAINDB.MDF;Integrated Security=True;Connect Timeout=30");
             }
         }
 
@@ -72,13 +72,13 @@ namespace DAL.Models
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdNeighborhood)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdNeigh__72910220");
+                    .HasConstraintName("FK__Donates__IdNeigh__2DE6D218");
 
                 entity.HasOne(d => d.IdStatusNavigation)
                     .WithMany(p => p.Donates)
                     .HasForeignKey(d => d.IdStatus)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donates__IdStatu__1A9EF37A");
+                    .HasConstraintName("FK__Donates__IdStatu__68487DD7");
             });
 
             modelBuilder.Entity<Donation>(entity =>
@@ -96,19 +96,19 @@ namespace DAL.Models
                 entity.HasOne(d => d.IdDonatedNavigation)
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonated)
-                    .HasConstraintName("FK__Donations__IdDon__2CBDA3B5");
+                    .HasConstraintName("FK__Donations__IdDon__2057CCD0");
 
                 entity.HasOne(d => d.IdDonorNavigation)
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdDonor)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdDon__719CDDE7");
+                    .HasConstraintName("FK__Donations__IdDon__1F63A897");
 
                 entity.HasOne(d => d.IdNeighborhoodNavigation)
                     .WithMany(p => p.Donations)
                     .HasForeignKey(d => d.IdNeighborhood)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Donations__IdNei__3FD07829");
+                    .HasConstraintName("FK__Donations__IdNei__22401542");
             });
 
             modelBuilder.Entity<Donor>(entity =>
@@ -140,18 +140,18 @@ namespace DAL.Models
 
             modelBuilder.Entity<Images>(entity =>
             {
-                entity.HasIndex(e => e.Id, "UQ__tmp_ms_x__3214EC069DC27615")
+                entity.HasIndex(e => e.Id, "UQ__Images__3214EC0633C2161C")
                     .IsUnique();
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.ContentType).HasMaxLength(100);
+                entity.Property(e => e.ContentType)
+                    .HasMaxLength(50)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.FileName).HasMaxLength(255);
+                entity.Property(e => e.FileName)
+                    .HasMaxLength(255)
+                    .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             });
 
             modelBuilder.Entity<Neighborhood>(entity =>
@@ -163,10 +163,13 @@ namespace DAL.Models
 
             modelBuilder.Entity<Permission>(entity =>
             {
+                entity.HasIndex(e => e.Email, "UC_Email")
+                    .IsUnique();
+
                 entity.HasIndex(e => e.Email, "UC_Email_Permissions")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Password, "UC_Password_Permission")
+                entity.HasIndex(e => e.Password, "UC_Password_Permissions")
                     .IsUnique();
 
                 entity.Property(e => e.Email)

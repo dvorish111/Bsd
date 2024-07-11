@@ -14,6 +14,7 @@ namespace BL_AppService.Profiles
         public ImageProfile()
         {
             CreateMap<Images, ImagesDTO>().ReverseMap();
+            CreateMap<Images, ImagesSaveDTO>().ReverseMap();
         }
 
     }
