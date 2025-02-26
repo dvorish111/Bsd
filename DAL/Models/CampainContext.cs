@@ -30,7 +30,7 @@ namespace DAL.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename= C:\\USERS\\USER\\DESKTOP\\כולנו\\דבורי\\אתר קופות צדקה רמות\\BSD-17-03\\DB\\CAMPAINDB.MDF;Integrated Security=True;Connect Timeout=30");
+                optionsBuilder.UseSqlServer("Server=162.19.137.14;Initial Catalog=Campain;User Id=SA;Password=dvorish111@;Trusted_Connection=False;Encrypt=False;TrustServerCertificate=True;");
             }
         }
 
